@@ -153,18 +153,17 @@ const mockHandlers = {
 console.info('mock axios')
 window.__axiosAdapter = (config) => {
   console.debug('mock request:', config)
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const handler = mockHandlers?.[config.url]?.[config.method]
     if (handler) {
-      window.setTimeout(async () => {
-        resolve({
-          status: 200,
-          statusText: 'OK',
-          headers: { 'content-type': 'application/json' },
-          data: await handler()
-        })
-      }, 268)
-      return
+      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+      const [data] = await Promise.all([handler(), delay(268)])
+      return resolve({
+        status: 200,
+        statusText: 'OK',
+        headers: { 'content-type': 'application/json' },
+        data
+      })
     }
 
     // create a AxiosError
