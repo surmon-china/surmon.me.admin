@@ -1,0 +1,351 @@
+{
+  "status": "success",
+  "message": "Get articles succeeded",
+  "result": {
+    "data": [
+      {
+        "keywords": ["工具链", "工程化", "性能"],
+        "state": 1,
+        "public": 1,
+        "origin": 1,
+        "tags": [
+          {
+            "_id": "5c5db19dad6d7f402c3d4e07",
+            "id": 14,
+            "name": "工程化",
+            "slug": "engineering",
+            "description": "构建、规范与工具链",
+            "extends": [
+              { "_id": "5c5db19dad6d7f402c3d4e08", "name": "icon", "value": "icon-tools" }
+            ],
+            "created_at": "2019-05-06T12:24:10.442Z",
+            "updated_at": "2024-04-06T09:44:03.700Z"
+          },
+          {
+            "_id": "5c4ca08c9d5c6e3f1b2c3d05",
+            "id": 13,
+            "name": "性能优化",
+            "slug": "performance",
+            "description": "更快、更省、更稳",
+            "extends": [
+              { "_id": "5c4ca08c9d5c6e3f1b2c3d06", "name": "icon", "value": "icon-speed" }
+            ],
+            "created_at": "2019-03-30T06:20:10.901Z",
+            "updated_at": "2024-01-05T04:12:18.010Z"
+          },
+          {
+            "_id": "5d55290314d2e6b7a394b01b",
+            "id": 21,
+            "name": "工具箱",
+            "slug": "toolbox",
+            "description": "提高效率的小工具",
+            "extends": [
+              { "_id": "5d55290314d2e6b7a394b01c", "name": "icon", "value": "icon-tools" }
+            ],
+            "created_at": "2020-05-23T12:00:00.000Z",
+            "updated_at": "2024-03-11T09:18:33.771Z"
+          }
+        ],
+        "categories": [
+          {
+            "pid": "589e0ad54a4ad562430953d2",
+            "_id": "65a10ad54a4ad562430953e1",
+            "id": 5,
+            "name": "架构与工程",
+            "slug": "architecture",
+            "description": "系统设计、工程实践与架构思考",
+            "extends": [{ "name": "icon", "value": "icon-architecture" }],
+            "created_at": "2019-05-06T12:24:10.442Z",
+            "updated_at": "2023-10-02T08:41:55.912Z"
+          }
+        ],
+        "_id": "676fa1321a53290533a7f206",
+        "title": "关于工程架构的备忘",
+        "description": "把常用的构建与发布细节整理成一份可复用清单。",
+        "thumbnail": "https://raw.githubusercontent.com/surmon-china/surmon.admin/main/public/images/thumbnail.jpg",
+        "extends": [],
+        "featured": true,
+        "meta": { "likes": 33, "views": 2184, "comments": 11 },
+        "created_at": "2025-06-18T09:12:44.533Z",
+        "updated_at": "2025-06-29T10:20:31.552Z",
+        "id": 6
+      },
+
+      {
+        "keywords": ["开源", "协作", "维护", "发布"],
+        "state": 1,
+        "public": 1,
+        "origin": 0,
+        "tags": [
+          {
+            "_id": "5c6ec2aebe7e80513d4e5f09",
+            "id": 15,
+            "name": "开源",
+            "slug": "open-source",
+            "description": "分享、协作与维护",
+            "extends": [
+              { "_id": "5c6ec2aebe7e80513d4e5f0a", "name": "icon", "value": "icon-github" }
+            ],
+            "created_at": "2019-06-18T11:02:44.533Z",
+            "updated_at": "2023-11-13T03:12:10.110Z"
+          },
+          {
+            "_id": "5c2a8d6a7b3a4c1d9f0e1a01",
+            "id": 11,
+            "name": "后端",
+            "slug": "backend",
+            "description": "服务端开发与系统实现",
+            "extends": [
+              { "_id": "5c2a8d6a7b3a4c1d9f0e1a02", "name": "icon", "value": "icon-server" }
+            ],
+            "created_at": "2019-01-01T08:12:11.120Z",
+            "updated_at": "2023-06-08T10:21:33.440Z"
+          },
+          {
+            "_id": "59e25a9bf9120a4bb4800912",
+            "id": 9,
+            "name": "计算机",
+            "slug": "computer",
+            "description": "计算机的世界",
+            "extends": [
+              { "_id": "59e25a9bf9120a4bb4800913", "name": "icon", "value": "icon-binarycode" }
+            ],
+            "created_at": "2017-10-14T18:42:35.936Z",
+            "updated_at": "2019-10-21T04:06:02.334Z"
+          }
+        ],
+        "categories": [
+          {
+            "pid": null,
+            "_id": "65c40ad54a4ad562430955c3",
+            "id": 4,
+            "name": "项目与发布",
+            "slug": "project",
+            "description": "项目记录、发布说明与里程碑",
+            "extends": [{ "name": "icon", "value": "icon-project" }],
+            "created_at": "2020-08-01T00:00:00.000Z",
+            "updated_at": "2024-02-02T10:20:31.552Z"
+          }
+        ],
+        "_id": "6667b9438a907384c63ff205",
+        "title": "开源日常小结",
+        "description": "关于协作、issue、版本与维护节奏的一些小结。",
+        "thumbnail": "https://raw.githubusercontent.com/surmon-china/surmon.admin/main/public/images/thumbnail.jpg",
+        "extends": [],
+        "featured": false,
+        "meta": { "likes": 21, "views": 1326, "comments": 6 },
+        "created_at": "2024-02-02T10:20:31.552Z",
+        "updated_at": "2024-04-06T09:44:03.700Z",
+        "id": 5
+      },
+
+      {
+        "keywords": ["阅读", "笔记", "摘录"],
+        "state": 1,
+        "public": 1,
+        "origin": 1,
+        "tags": [
+          {
+            "_id": "5d3306e2f2b0c49581729017",
+            "id": 19,
+            "name": "读书",
+            "slug": "reading",
+            "description": "阅读、笔记与回响",
+            "extends": [
+              { "_id": "5d3306e2f2b0c49581729018", "name": "icon", "value": "icon-book" }
+            ],
+            "created_at": "2019-11-16T08:20:00.000Z",
+            "updated_at": "2024-02-22T11:11:11.111Z"
+          },
+          {
+            "_id": "5d774b2536f408d9c5b6d01f",
+            "id": 23,
+            "name": "随手记",
+            "slug": "notes",
+            "description": "短句与碎片",
+            "extends": [
+              { "_id": "5d774b2536f408d9c5b6d020", "name": "icon", "value": "icon-note" }
+            ],
+            "created_at": "2021-09-12T10:12:12.012Z",
+            "updated_at": "2024-05-09T06:44:12.844Z"
+          },
+          {
+            "_id": "5d4417f303c1d5a69283a019",
+            "id": 20,
+            "name": "思考",
+            "slug": "thinking",
+            "description": "把话说清楚",
+            "extends": [
+              { "_id": "5d4417f303c1d5a69283a01a", "name": "icon", "value": "icon-thinking" }
+            ],
+            "created_at": "2020-01-07T04:06:02.334Z",
+            "updated_at": "2023-12-13T01:02:03.004Z"
+          }
+        ],
+        "categories": [
+          {
+            "pid": "65a20ad54a4ad562430953f0",
+            "_id": "65b30ad54a4ad562430954b2",
+            "id": 8,
+            "name": "书摘与笔记",
+            "slug": "notes",
+            "description": "阅读过程中的摘录与简评",
+            "extends": [{ "name": "icon", "value": "icon-note" }],
+            "created_at": "2019-11-14T13:02:44.311Z",
+            "updated_at": "2023-03-18T06:28:51.904Z"
+          }
+        ],
+        "_id": "65bd8c1f1a53290533a7f204",
+        "title": "读书摘录",
+        "description": "一些短摘录与当下的想法，作为未来回看的线索。",
+        "thumbnail": "https://raw.githubusercontent.com/surmon-china/surmon.admin/main/public/images/thumbnail.jpg",
+        "extends": [],
+        "featured": false,
+        "meta": { "likes": 15, "views": 980, "comments": 4 },
+        "created_at": "2024-05-09T06:44:12.844Z",
+        "updated_at": "2024-06-05T08:11:44.233Z",
+        "id": 4
+      },
+
+      {
+        "keywords": ["旅行", "记录", "摄影"],
+        "state": 0,
+        "public": -1,
+        "origin": 0,
+        "tags": [
+          {
+            "_id": "5d10e4c0d09fa2735f607013",
+            "id": 17,
+            "name": "旅行",
+            "slug": "travel",
+            "description": "在路上",
+            "extends": [
+              { "_id": "5d10e4c0d09fa2735f607014", "name": "icon", "value": "icon-plane" }
+            ],
+            "created_at": "2019-09-21T09:15:00.000Z",
+            "updated_at": "2023-09-24T08:01:12.000Z"
+          },
+          {
+            "_id": "5d21f5d1e1afb38470618015",
+            "id": 18,
+            "name": "摄影",
+            "slug": "photography",
+            "description": "光、影与瞬间",
+            "extends": [
+              { "_id": "5d21f5d1e1afb38470618016", "name": "icon", "value": "icon-camera" }
+            ],
+            "created_at": "2019-10-11T10:30:00.000Z",
+            "updated_at": "2021-11-11T02:10:10.010Z"
+          },
+          {
+            "_id": "59b18754c8bfdb5b0c06980b",
+            "id": 8,
+            "name": "诗和远方",
+            "slug": "soul",
+            "description": "无处安放",
+            "extends": [
+              { "_id": "59b18754c8bfdb5b0c06980c", "name": "icon", "value": "icon-coffee" }
+            ],
+            "created_at": "2017-09-07T17:52:20.941Z",
+            "updated_at": "2018-08-31T20:08:34.689Z"
+          }
+        ],
+        "categories": [
+          {
+            "pid": "589e07c04a4ad562430953d0",
+            "_id": "65b20ad54a4ad562430954a1",
+            "id": 7,
+            "name": "日常记录",
+            "slug": "daily",
+            "description": "日常生活与即时感受",
+            "extends": [{ "name": "icon", "value": "icon-daily" }],
+            "created_at": "2018-06-03T04:18:52.901Z",
+            "updated_at": "2022-09-11T10:44:09.114Z"
+          }
+        ],
+        "_id": "6558e1d11a53290533a7f203",
+        "title": "蓝毗尼旅途片段",
+        "description": "一些还没整理完的片段，只先留个存档入口。",
+        "thumbnail": "https://raw.githubusercontent.com/surmon-china/surmon.admin/main/public/images/thumbnail.jpg",
+        "extends": [],
+        "featured": false,
+        "meta": { "likes": 3, "views": 266, "comments": 1 },
+        "created_at": "2023-09-24T08:01:12.000Z",
+        "updated_at": "2023-10-01T06:18:24.341Z",
+        "id": 3
+      },
+
+      {
+        "keywords": ["自我修复", "情绪", "记录"],
+        "state": 1,
+        "public": 0,
+        "origin": 1,
+        "tags": [
+          {
+            "_id": "5d663a1425e3f7c8b4a5c01d",
+            "id": 22,
+            "name": "自我修复",
+            "slug": "healing",
+            "description": "让自己慢慢变好",
+            "extends": [
+              { "_id": "5d663a1425e3f7c8b4a5c01e", "name": "icon", "value": "icon-heart" }
+            ],
+            "created_at": "2021-03-01T08:00:00.000Z",
+            "updated_at": "2023-11-29T10:20:31.552Z"
+          },
+          {
+            "_id": "58c8a3dccc2ca807b19d23cd",
+            "id": 1,
+            "name": "生活",
+            "slug": "life",
+            "description": "生活中的小思考",
+            "extends": [
+              { "_id": "58c8a3dccc2ca807b19d23ce", "name": "icon", "value": "icon-coffee" }
+            ],
+            "created_at": "2017-03-15T02:15:56.590Z",
+            "updated_at": "2020-09-10T17:39:53.732Z"
+          },
+          {
+            "_id": "594d2b1251c61940c28c854f",
+            "id": 6,
+            "name": "世界",
+            "slug": "world",
+            "description": "No fear in my heart",
+            "extends": [
+              { "_id": "594d2b1251c61940c28c8550", "name": "icon", "value": "icon-emoji" }
+            ],
+            "created_at": "2017-06-23T14:52:02.428Z",
+            "updated_at": "2021-09-02T13:45:20.372Z"
+          }
+        ],
+        "categories": [
+          {
+            "pid": null,
+            "_id": "589e07c04a4ad562430953d0",
+            "id": 2,
+            "name": "生活随笔",
+            "slug": "insight",
+            "description": "记录生活点滴和思考",
+            "extends": [
+              { "name": "icon", "value": "icon-thinking" },
+              { "name": "background", "value": "https://static.surmon.me/18-10-30/42118397.jpg" }
+            ],
+            "created_at": "2017-02-10T18:34:40.680Z",
+            "updated_at": "2023-06-12T18:12:07.019Z"
+          }
+        ],
+        "_id": "656f2f5fcf1faa098ee1f202",
+        "title": "心灵的缓慢修复",
+        "description": "写给自己的备忘：把感受放回到它该在的位置。",
+        "thumbnail": "https://raw.githubusercontent.com/surmon-china/surmon.admin/main/public/images/thumbnail.jpg",
+        "extends": [],
+        "featured": true,
+        "meta": { "likes": 9, "views": 402, "comments": 3 },
+        "created_at": "2023-11-29T10:20:31.552Z",
+        "updated_at": "2023-12-13T01:02:03.004Z",
+        "id": 2
+      }
+    ],
+    "pagination": { "total": 6, "current_page": 1, "total_page": 1, "per_page": 16 }
+  }
+}

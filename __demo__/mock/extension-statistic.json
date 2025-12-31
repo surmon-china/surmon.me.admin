@@ -2,12 +2,12 @@
   "status": "success",
   "message": "Get statistic succeeded",
   "result": {
-    "tags": 29,
-    "articles": 161,
-    "comments": 2060,
+    "tags": 89,
+    "articles": 461,
+    "comments": 3460,
     "totalViews": 574127,
-    "totalLikes": 4896,
-    "todayViews": 639,
+    "totalLikes": 7396,
+    "todayViews": 3619,
     "averageEmotion": 4.89
   }
 }

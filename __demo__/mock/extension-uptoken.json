@@ -1,0 +1,7 @@
+{
+  "status": "success",
+  "message": "Get uptoken succeeded",
+  "result": {
+    "token": "mock_token"
+  }
+}
