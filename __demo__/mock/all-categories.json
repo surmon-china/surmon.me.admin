@@ -1,0 +1,111 @@
+[
+  {
+    "pid": null,
+    "_id": "589e0ad54a4ad562430953d2",
+    "id": 1,
+    "name": "技术探索",
+    "slug": "code",
+    "description": "和技术相关的思考与实践",
+    "extends": [
+      { "_id": "589e0ad54a4ad562430953d3", "name": "icon", "value": "icon-code" },
+      {
+        "_id": "5bca0b204514310c0046dcc0",
+        "name": "background",
+        "value": "https://static.surmon.me/nodepress/image/binary-code-ip.jpg"
+      }
+    ],
+    "created_at": "2017-02-10T18:47:49.776Z",
+    "updated_at": "2023-11-18T09:12:30.114Z",
+    "article_count": 72
+  },
+  {
+    "pid": "589e0ad54a4ad562430953d2",
+    "_id": "65a10ad54a4ad562430953e1",
+    "id": 5,
+    "name": "架构与工程",
+    "slug": "architecture",
+    "description": "系统设计、工程实践与架构思考",
+    "extends": [{ "name": "icon", "value": "icon-architecture" }],
+    "created_at": "2019-05-06T12:24:10.442Z",
+    "updated_at": "2023-10-02T08:41:55.912Z",
+    "article_count": 21
+  },
+  {
+    "pid": "589e0ad54a4ad562430953d2",
+    "_id": "65a10ad54a4ad562430953e2",
+    "id": 6,
+    "name": "前端与交互",
+    "slug": "frontend",
+    "description": "前端技术、交互设计与用户体验",
+    "extends": [{ "name": "icon", "value": "icon-frontend" }],
+    "created_at": "2020-03-12T09:18:33.771Z",
+    "updated_at": "2024-01-06T16:22:19.330Z",
+    "article_count": 28
+  },
+  {
+    "pid": null,
+    "_id": "589e07c04a4ad562430953d0",
+    "id": 2,
+    "name": "生活随笔",
+    "slug": "insight",
+    "description": "记录生活点滴和思考",
+    "extends": [
+      { "name": "icon", "value": "icon-thinking" },
+      {
+        "name": "background",
+        "value": "https://static.surmon.me/18-10-30/42118397.jpg"
+      }
+    ],
+    "created_at": "2017-02-10T18:34:40.680Z",
+    "updated_at": "2023-06-12T18:12:07.019Z",
+    "article_count": 164
+  },
+  {
+    "pid": "589e07c04a4ad562430953d0",
+    "_id": "65b20ad54a4ad562430954a1",
+    "id": 7,
+    "name": "日常记录",
+    "slug": "daily",
+    "description": "日常生活与即时感受",
+    "extends": [{ "name": "icon", "value": "icon-daily" }],
+    "created_at": "2018-06-03T04:18:52.901Z",
+    "updated_at": "2022-09-11T10:44:09.114Z",
+    "article_count": 46
+  },
+  {
+    "pid": null,
+    "_id": "65a20ad54a4ad562430953f0",
+    "id": 3,
+    "name": "阅读与思考",
+    "slug": "reading",
+    "description": "阅读记录与延伸思考",
+    "extends": [{ "name": "icon", "value": "icon-book" }],
+    "created_at": "2018-09-21T07:11:02.551Z",
+    "updated_at": "2022-12-19T10:05:44.903Z",
+    "article_count": 39
+  },
+  {
+    "pid": "65a20ad54a4ad562430953f0",
+    "_id": "65b30ad54a4ad562430954b2",
+    "id": 8,
+    "name": "书摘与笔记",
+    "slug": "notes",
+    "description": "阅读过程中的摘录与简评",
+    "extends": [{ "name": "icon", "value": "icon-note" }],
+    "created_at": "2019-11-14T13:02:44.311Z",
+    "updated_at": "2023-03-18T06:28:51.904Z",
+    "article_count": 17
+  },
+  {
+    "pid": null,
+    "_id": "65c40ad54a4ad562430955c3",
+    "id": 4,
+    "name": "项目与发布",
+    "slug": "project",
+    "description": "项目记录、发布说明与里程碑",
+    "extends": [{ "name": "icon", "value": "icon-project" }],
+    "created_at": "2020-08-01T00:00:00.000Z",
+    "updated_at": "2024-02-02T10:20:31.552Z",
+    "article_count": 12
+  }
+]
