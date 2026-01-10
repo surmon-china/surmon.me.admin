@@ -42,7 +42,7 @@
         "sfsfsfs@email.com"
       ]
     },
-    "ad_config": "{\"PC_NAV\":[{\"icon\":\"icon-tencent-cloud\",\"color\":\"#006eff\",\"url\":\"https://curl.qcloud.com/WfO7qXy9\",\"i18n\":{\"en\":\"QCloud\",\"zh\":\"新春上云\"}}],\"PC_ASIDE_SWIPER\":[{\"url\":\"https://curl.qcloud.com/n4x6k4h3\",\"src\":\"https://static.surmon.me/assets/pc-aside-tencent.jpg\"}]}",
+    "app_config": "{\"PC_NAV\":[{\"icon\":\"icon-tencent-cloud\",\"color\":\"#006eff\",\"url\":\"https://curl.qcloud.com/WfO7qXy9\",\"i18n\":{\"en\":\"QCloud\",\"zh\":\"新春上云\"}}],\"PC_ASIDE_SWIPER\":[{\"url\":\"https://curl.qcloud.com/n4x6k4h3\",\"src\":\"https://static.surmon.me/assets/pc-aside-tencent.jpg\"}]}",
     "updated_at": "2019-01-23T17:44:13.425Z"
   }
 }
