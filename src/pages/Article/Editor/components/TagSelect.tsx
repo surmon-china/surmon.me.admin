@@ -47,7 +47,7 @@ export const TagSelect: React.FC<TagSelectProps> = (props) => {
           )
         }
       >
-        {tag.name}
+        {tag.name} · {tag.slug}
       </Button>
     )
   }

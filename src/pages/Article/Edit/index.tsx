@@ -16,6 +16,7 @@ import { Article } from '@/constants/article'
 import { scrollTo } from '@/utils/scroller'
 import { numberToKilo, numberSplit } from '@/transforms/number'
 import { getBlogArticleUrl } from '@/transforms/url'
+import { stringToYMD } from '@/transforms/date'
 import { ArticleEditor } from '../Editor'
 import { VoteDrawer } from './VoteDrawer'
 import { CommentDrawer } from './CommentDrawer'
@@ -115,6 +116,18 @@ export const ArticleEditPage: React.FC = () => {
                 <Typography.Text>{article.value?.id ?? '-'}</Typography.Text>
                 <Divider orientation="vertical" />
                 <Typography.Text>{article.value?._id ?? '-'}</Typography.Text>
+              </Space>
+            )
+          },
+          {
+            label: '时间',
+            content: (
+              <Space size="small">
+                最初发布于
+                <Typography.Text>{stringToYMD(article.value?.created_at ?? '-')}</Typography.Text>
+                <Divider orientation="vertical" />
+                最后更新于
+                <Typography.Text>{stringToYMD(article.value?.updated_at ?? '-')}</Typography.Text>
               </Space>
             )
           }

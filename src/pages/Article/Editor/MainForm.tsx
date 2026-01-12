@@ -36,7 +36,7 @@ export const MainForm: React.FC<MainFormProps> = (props) => {
         form={props.form}
       >
         {props.extraItems?.map((extra, index) => (
-          <Form.Item label={extra.label} wrapperCol={{ span: 12 }} key={index}>
+          <Form.Item label={extra.label} wrapperCol={{ span: 24 }} key={index}>
             {extra.content}
           </Form.Item>
         ))}
