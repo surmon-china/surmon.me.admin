@@ -5,8 +5,7 @@
     "data": [
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 24,
         "dislikes": 0,
         "_id": "6602e91a1a53290533a7d00c",
@@ -29,13 +28,12 @@
         },
         "created_at": "2024-05-09T09:18:44.221Z",
         "updated_at": "2024-05-09T09:18:44.221Z",
-        "extends": [],
+        "extras": [],
         "id": 12
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 8,
         "dislikes": 0,
         "_id": "65f0c7b01a53290533a7d00b",
@@ -57,13 +55,12 @@
         },
         "created_at": "2024-04-17T03:12:55.102Z",
         "updated_at": "2024-04-17T03:12:55.102Z",
-        "extends": [],
+        "extras": [],
         "id": 11
       },
       {
         "pid": 0,
-        "state": 0,
-        "is_top": false,
+        "status": 0,
         "likes": 0,
         "dislikes": 0,
         "_id": "65d8b9121a53290533a7d00a",
@@ -85,13 +82,12 @@
         },
         "created_at": "2024-03-26T11:08:09.773Z",
         "updated_at": "2024-03-26T11:08:09.773Z",
-        "extends": [],
+        "extras": [],
         "id": 10
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 31,
         "dislikes": 1,
         "_id": "64f1a0be1a53290533a7d009",
@@ -114,13 +110,12 @@
         },
         "created_at": "2023-10-08T07:44:18.221Z",
         "updated_at": "2023-10-08T07:44:18.221Z",
-        "extends": [],
+        "extras": [],
         "id": 9
       },
       {
         "pid": 0,
-        "state": -1,
-        "is_top": false,
+        "status": -1,
         "likes": 0,
         "dislikes": 0,
         "_id": "64c22a4d1a53290533a7d008",
@@ -142,13 +137,12 @@
         },
         "created_at": "2023-07-29T15:33:41.900Z",
         "updated_at": "2023-07-29T15:33:41.900Z",
-        "extends": [],
+        "extras": [],
         "id": 8
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 14,
         "dislikes": 0,
         "_id": "63f80c1f1a53290533a7d007",
@@ -171,13 +165,12 @@
         },
         "created_at": "2023-03-18T06:22:54.600Z",
         "updated_at": "2023-03-18T06:22:54.600Z",
-        "extends": [],
+        "extras": [],
         "id": 7
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 6,
         "dislikes": 0,
         "_id": "62a1f5f81a53290533a7d006",
@@ -199,13 +192,12 @@
         },
         "created_at": "2022-06-21T10:01:18.112Z",
         "updated_at": "2022-06-21T10:01:18.112Z",
-        "extends": [],
+        "extras": [],
         "id": 6
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 4,
         "dislikes": 0,
         "_id": "61a0e1d11a53290533a7d005",
@@ -227,13 +219,12 @@
         },
         "created_at": "2022-01-15T02:15:44.903Z",
         "updated_at": "2022-01-15T02:15:44.903Z",
-        "extends": [],
+        "extras": [],
         "id": 5
       },
       {
         "pid": 0,
-        "state": 0,
-        "is_top": false,
+        "status": 0,
         "likes": 0,
         "dislikes": 0,
         "_id": "6190c5d91a53290533a7d004",
@@ -255,13 +246,12 @@
         },
         "created_at": "2021-11-18T08:45:12.600Z",
         "updated_at": "2021-11-18T08:45:12.600Z",
-        "extends": [],
+        "extras": [],
         "id": 4
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 2,
         "dislikes": 0,
         "_id": "6180b4a81a53290533a7d003",
@@ -283,13 +273,12 @@
         },
         "created_at": "2021-10-10T14:02:33.221Z",
         "updated_at": "2021-10-10T14:02:33.221Z",
-        "extends": [],
+        "extras": [],
         "id": 3
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 1,
         "dislikes": 0,
         "_id": "6170a3971a53290533a7d002",
@@ -311,13 +300,12 @@
         },
         "created_at": "2021-09-02T03:11:22.110Z",
         "updated_at": "2021-09-02T03:11:22.110Z",
-        "extends": [],
+        "extras": [],
         "id": 2
       },
       {
         "pid": 0,
-        "state": 1,
-        "is_top": false,
+        "status": 1,
         "likes": 0,
         "dislikes": 0,
         "_id": "616093861a53290533a7d001",
@@ -339,7 +327,7 @@
         },
         "created_at": "2021-08-14T18:45:43.617Z",
         "updated_at": "2021-08-14T18:45:43.617Z",
-        "extends": [],
+        "extras": [],
         "id": 1
       }
     ],

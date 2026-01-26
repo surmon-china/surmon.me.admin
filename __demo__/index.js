@@ -69,14 +69,14 @@ const mockHandlers = {
   '/disqus/config': {
     get: () => ensureJSON('disqus-config')
   },
-  '/option': {
-    get: () => ensureJSON('option')
+  '/options': {
+    get: () => ensureJSON('options')
   },
-  '/extension/statistic': {
-    get: () => ensureJSON('extension-statistic')
+  '/system/statistics': {
+    get: () => ensureJSON('system-statistics')
   },
-  '/extension/uptoken': {
-    get: () => ensureJSON('extension-uptoken')
+  '/system/uptoken': {
+    get: () => ensureJSON('system-uptoken')
   },
   // --------------------------------
   '/category/all': {
@@ -115,14 +115,14 @@ const mockHandlers = {
   '/comment/calendar': {
     get: () => ({
       status: 'success',
-      message: 'Get comment calendar succeeded',
+      message: 'Get comments calendar succeeded',
       result: generateCalendar({ prob: 0.5, maxCount: 6 })
     })
   },
   '/article/calendar': {
     get: () => ({
       status: 'success',
-      message: 'Get article calendar succeeded',
+      message: 'Get articles calendar succeeded',
       result: generateCalendar({ prob: 0.35, maxCount: 4 })
     })
   },
