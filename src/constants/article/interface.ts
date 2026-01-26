@@ -6,37 +6,34 @@
 import { GeneralKeyValue } from '../general'
 import { Category } from '../category'
 import { Tag } from '../tag'
+import { ArticleStatus } from './status'
 import { ArticleOrigin } from './origin'
-import { ArticlePublic } from './public'
-import { ArticlePublish } from './publish'
 import { ArticleLanguage } from './language'
 
 export type ArticleId = string | number
 
-/** 文章 */
 export interface Article {
   id?: number
   _id?: string
   slug: string | null
   title: string
+  summary: string
   content?: string
-  description: string
   keywords: string[]
   thumbnail?: string
-  tags: Tag[]
-  categories: Category[]
+  status: ArticleStatus
   origin: ArticleOrigin
-  public: ArticlePublic
-  state: ArticlePublish
   lang: ArticleLanguage
   featured: boolean
   disabled_comments: boolean
-  meta?: {
+  stats?: {
     likes: number
     views: number
     comments: number
   }
+  tags: Tag[]
+  categories: Category[]
+  extras: GeneralKeyValue[]
   updated_at?: string
   created_at?: string
-  extends: GeneralKeyValue[]
 }

@@ -14,7 +14,7 @@ import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/comment'
 import type { GetCommentsParams } from '@/apis/comment'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
-import { Comment as CommentType, CommentState, getCommentState } from '@/constants/comment'
+import { Comment as CommentType, CommentStatus, getCommentStatus } from '@/constants/comment'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { scrollTo } from '@/utils/scroller'
 import { useTranslation } from '@/i18n'
@@ -134,17 +134,17 @@ export const CommentPage: React.FC = () => {
     })
   }
 
-  const updateCommentsState = (comments: CommentType[], state: CommentState) => {
+  const updateCommentsStatus = (comments: CommentType[], status: CommentStatus) => {
     Modal.confirm({
-      title: `确定要将 ${comments.length} 个评论更新为「 ${getCommentState(state).name} 」状态吗？`,
+      title: `确定要将 ${comments.length} 个评论更新为「${getCommentStatus(status).name}」状态吗？`,
       content: '请谨慎操作',
       centered: true,
       onOk: () => {
         return api
-          .patchCommentsState(
+          .patchCommentsStatus(
             comments.map((comment) => comment._id!),
             _uniq(comments.map((comment) => comment.post_id)),
-            state
+            status
           )
           .then(() => {
             refreshList()
@@ -187,22 +187,23 @@ export const CommentPage: React.FC = () => {
               {
                 label: '退为草稿',
                 icon: <Icons.EditOutlined />,
-                onClick: () => updateCommentsState(selectedComments.value, CommentState.Auditing)
+                onClick: () => updateCommentsStatus(selectedComments.value, CommentStatus.Pending)
               },
               {
                 label: '审核通过',
                 icon: <Icons.CheckOutlined />,
-                onClick: () => updateCommentsState(selectedComments.value, CommentState.Published)
+                onClick: () =>
+                  updateCommentsStatus(selectedComments.value, CommentStatus.Published)
               },
               {
                 label: '标为垃圾',
                 icon: <Icons.StopOutlined />,
-                onClick: () => updateCommentsState(selectedComments.value, CommentState.Spam)
+                onClick: () => updateCommentsStatus(selectedComments.value, CommentStatus.Spam)
               },
               {
                 label: '移回收站',
                 icon: <Icons.DeleteOutlined />,
-                onClick: () => updateCommentsState(selectedComments.value, CommentState.Deleted)
+                onClick: () => updateCommentsStatus(selectedComments.value, CommentStatus.Trash)
               },
               {
                 label: '彻底删除',
@@ -223,7 +224,7 @@ export const CommentPage: React.FC = () => {
         onPaginate={(page, pageSize) => fetchList({ page, per_page: pageSize })}
         onDetail={(_, index) => openEditDrawer(index)}
         onDelete={(comment) => deleteComments([comment])}
-        onUpdateState={(comment, state) => updateCommentsState([comment], state)}
+        onUpdateStatus={(comment, status) => updateCommentsStatus([comment], status)}
         onClickPostId={resetFiltersToPostId}
       />
       <Drawer

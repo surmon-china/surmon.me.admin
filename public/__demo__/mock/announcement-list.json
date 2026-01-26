@@ -4,7 +4,7 @@
   "result": {
     "data": [
       {
-        "state": 1,
+        "status": 1,
         "_id": "65f2cf0dce71cd0b743fb018",
         "content": "应无所住，而生其心",
         "created_at": "2024-03-14T10:04:45.085Z",
@@ -12,7 +12,7 @@
         "id": 24
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "65e1cf0dce71cd0b743fb017",
         "content": "一切有为法，如梦幻泡影",
         "created_at": "2024-02-20T09:12:11.320Z",
@@ -20,7 +20,7 @@
         "id": 23
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "65d0cf0dce71cd0b743fb016",
         "content": "系统已完成一次例行维护",
         "created_at": "2024-01-28T03:40:02.918Z",
@@ -28,7 +28,7 @@
         "id": 22
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "65cfcf0dce71cd0b743fb015",
         "content": "目的地不需要多好，只需要足够陌生",
         "created_at": "2024-01-10T14:22:31.600Z",
@@ -36,7 +36,7 @@
         "id": 21
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "65becf0dce71cd0b743fb014",
         "content": "一次失败的重构经验记录",
         "created_at": "2023-12-18T07:55:19.401Z",
@@ -44,7 +44,7 @@
         "id": 20
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "65adcf0dce71cd0b743fb013",
         "content": "周末，从素可泰出发去乌汶府",
         "created_at": "2023-11-30T11:09:43.772Z",
@@ -52,7 +52,7 @@
         "id": 19
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "659ccf0dce71cd0b743fb012",
         "content": "没有我，一切只是发生",
         "created_at": "2023-11-05T16:48:22.190Z",
@@ -60,7 +60,7 @@
         "id": 18
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "658bcf0dce71cd0b743fb011",
         "content": "临时关闭评论功能",
         "created_at": "2023-10-12T02:31:08.557Z",
@@ -68,7 +68,7 @@
         "id": 17
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "657acf0dce71cd0b743fb010",
         "content": "载舟和覆舟，都是水的妙用",
         "created_at": "2023-09-21T09:15:00.000Z",
@@ -76,7 +76,7 @@
         "id": 16
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "6569cf0dce71cd0b743fb009",
         "content": "服务端已支持 IPv6 访问",
         "created_at": "2023-08-30T06:44:12.844Z",
@@ -84,7 +84,7 @@
         "id": 15
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "6558cf0dce71cd0b743fb008",
         "content": "未来一周在卢卡拉 EBC 徒步",
         "created_at": "2023-07-14T10:04:45.085Z",
@@ -92,7 +92,7 @@
         "id": 14
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "6547cf0dce71cd0b743fb007",
         "content": "一次并不成功的投资决策",
         "created_at": "2023-06-22T18:09:33.220Z",
@@ -100,7 +100,7 @@
         "id": 13
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "6536cf0dce71cd0b743fb006",
         "content": "保持节律，比爆发更重要",
         "created_at": "2023-05-18T05:26:14.901Z",
@@ -108,7 +108,7 @@
         "id": 12
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "6525cf0dce71cd0b743fb005",
         "content": "评论区维护，关闭 48 小时",
         "created_at": "2023-04-03T08:35:51.788Z",
@@ -116,7 +116,7 @@
         "id": 11
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "6514cf0dce71cd0b743fb004",
         "content": "新设计发布了～",
         "created_at": "2023-03-11T17:15:13.459Z",
@@ -124,7 +124,7 @@
         "id": 10
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "6503cf0dce71cd0b743fb003",
         "content": "专注是一种能力，也是一种选择",
         "created_at": "2023-02-02T12:02:44.533Z",
@@ -132,7 +132,7 @@
         "id": 9
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "64f2cf0dce71cd0b743fb002",
         "content": "今天很开心～",
         "created_at": "2022-12-09T15:23:42.855Z",
@@ -140,7 +140,7 @@
         "id": 8
       },
       {
-        "state": 1,
+        "status": 1,
         "_id": "64e1cf0dce71cd0b743fb001",
         "content": "Happy new year! 🎉",
         "created_at": "2022-12-31T14:21:03.724Z",
@@ -148,7 +148,7 @@
         "id": 7
       },
       {
-        "state": 0,
+        "status": 0,
         "_id": "64d0cf0dce71cd0b743fb000",
         "content": "系统首次上线",
         "created_at": "2022-10-01T00:00:00.000Z",

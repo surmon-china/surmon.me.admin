@@ -9,14 +9,14 @@ import { useLoading } from 'veact-use'
 import * as Icons from '@ant-design/icons'
 import { Button, Card, Table, Select, Tag, Space, Switch, Divider, Flex, Typography } from 'antd'
 import { getDisqusConfig, getDisqusThreads, GeneralDisqusParams } from '@/apis/disqus'
-import { DisqusThreadState, DisqusOrderType } from '@/constants/disqus'
+import { DisqusThreadStatus, DisqusSortOrder } from '@/constants/disqus'
 import { stringToYMD } from '@/transforms/date'
 import { scrollTo } from '@/utils/scroller'
 
 const SELECT_ALL_VALUE = 'ALL'
 const DEFAULT_FILTER_PARAMS = {
-  order: DisqusOrderType.Desc,
-  include: SELECT_ALL_VALUE as any as DisqusThreadState | typeof SELECT_ALL_VALUE
+  order: DisqusSortOrder.Desc,
+  include: SELECT_ALL_VALUE as any as DisqusThreadStatus | typeof SELECT_ALL_VALUE
 }
 
 export const DisqusThreadsPage: React.FC = () => {
@@ -42,7 +42,7 @@ export const DisqusThreadsPage: React.FC = () => {
       include:
         filterParams.value.include !== SELECT_ALL_VALUE
           ? [filterParams.value.include]
-          : [...Object.values(DisqusThreadState)]
+          : [...Object.values(DisqusThreadStatus)]
     }
 
     fetching.promise(getDisqusThreads(getParams)).then((response) => {
@@ -102,11 +102,11 @@ export const DisqusThreadsPage: React.FC = () => {
               label: 'All state'
             },
             {
-              value: DisqusThreadState.Open,
+              value: DisqusThreadStatus.Open,
               label: 'Open'
             },
             {
-              value: DisqusThreadState.Closed,
+              value: DisqusThreadStatus.Closed,
               label: 'Closed'
             }
           ]}
@@ -118,11 +118,11 @@ export const DisqusThreadsPage: React.FC = () => {
           onChange={(order) => (filterParams.value.order = order)}
           options={[
             {
-              value: DisqusOrderType.Desc,
+              value: DisqusSortOrder.Desc,
               label: 'Desc'
             },
             {
-              value: DisqusOrderType.Asc,
+              value: DisqusSortOrder.Asc,
               label: 'Asc'
             }
           ]}

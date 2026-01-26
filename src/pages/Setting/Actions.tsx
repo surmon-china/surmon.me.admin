@@ -6,7 +6,7 @@ import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/system'
 import { getAllArticles } from '@/apis/article'
 import { getBlogArticleUrl } from '@/transforms/url'
-import { Article, ArticlePublic, ArticlePublish } from '@/constants/article'
+import { Article, ArticleStatus } from '@/constants/article'
 import { UniversalEditor, UnEditorLanguage } from '@/components/common/UniversalEditor'
 
 export const ActionsForm: React.FC = () => {
@@ -38,9 +38,7 @@ export const ActionsForm: React.FC = () => {
 
   const filteredArticles = useComputed(() => {
     if (articlesState.publicOnly) {
-      return articlesData.value.filter((a) => {
-        return a.state === ArticlePublish.Published && a.public === ArticlePublic.Public
-      })
+      return articlesData.value.filter((a) => a.status === ArticleStatus.Published)
     } else {
       return articlesData.value
     }
@@ -59,7 +57,7 @@ export const ActionsForm: React.FC = () => {
           `## 文章信息`,
           `- 分类：${article.categories.map((c) => c.name || c.slug).join(', ')}`,
           `- 标签：${article.tags.map((t) => t.name || t.slug).join(', ')}`,
-          `- 引言：${article.description?.replace(/\n/g, ' ').trim() || '暂无引言'}`,
+          `- 引言：${article.summary?.replace(/\n/g, ' ').trim() || '暂无引言'}`,
           `- 发布时间：${new Date(article.created_at!).toLocaleString('zh-CN', { hour12: false })}`,
           `- 原文链接：${getBlogArticleUrl(article.id!)}`,
           ``,
@@ -131,7 +129,7 @@ export const ActionsForm: React.FC = () => {
             checked={articlesState.publicOnly}
             onChange={(event) => handleArticlesPublicOnlyChange(event.target.checked)}
           >
-            仅保留公开文章数据（State = Published; Public = Public）
+            仅保留公开文章数据（ArticleStatus = Published）
           </Checkbox>
           <Typography.Text strong={articlesState.publicOnly} disabled={!articlesState.publicOnly}>
             已过滤 {articlesData.value.length - filteredArticles.value.length} 条非公开数据

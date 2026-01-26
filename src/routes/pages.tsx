@@ -54,7 +54,7 @@ export const pageRoutes: RouteObject[] = [
     element: <CategoryPage />,
     handle: {
       i18nKey: 'page.category.title',
-      icon: <Icons.FolderOpenOutlined />
+      icon: <Icons.AppstoreOutlined />
     }
   },
   {
@@ -150,7 +150,7 @@ export const pageRoutes: RouteObject[] = [
         element: <DisqusThreadsPage />,
         handle: {
           i18nKey: 'page.disqus.threads',
-          icon: <Icons.AppstoreOutlined />
+          icon: <Icons.FolderOpenOutlined />
         }
       },
       {
@@ -179,7 +179,7 @@ export const pageRoutes: RouteObject[] = [
     element: <FeedbackPage />,
     handle: {
       i18nKey: 'page.feedback.title',
-      icon: <Icons.BulbOutlined />
+      icon: <Icons.SmileOutlined />
     }
   },
   {
@@ -188,7 +188,7 @@ export const pageRoutes: RouteObject[] = [
     element: <StaticPage />,
     handle: {
       i18nKey: 'page.setting.statics',
-      icon: <Icons.FileImageOutlined />
+      icon: <Icons.FileSearchOutlined />
     }
   },
   {

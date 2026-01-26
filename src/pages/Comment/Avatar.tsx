@@ -13,7 +13,7 @@ export interface CommentAvatarProps {
 }
 
 export const CommentAvatar: React.FC<CommentAvatarProps> = (props) => {
-  const isDisqusUser = !!getDisqusUserName(props.comment.extends)
+  const isDisqusUser = !!getDisqusUserName(props.comment.extras)
   const title = isDisqusUser ? 'Disqus user' : 'Guest user'
   const iconUrl = isDisqusUser ? '/images/disqus.svg' : '/images/logo.mini.svg'
   return (

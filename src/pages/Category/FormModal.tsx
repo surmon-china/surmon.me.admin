@@ -13,9 +13,9 @@ const formLayout = {
 const CATEGORY_NULL_VALUE = 'null'
 const DEFAULT_CATEGORY_DATA: Partial<CategoryType> = {
   pid: CATEGORY_NULL_VALUE,
-  extends: [
+  extras: [
     {
-      name: 'icon',
+      key: 'icon-name',
       value: 'icon-category'
     }
   ]
@@ -140,10 +140,10 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
         </Form.Item>
         <Form.Item
           label="自定义扩展"
-          extra="可以为当前分类增加自定义扩展属性，如：icon、background"
+          extra="可以为当前分类增加自定义扩展属性，如：icon-name、background-color"
           shouldUpdate={true}
         >
-          <FormKeyValueInput fieldName="extends" />
+          <FormKeyValueInput formFieldName="extras" />
         </Form.Item>
       </Form>
     </Modal>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Select, Space, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { Trans } from '@/i18n'
-import { SortTypeBase } from '@/constants/sort'
+import { SortOrder } from '@/constants/sort'
 import { SortSelect } from '@/components/common/SortSelect'
 import { SelectWithInput } from '@/components/common/SelectWithInput'
 import { VoteTarget, VoteType, VoteAuthorType, voteTypes } from '@/constants/vote'
@@ -14,7 +14,7 @@ export const DEFAULT_FILTER_PARAMS = {
   target_type: SELECT_ALL_VALUE as VoteTarget | typeof SELECT_ALL_VALUE,
   vote_type: SELECT_ALL_VALUE as VoteType | typeof SELECT_ALL_VALUE,
   author_type: SELECT_ALL_VALUE as VoteAuthorType | typeof SELECT_ALL_VALUE,
-  sort: SortTypeBase.Desc
+  sort: SortOrder.Desc
 }
 
 export type FilterTargetId = number | typeof DEFAULT_TARGET_ID
@@ -44,7 +44,7 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
         <Space.Compact>
           <SelectWithInput
             disabled={props.loading}
-            inputStyle={{ width: 120 }}
+            inputStyle={{ width: 140 }}
             inputPlaceholder={
               (props.params.target_type === SELECT_ALL_VALUE
                 ? '目标'
@@ -68,7 +68,7 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
             }}
             selectOptions={[
               { value: SELECT_ALL_VALUE, label: '所有类型' },
-              { value: VoteTarget.Post, label: getVoteTargetText(VoteTarget.Post) },
+              { value: VoteTarget.Article, label: getVoteTargetText(VoteTarget.Article) },
               { value: VoteTarget.Comment, label: getVoteTargetText(VoteTarget.Comment) }
             ]}
           />

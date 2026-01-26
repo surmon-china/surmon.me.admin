@@ -4,20 +4,20 @@ import * as Icons from '@ant-design/icons'
 import { Trans } from '@/i18n'
 import { SelectWithInput } from '@/components/common/SelectWithInput'
 import { SortSelect } from '@/components/common/SortSelect'
-import { SortTypeWithHot } from '@/constants/sort'
-import { CommentState, commentStates, COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
+import { SortMode } from '@/constants/sort'
+import { CommentStatus, commentStatuses, COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = Object.freeze({
   postId: SELECT_ALL_VALUE as number | typeof SELECT_ALL_VALUE,
-  state: SELECT_ALL_VALUE as typeof SELECT_ALL_VALUE | CommentState,
-  sort: SortTypeWithHot.Desc
+  status: SELECT_ALL_VALUE as typeof SELECT_ALL_VALUE | CommentStatus,
+  sort: SortMode.Latest
 })
 
 export type FilterParams = typeof DEFAULT_FILTER_PARAMS
 export const getQueryParams = (params: FilterParams) => ({
   post_id: params.postId !== SELECT_ALL_VALUE ? params.postId : void 0,
-  state: params.state !== SELECT_ALL_VALUE ? params.state : void 0,
+  status: params.status !== SELECT_ALL_VALUE ? params.status : void 0,
   sort: params.sort
 })
 
@@ -40,7 +40,7 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
       <Space wrap>
         <SelectWithInput
           disabled={props.loading}
-          inputStyle={{ width: 126 }}
+          inputStyle={{ width: 130 }}
           inputPlaceholder="POST ID"
           inputType="number"
           inputValue={props.postIdInput}
@@ -64,16 +64,16 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
         <Select
           style={{ width: 130 }}
           disabled={props.loading}
-          value={props.params.state}
-          onChange={(state) => props.onParamsChange({ state })}
+          value={props.params.status}
+          onChange={(status) => props.onParamsChange({ status })}
           options={[
             { label: '全部状态', value: SELECT_ALL_VALUE },
-            ...commentStates.map((state) => ({
-              value: state.id,
+            ...commentStatuses.map((status) => ({
+              value: status.id,
               label: (
                 <Space size="small">
-                  {state.icon}
-                  {state.name}
+                  {status.icon}
+                  {status.name}
                 </Space>
               )
             }))

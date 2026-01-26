@@ -5,25 +5,23 @@ import { Button, Input, Select, Space, Flex, TreeSelect } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
 import { SortSelect } from '@/components/common/SortSelect'
-import { SortTypeWithHot } from '@/constants/sort'
+import { SortMode } from '@/constants/sort'
 import type { CategoryTree } from '@/apis/category'
 import type { Tag } from '@/constants/tag'
 import type { GetArticleParams } from '@/apis/article'
 import { getAllTags } from '@/apis/tag'
 import { getAllCategories, getAntdTreeByTree } from '@/apis/category'
-import { ArticlePublish, articlePublishs } from '@/constants/article'
-import { ArticlePublic, articlePublics } from '@/constants/article'
+import { ArticleStatus, articleStatuses } from '@/constants/article'
 import { ArticleOrigin, articleOrigins } from '@/constants/article'
 import { ArticleLanguage, articleLanguages } from '@/constants/article'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = {
-  sort: SortTypeWithHot.Desc,
+  sort: SortMode.Latest,
   featured: false as boolean,
   tag_slug: SELECT_ALL_VALUE as SelectAllValue | string,
   category_slug: SELECT_ALL_VALUE as SelectAllValue | string,
-  public: SELECT_ALL_VALUE as SelectAllValue | ArticlePublic,
-  state: SELECT_ALL_VALUE as SelectAllValue | ArticlePublish,
+  status: SELECT_ALL_VALUE as SelectAllValue | ArticleStatus,
   origin: SELECT_ALL_VALUE as SelectAllValue | ArticleOrigin,
   lang: SELECT_ALL_VALUE as SelectAllValue | ArticleLanguage
 }
@@ -35,8 +33,7 @@ export const getQueryParams = (params: FilterParams): GetArticleParams => ({
   featured: params.featured ? true : void 0,
   tag_slug: params.tag_slug !== SELECT_ALL_VALUE ? params.tag_slug : void 0,
   category_slug: params.category_slug !== SELECT_ALL_VALUE ? params.category_slug : void 0,
-  state: params.state !== SELECT_ALL_VALUE ? params.state : void 0,
-  public: params.public !== SELECT_ALL_VALUE ? params.public : void 0,
+  status: params.status !== SELECT_ALL_VALUE ? params.status : void 0,
   origin: params.origin !== SELECT_ALL_VALUE ? params.origin : void 0,
   lang: params.lang !== SELECT_ALL_VALUE ? params.lang : void 0
 })
@@ -93,34 +90,16 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
           <Select
             style={{ width: 110 }}
             disabled={props.loading}
-            value={props.params.state}
-            onChange={(state) => props.onParamsChange({ state })}
+            value={props.params.status}
+            onChange={(status) => props.onParamsChange({ status })}
             options={[
               { label: '全部状态', value: SELECT_ALL_VALUE },
-              ...articlePublishs.map((state) => ({
-                value: state.id,
+              ...articleStatuses.map((status) => ({
+                value: status.id,
                 label: (
                   <Space size="small">
-                    {state.icon}
-                    {state.name}
-                  </Space>
-                )
-              }))
-            ]}
-          />
-          <Select
-            style={{ width: 106 }}
-            disabled={props.loading}
-            value={props.params.public}
-            onChange={(value) => props.onParamsChange({ public: value })}
-            options={[
-              { label: '全部可见', value: SELECT_ALL_VALUE },
-              ...articlePublics.map((item) => ({
-                value: item.id,
-                label: (
-                  <Space size="small">
-                    {item.icon}
-                    {item.name}
+                    {status.icon}
+                    {status.name}
                   </Space>
                 )
               }))

@@ -75,7 +75,7 @@ export const CategoryPage: React.FC = () => {
 
   const deleteCategory = (category: Category) => {
     Modal.confirm({
-      title: `确定要删除分类「 ${category.name} 」吗？`,
+      title: `确定要删除分类「${category.name}」吗？`,
       content: '删除后不可恢复',
       centered: true,
       onOk: () => {

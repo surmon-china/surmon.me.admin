@@ -47,12 +47,12 @@ export const markedStates = [
   }
 ]
 
-const markedStateMap = new Map(markedStates.map((item) => [item.number, item]))
+const markedStatesMap = new Map(markedStates.map((item) => [item.number, item]))
 
 export const getMarkedByNumber = (number: number) => {
-  return markedStateMap.get(number)!
+  return markedStatesMap.get(number)!
 }
 
 export const getMarkedByBoolean = (boolean: boolean) => {
-  return markedStateMap.get(boolean ? MarkedState.Yes : MarkedState.No)!
+  return markedStatesMap.get(boolean ? MarkedState.Yes : MarkedState.No)!
 }

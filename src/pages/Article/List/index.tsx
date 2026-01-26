@@ -14,8 +14,8 @@ import { scrollTo } from '@/utils/scroller'
 import { RoutesKey, RoutesPath } from '@/routes'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
-import { ArticleId, Article, ArticlePublish, getArticlePublish } from '@/constants/article'
-import { getArticles, GetArticleParams, patchArticlesState } from '@/apis/article'
+import { ArticleId, Article, ArticleStatus, getArticleStatus } from '@/constants/article'
+import { getArticles, GetArticleParams, patchArticlesStatus } from '@/apis/article'
 import { ListFilters, DEFAULT_FILTER_PARAMS, FilterParams, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
 
@@ -63,28 +63,28 @@ export const ArticleListPage: React.FC = () => {
     })
   }
 
-  const updateArticleState = (_article: Article, state: ArticlePublish) => {
-    const targetState = getArticlePublish(state).name
+  const updateArticleState = (_article: Article, state: ArticleStatus) => {
+    const targetState = getArticleStatus(state).name
     Modal.confirm({
-      title: `确定要将此文章更新为「 ${targetState} 」状态吗？`,
+      title: `确定要将此文章更新为「${targetState}」状态吗？`,
       content: `《${_article.title}》`,
       centered: true,
       onOk: () => {
-        return patchArticlesState([_article._id!], state).then(() => {
+        return patchArticlesStatus([_article._id!], state).then(() => {
           refreshList()
         })
       }
     })
   }
 
-  const updateArticlesState = (articleIds: ArticleId[], state: ArticlePublish) => {
-    const targetState = getArticlePublish(state).name
+  const updateArticlesState = (articleIds: ArticleId[], state: ArticleStatus) => {
+    const targetState = getArticleStatus(state).name
     Modal.confirm({
-      title: `确定要将 ${articleIds.length} 个文章更新为「 ${targetState} 」状态吗？`,
+      title: `确定要将 ${articleIds.length} 个文章更新为「${targetState}」状态吗？`,
       content: '请确认操作',
       centered: true,
       onOk: () => {
-        return patchArticlesState(articleIds, state).then(() => {
+        return patchArticlesStatus(articleIds, state).then(() => {
           refreshList()
         })
       }
@@ -129,17 +129,17 @@ export const ArticleListPage: React.FC = () => {
               {
                 label: '退为草稿',
                 icon: <Icons.RollbackOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticlePublish.Draft)
+                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Draft)
               },
               {
                 label: '直接发布',
                 icon: <Icons.CheckOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticlePublish.Published)
+                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Published)
               },
               {
                 label: '移回收站',
                 icon: <Icons.DeleteOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticlePublish.Recycle)
+                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Trash)
               }
             ]}
           />

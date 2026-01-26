@@ -3,9 +3,8 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-/** 通用的数据扩展 */
 export interface GeneralKeyValue {
-  name: string
+  key: string
   value: string
 }
 

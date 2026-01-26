@@ -57,7 +57,7 @@
   "page.article.editor.content": "文章內容",
   "page.article.editor.categories": "分類目錄",
   "page.article.editor.thumbnail": "縮略圖",
-  "page.article.editor.extends": "自定義擴展",
+  "page.article.editor.extras": "自定義擴展",
   "page.article.editor.states": "發佈選項",
 
   "page.comment.title": "評論管理",

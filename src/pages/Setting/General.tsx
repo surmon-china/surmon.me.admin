@@ -1,12 +1,12 @@
 import React from 'react'
 import { useRef, onMounted } from 'veact'
 import { useLoading } from 'veact-use'
-import { Form, Input, Button, Select, Spin, Statistic } from 'antd'
+import { Form, Input, Button, Select, Spin } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/system'
 import { UniversalEditor, UnEditorLanguage } from '@/components/common/UniversalEditor'
 import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
-import { Option } from '@/constants/option'
+import { Options } from '@/constants/options'
 import { scrollTo } from '@/utils/scroller'
 import { formatJSONString } from '@/transforms/json'
 
@@ -18,10 +18,10 @@ export interface GeneralFormProps {
 export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
   const fetching = useLoading()
   const updating = useLoading()
-  const data = useRef<Option | null>(null)
-  const [form] = Form.useForm<Option>()
+  const data = useRef<Options | null>(null)
+  const [form] = Form.useForm<Options>()
 
-  const resetForm = (option: Option) => {
+  const resetForm = (option: Options) => {
     data.value = option
     form.setFieldsValue({
       ...option,
@@ -29,11 +29,11 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
     })
   }
 
-  const fetchOption = () => {
+  const fetchOptions = () => {
     return fetching.promise(api.getOption()).then(resetForm)
   }
 
-  const updateOption = (newOption: Option) => {
+  const updateOptions = (newOption: Options) => {
     const payload = {
       ...newOption,
       app_config: formatJSONString(newOption.app_config)
@@ -47,14 +47,14 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
         ...data.value,
         ...formValues
       }
-      updateOption(payload).then(() => {
+      updateOptions(payload).then(() => {
         scrollTo(document.body)
       })
     })
   }
 
   onMounted(() => {
-    fetchOption()
+    fetchOptions()
   })
 
   return (
@@ -66,14 +66,6 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
         labelCol={{ span: props.labelSpan }}
         wrapperCol={{ span: props.wrapperSpan }}
       >
-        <Form.Item label>
-          <Statistic
-            styles={{ content: { fontWeight: 'bold' } }}
-            value={data.value?.meta.likes}
-            title="站点累计被喜欢"
-            suffix="次"
-          />
-        </Form.Item>
         <Form.Item name="title" label="站点标题" required={true}>
           <Input placeholder="站点标题" />
         </Form.Item>
@@ -83,7 +75,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
         <Form.Item name="description" label="站点描述" required={true}>
           <Input.TextArea rows={4} placeholder="站点描述" />
         </Form.Item>
-        <Form.Item name="keywords" label="关键词" required={true}>
+        <Form.Item name="keywords" label="SEO 关键词" required={true}>
           <Select placeholder="输入关键词后回车" mode="tags" />
         </Form.Item>
         <Form.Item
@@ -131,8 +123,8 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
             disabledLineNumbers={true}
           />
         </Form.Item>
-        <Form.Item label="友情链接" extra="Name 为名称，Value 为链接地址" shouldUpdate={true}>
-          <FormKeyValueInput fieldName="friend_links" />
+        <Form.Item label="友情链接" extra="name 为名称，url 为链接地址" shouldUpdate={true}>
+          <FormKeyValueInput formFieldName="friend_links" keyField="name" valueField="url" />
         </Form.Item>
         <Form.Item
           name={['blocklist', 'ips']}
@@ -157,8 +149,8 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
         </Form.Item>
         <Form.Item
           name="app_config"
-          label="APP CONFIG"
-          extra="站点综合配置，用于给各处的不同客户端消费"
+          label="App Config"
+          extra="通用站点配置，用于给下游的不同客户端消费"
           rules={[
             {
               message: '请输入合法的 JSON 数据',

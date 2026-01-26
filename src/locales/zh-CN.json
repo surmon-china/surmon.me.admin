@@ -57,7 +57,7 @@
   "page.article.editor.content": "文章内容",
   "page.article.editor.categories": "分类目录",
   "page.article.editor.thumbnail": "缩略图",
-  "page.article.editor.extends": "自定义扩展",
+  "page.article.editor.extras": "自定义扩展",
   "page.article.editor.states": "发布选项",
 
   "page.comment.title": "评论管理",

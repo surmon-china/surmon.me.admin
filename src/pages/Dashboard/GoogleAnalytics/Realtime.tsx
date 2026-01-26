@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { onBeforeUnmount, onMounted } from 'veact'
 import * as Icons from '@ant-design/icons'
 import { Col, Row, List, Flex, Statistic, Divider, Empty } from 'antd'
@@ -25,7 +25,7 @@ export interface GoogleAnalyticsRealtimeProps extends React.PropsWithChildren {
 }
 
 export const GoogleAnalyticsRealtime: React.FC<GoogleAnalyticsRealtimeProps> = (props) => {
-  const intervalId = useRef<number>()
+  const intervalId = useRef<number>(undefined)
   const isCanceled = useRef(false)
 
   const [timelineReports, setTimelineReports] = useState<ReportRowItem[]>([])

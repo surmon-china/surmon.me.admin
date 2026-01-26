@@ -11,7 +11,7 @@ import { APP_LAYOUT_GUTTER_SIZE } from '@/config'
 import { ImageUploader } from '@/components/common/ImageUploader'
 import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
 import { openJSONEditor } from '@/components/common/ModalJsonEditor'
-import { ArticleOrigin, ArticlePublic, ArticlePublish } from '@/constants/article'
+import { ArticleOrigin, ArticleStatus } from '@/constants/article'
 import { Article, ArticleLanguage } from '@/constants/article'
 import { useLocale } from '@/contexts/Locale'
 import { useTheme } from '@/contexts/Theme'
@@ -22,29 +22,28 @@ import { CategoriesForm } from './CategoriesForm'
 import { StatesForm } from './StatesForm'
 
 export type MainFormModel = Partial<
-  Pick<Article, 'slug' | 'tags' | 'title' | 'content' | 'keywords' | 'description'>
+  Pick<Article, 'slug' | 'tags' | 'title' | 'content' | 'keywords' | 'summary'>
 >
 export type CategoriesFormModel = Pick<Article, 'categories'>
 export type ThumbnailFormModel = Pick<Article, 'thumbnail'>
-export type ExtendsFormModel = Pick<Article, 'extends'>
-export type StatesFormModel = Pick<Article, 'state' | 'origin' | 'public'>
+export type ExtrasFormModel = Pick<Article, 'extras'>
+export type StatesFormModel = Pick<Article, 'status' | 'origin'>
 
 const DEFAULT_ARTICLE: Article = Object.freeze({
   slug: null,
   title: '',
-  description: '',
+  summary: '',
   keywords: [],
   content: '',
   thumbnail: '',
+  status: ArticleStatus.Published,
   origin: ArticleOrigin.Original,
-  state: ArticlePublish.Published,
-  public: ArticlePublic.Public,
   lang: ArticleLanguage.Chinese,
   featured: false,
   disabled_comments: false,
   tags: [],
   categories: [],
-  extends: []
+  extras: []
 })
 
 export interface ArticleEditorProps {
@@ -64,14 +63,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
   const [mainForm] = Form.useForm<MainFormModel>()
   const [categoriesFormModel] = Form.useForm<CategoriesFormModel>()
   const [thumbnailFormModel] = Form.useForm<ThumbnailFormModel>()
-  const [extendsFormModel] = Form.useForm<ExtendsFormModel>()
+  const [extrasFormModel] = Form.useForm<ExtrasFormModel>()
   const [statesFormModel] = Form.useForm<StatesFormModel>()
 
   const setFormsValue = (formValue: Article) => {
     mainForm.setFieldsValue(formValue)
     categoriesFormModel.setFieldsValue(formValue)
     thumbnailFormModel.setFieldsValue(formValue)
-    extendsFormModel.setFieldsValue(formValue)
+    extrasFormModel.setFieldsValue(formValue)
     statesFormModel.setFieldsValue(formValue)
   }
 
@@ -82,7 +81,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
         ...(await mainForm.validateFields()),
         ...(await categoriesFormModel.validateFields()),
         ...(await thumbnailFormModel.validateFields()),
-        ...(await extendsFormModel.validateFields()),
+        ...(await extrasFormModel.validateFields()),
         ...(await statesFormModel.validateFields())
       }
       data.slug = data.slug || null
@@ -93,13 +92,13 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
     }
   }
 
-  const handleEditExtendsAsJSON = () => {
+  const handleEditExtrasAsJSON = () => {
     openJSONEditor({
       title: '以 JSON 编辑自定义扩展',
       initTheme: theme,
       initLanguage: language,
-      initValue: extendsFormModel.getFieldsValue(),
-      callback: (newValue) => extendsFormModel.setFieldsValue(newValue)
+      initValue: extrasFormModel.getFieldsValue(),
+      callback: (newValue) => extrasFormModel.setFieldsValue(newValue)
     })
   }
 
@@ -155,7 +154,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
           </Col>
           <Col span={24}>
             <Card
-              title={i18n.t('page.article.editor.extends')}
+              title={i18n.t('page.article.editor.extras')}
               variant="borderless"
               extra={
                 <Button
@@ -163,16 +162,16 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
                   size="small"
                   icon={<Icons.EditOutlined />}
                   disabled={props.loading}
-                  onClick={handleEditExtendsAsJSON}
+                  onClick={handleEditExtrasAsJSON}
                 >
                   以 JSON 编辑
                 </Button>
               }
             >
               <Spin spinning={props.loading}>
-                <Form scrollToFirstError={true} form={extendsFormModel}>
+                <Form scrollToFirstError={true} form={extrasFormModel}>
                   <Form.Item noStyle={true} shouldUpdate={true}>
-                    <FormKeyValueInput fieldName="extends" />
+                    <FormKeyValueInput formFieldName="extras" />
                   </Form.Item>
                 </Form>
               </Spin>

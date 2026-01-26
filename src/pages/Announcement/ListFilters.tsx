@@ -3,18 +3,18 @@ import { Button, Input, Select, Space, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
 import { SortSelect } from '@/components/common/SortSelect'
-import { SortTypeBase } from '@/constants/sort'
-import { AnnouncementState, announcementStates } from '@/constants/announcement'
+import { SortOrder } from '@/constants/sort'
+import { AnnouncementStatus, announcementStatuses } from '@/constants/announcement'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = {
-  state: SELECT_ALL_VALUE as typeof SELECT_ALL_VALUE | AnnouncementState,
-  sort: SortTypeBase.Desc
+  status: SELECT_ALL_VALUE as typeof SELECT_ALL_VALUE | AnnouncementStatus,
+  sort: SortOrder.Desc
 }
 
 export type FilterParams = typeof DEFAULT_FILTER_PARAMS
 export const getQueryParams = (params: FilterParams) => ({
-  state: params.state !== SELECT_ALL_VALUE ? params.state : void 0,
+  status: params.status !== SELECT_ALL_VALUE ? params.status : void 0,
   sort: params.sort
 })
 
@@ -37,16 +37,16 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
         <Select
           style={{ width: 110 }}
           disabled={props.loading}
-          value={props.params.state}
-          onChange={(state) => props.onParamsChange({ state })}
+          value={props.params.status}
+          onChange={(status) => props.onParamsChange({ status })}
           options={[
             { label: '全部状态', value: SELECT_ALL_VALUE },
-            ...announcementStates.map((state) => ({
-              value: state.id,
+            ...announcementStatuses.map((status) => ({
+              value: status.id,
               label: (
                 <Space size="small">
-                  {state.icon}
-                  {state.name}
+                  {status.icon}
+                  {status.name}
                 </Space>
               )
             }))

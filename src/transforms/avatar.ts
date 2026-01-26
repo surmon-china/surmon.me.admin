@@ -21,7 +21,7 @@ export const autoCommentAvatar = (comment: Comment) => {
     return getGravatar(comment.author.email_hash)
   }
 
-  const disqusUsername = getDisqusUserName(comment.extends)
+  const disqusUsername = getDisqusUserName(comment.extras)
   if (disqusUsername) {
     return getDisqusAvatar(disqusUsername)
   }

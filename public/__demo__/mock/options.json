@@ -2,8 +2,6 @@
   "status": "success",
   "message": "Get app options succeeded",
   "result": {
-    "_id": "589e01b75af07d59124234cd",
-    "meta": { "likes": 600 },
     "title": "Blog name",
     "sub_title": "Sub title",
     "description": "Site description",
@@ -13,11 +11,11 @@
     "friend_links": [
       {
         "name": "Surmon.me",
-        "value": "https://surmon.me"
+        "url": "https://surmon.me"
       },
       {
         "name": "Surmon's GitHub",
-        "value": "https://github.com/surmon-china"
+        "url": "https://github.com/surmon-china"
       }
     ],
     "blocklist": {

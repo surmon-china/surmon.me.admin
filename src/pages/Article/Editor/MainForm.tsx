@@ -1,7 +1,7 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import { useRef } from 'veact'
-import { Button, Form, Select, Input, Modal, Space } from 'antd'
+import { Button, Form, Select, Input, Modal } from 'antd'
 import type { FormInstance } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { FileManager } from '@/components/common/FileManager'
@@ -67,17 +67,17 @@ export const MainForm: React.FC<MainFormProps> = (props) => {
           <Input placeholder="文章标题" />
         </Form.Item>
         <Form.Item
-          label="描述"
-          name="description"
+          label="概要"
+          name="summary"
           required={true}
           rules={[
             {
               required: true,
-              message: '请输入标题'
+              message: '请输入概要'
             }
           ]}
         >
-          <Input.TextArea rows={4} placeholder="文章描述" />
+          <Input.TextArea rows={4} placeholder="文章概要" />
         </Form.Item>
         <Form.Item label="关键词" name="keywords">
           <Select placeholder="输入关键词后回车" mode="tags" />

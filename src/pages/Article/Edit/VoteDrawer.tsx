@@ -11,7 +11,7 @@ import { IPLocation } from '@/components/common/IPLocation'
 import { UniversalText } from '@/components/common/UniversalText'
 import { Vote, VoteType, getVoteType, VoteTarget, getVoteAuthorTypeText } from '@/constants/vote'
 import { Pagination } from '@/constants/nodepress'
-import { SortTypeBase } from '@/constants/sort'
+import { SortOrder } from '@/constants/sort'
 import { stringToYMD } from '@/transforms/date'
 import { parseBrowser, parseOS } from '@/transforms/ua'
 
@@ -97,7 +97,7 @@ export const VoteDrawer: React.FC<VoteDrawerProps> = (props) => {
   const loadmoreFetching = useLoading()
   const votes = useRef<Vote[]>([])
   const pagination = useShallowRef<Pagination | null>(null)
-  const sortType = useShallowRef(SortTypeBase.Desc)
+  const sortOrder = useShallowRef(SortOrder.Desc)
 
   const hasMore = useComputed(() => {
     if (!pagination.value) {
@@ -119,9 +119,9 @@ export const VoteDrawer: React.FC<VoteDrawerProps> = (props) => {
     const getParams: GetVotesParams = {
       page,
       per_page: 50,
-      target_type: VoteTarget.Post,
+      target_type: VoteTarget.Article,
       target_id: props.articleId,
-      sort: sortType.value
+      sort: sortOrder.value
     }
     const response = await fetching.promise(voteApi.getVotes(getParams))
     if (isFirstPage) {
@@ -147,9 +147,9 @@ export const VoteDrawer: React.FC<VoteDrawerProps> = (props) => {
         <Space.Compact>
           <SortSelect
             disabled={initFetching.state.value || loadmoreFetching.state.value}
-            value={sortType.value}
+            value={sortOrder.value}
             onChange={(value) => {
-              sortType.value = value
+              sortOrder.value = value
               fetchVotes()
             }}
           />

@@ -28,7 +28,7 @@ export enum VoteType {
 }
 
 export enum VoteTarget {
-  Post = 1,
+  Article = 1,
   Comment = 2
 }
 
@@ -38,23 +38,23 @@ export enum VoteAuthorType {
   Disqus = 2
 }
 
-const voteTargetTextMap = new Map([
-  [VoteTarget.Post, '页面'],
+const voteTargetTextsMap = new Map([
+  [VoteTarget.Article, '文章'],
   [VoteTarget.Comment, '评论']
 ])
 
 export const getVoteTargetText = (voteTarget: VoteTarget) => {
-  return voteTargetTextMap.get(voteTarget)!
+  return voteTargetTextsMap.get(voteTarget)!
 }
 
-const voteAuthorTypeMap = new Map([
+const voteAuthorTypesMap = new Map([
   [VoteAuthorType.Anonymous, '匿名用户'],
   [VoteAuthorType.Guest, '本地访客'],
   [VoteAuthorType.Disqus, 'Disqus 用户']
 ])
 
 export const getVoteAuthorTypeText = (voteAuthorType: VoteAuthorType) => {
-  return voteAuthorTypeMap.get(voteAuthorType)!
+  return voteAuthorTypesMap.get(voteAuthorType)!
 }
 
 export const voteTypes = [
@@ -70,8 +70,8 @@ export const voteTypes = [
   }
 ]
 
-const voteTypeMap = new Map(voteTypes.map((item) => [item.id, item]))
+const voteTypesMap = new Map(voteTypes.map((item) => [item.id, item]))
 
 export const getVoteType = (voteType: VoteType) => {
-  return voteTypeMap.get(voteType)!
+  return voteTypesMap.get(voteType)!
 }

@@ -135,9 +135,9 @@ export const ArticleEditPage: React.FC = () => {
         mainCardExtra={
           <Space size="small" wrap>
             <Space.Compact size="small">
-              <Tooltip title={numberSplit(article.value?.meta?.views ?? 0)}>
+              <Tooltip title={numberSplit(article.value?.stats?.views ?? 0)}>
                 <Button icon={<Icons.EyeOutlined />} loading={fetching.state.value}>
-                  {numberToKilo(article.value?.meta?.views ?? 0)} 阅读
+                  {numberToKilo(article.value?.stats?.views ?? 0)} 阅读
                 </Button>
               </Tooltip>
               <Button
@@ -146,7 +146,7 @@ export const ArticleEditPage: React.FC = () => {
                 disabled={fetching.state.value}
                 onClick={() => (isVoteDrawerOpen.value = true)}
               >
-                {article.value?.meta?.likes ?? ''} 喜欢
+                {article.value?.stats?.likes ?? ''} 喜欢
               </Button>
               <Button
                 icon={<Icons.CommentOutlined />}
@@ -154,7 +154,7 @@ export const ArticleEditPage: React.FC = () => {
                 loading={fetching.state.value}
                 onClick={() => (isCommentDrawerOpen.value = true)}
               >
-                {article.value?.meta?.comments ?? ''} 评论
+                {article.value?.stats?.comments ?? ''} 评论
               </Button>
             </Space.Compact>
             <Divider orientation="vertical" />
@@ -191,14 +191,14 @@ export const ArticleEditPage: React.FC = () => {
           <VoteDrawer
             size="large"
             open={isVoteDrawerOpen.value}
-            likeCount={article.value.meta!.likes}
+            likeCount={article.value.stats!.likes}
             articleId={article.value.id!}
             onClose={() => (isVoteDrawerOpen.value = false)}
           />
           <CommentDrawer
             size="large"
             open={isCommentDrawerOpen.value}
-            commentCount={article.value.meta!.comments}
+            commentCount={article.value.stats!.comments}
             articleId={article.value.id!}
             renderTreeList={({ comments, loading }) => (
               <CommentTreeList comments={comments} loading={loading} />

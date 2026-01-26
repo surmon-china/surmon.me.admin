@@ -8,7 +8,7 @@ import * as commentApi from '@/apis/comment'
 import type { CommentTree, GetCommentsParams } from '@/apis/comment'
 import { Comment } from '@/constants/comment'
 import { Pagination } from '@/constants/nodepress'
-import { SortTypeWithHot } from '@/constants/sort'
+import { SortMode } from '@/constants/sort'
 import { SortSelect } from '@/components/common/SortSelect'
 
 export interface CommentDrawerProps {
@@ -26,7 +26,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = (props) => {
   const loadmoreFetching = useLoading()
   const comments = useRef<Comment[]>([])
   const pagination = useShallowRef<Pagination | null>(null)
-  const sortType = useShallowRef(SortTypeWithHot.Desc)
+  const sortMode = useShallowRef(SortMode.Latest)
 
   const hasMore = useComputed(() => {
     if (!pagination.value) {
@@ -53,7 +53,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = (props) => {
       page,
       per_page: 50,
       post_id: props.articleId,
-      sort: sortType.value
+      sort: sortMode.value
     }
     const response = await fetching.promise(commentApi.getComments(getParams))
     if (isFirstPage) {
@@ -79,9 +79,9 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = (props) => {
         <SortSelect
           withHot={true}
           disabled={initFetching.state.value || loadmoreFetching.state.value}
-          value={sortType.value}
+          value={sortMode.value}
           onChange={(value) => {
-            sortType.value = value
+            sortMode.value = value
             fetchComments()
           }}
         />

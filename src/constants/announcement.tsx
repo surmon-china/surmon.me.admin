@@ -6,38 +6,37 @@
 import React from 'react'
 import * as Icons from '@ant-design/icons'
 
-/** 公告 */
+export enum AnnouncementStatus {
+  Draft = 0,
+  Published = 1
+}
+
 export interface Announcement {
-  id?: number
   _id?: string
-  state: AnnouncementState
+  id?: number
+  status: AnnouncementStatus
   content: string
   updated_at: string
   created_at: string
 }
 
-export enum AnnouncementState {
-  Unpublished = 0,
-  Published = 1
-}
-
-export const announcementStates = [
+export const announcementStatuses = [
   {
-    id: AnnouncementState.Unpublished,
-    name: '未发布',
-    icon: <Icons.EditOutlined />,
+    id: AnnouncementStatus.Draft,
+    name: '草稿',
+    icon: <Icons.SignatureOutlined />,
     color: 'orange'
   },
   {
-    id: AnnouncementState.Published,
+    id: AnnouncementStatus.Published,
     name: '已发布',
     icon: <Icons.CheckOutlined />,
     color: 'green'
   }
 ]
 
-const announcementStateMap = new Map(announcementStates.map((item) => [item.id, item]))
+const announcementStatusesMap = new Map(announcementStatuses.map((item) => [item.id, item]))
 
-export const getAnnouncementState = (state: AnnouncementState) => {
-  return announcementStateMap.get(state)!
+export const getAnnouncementStatus = (status: AnnouncementStatus) => {
+  return announcementStatusesMap.get(status)!
 }

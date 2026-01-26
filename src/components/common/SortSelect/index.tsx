@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { Select, Space } from 'antd'
-import { getSortType, SortTypeBase, SortTypeWithHot } from '@/constants/sort'
+import { getSortMode, SortOrder, SortMode } from '@/constants/sort'
 
 export interface SortSelectProps {
   value?: number
@@ -18,8 +18,8 @@ export interface SortSelectProps {
 }
 
 export const SortSelect: React.FC<SortSelectProps> = (props) => {
-  const baseTypes = [SortTypeBase.Desc, SortTypeBase.Asc]
-  const sortTypes = props.withHot ? [...baseTypes, SortTypeWithHot.Hot] : baseTypes
+  const basicOptions = [SortOrder.Desc, SortOrder.Asc]
+  const sortOptions = props.withHot ? [...basicOptions, SortMode.Hottest] : basicOptions
 
   return (
     <Select
@@ -29,13 +29,13 @@ export const SortSelect: React.FC<SortSelectProps> = (props) => {
       disabled={props.disabled}
       value={props.value}
       onChange={props.onChange}
-      options={sortTypes.map((sortType) => {
+      options={sortOptions.map((sortId) => {
         return {
-          value: sortType,
+          value: sortId,
           label: (
             <Space size="small">
-              {getSortType(sortType).icon}
-              {getSortType(sortType).name}
+              {getSortMode(sortId).icon}
+              {getSortMode(sortId).name}
             </Space>
           )
         }

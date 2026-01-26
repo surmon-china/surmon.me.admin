@@ -5,17 +5,16 @@
 
 import { GeneralKeyValue } from './general'
 
-/** 分类 */
 export interface Category {
-  id?: number
   _id?: string
+  id?: number
   pid?: string | null
   name: string
   slug: string
   description: string
+  children?: Category[]
+  extras: GeneralKeyValue[]
   updated_at: string
   created_at: string
-  children?: Category[]
-  extends: GeneralKeyValue[]
   article_count?: number
 }

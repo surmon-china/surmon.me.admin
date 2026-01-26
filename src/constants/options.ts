@@ -1,12 +1,9 @@
 /**
- * @file Option interface
+ * @file Options interface
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { GeneralKeyValue } from './general'
-
-/** 设置 */
-export interface Option {
+export interface Options {
   title: string
   sub_title: string
   description: string
@@ -14,15 +11,12 @@ export interface Option {
   statement: string
   site_url: string
   site_email: string
-  meta: {
-    likes: number
-  }
   blocklist: {
     ips: string[]
     mails: string[]
     keywords: string[]
   }
-  friend_links: GeneralKeyValue[]
+  friend_links: Array<{ name: string; url: string }>
   app_config: string
   updated_at: string
 }

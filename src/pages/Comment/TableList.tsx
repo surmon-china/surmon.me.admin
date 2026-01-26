@@ -5,7 +5,7 @@ import { UniversalText } from '@/components/common/UniversalText'
 import { Placeholder } from '@/components/common/Placeholder'
 import { IPLocation } from '@/components/common/IPLocation'
 import { Pagination } from '@/constants/nodepress'
-import { Comment, CommentState, getCommentState } from '@/constants/comment'
+import { Comment, CommentStatus, getCommentStatus } from '@/constants/comment'
 import { parseBrowser, parseOS, parseDevice } from '@/transforms/ua'
 import { stringToYMD } from '@/transforms/date'
 import { CommentAvatar } from './Avatar'
@@ -21,7 +21,7 @@ export interface TableListProps {
   onPaginate(page: number, pageSize?: number): void
   onDetail(comment: Comment, index: number): void
   onDelete(comment: Comment, index: number): void
-  onUpdateState(comment: Comment, state: CommentState): void
+  onUpdateStatus(comment: Comment, status: CommentStatus): void
   onClickPostId(id: number): void
 }
 
@@ -160,23 +160,25 @@ export const TableList: React.FC<TableListProps> = (props) => {
         {
           title: '状态',
           width: 80,
-          dataIndex: 'state',
+          dataIndex: 'status',
           render: (_, comment) => {
-            const state = getCommentState(comment.state)
+            const status = getCommentStatus(comment.status)
             return (
               <Space orientation="vertical">
-                <Tag icon={state.icon} color={state.color}>
-                  {state.name}
+                <Tag variant="outlined" icon={status.icon} color={status.color}>
+                  {status.name}
                 </Tag>
                 <Tag
+                  variant="outlined"
                   icon={<Icons.LikeOutlined />}
-                  color={comment.likes > 0 ? 'processing' : undefined}
+                  color={comment.likes > 0 ? 'blue' : undefined}
                 >
                   {comment.likes} 个赞
                 </Tag>
                 <Tag
+                  variant="outlined"
                   icon={<Icons.DislikeOutlined />}
-                  color={comment.dislikes > 0 ? 'gold' : undefined}
+                  color={comment.dislikes > 0 ? 'blue' : undefined}
                 >
                   {comment.dislikes} 个踩
                 </Tag>
@@ -199,53 +201,55 @@ export const TableList: React.FC<TableListProps> = (props) => {
               >
                 评论详情
               </Button>
-              {comment.state === CommentState.Auditing && (
+              {comment.status === CommentStatus.Pending && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="green"
                   block={true}
                   icon={<Icons.CheckOutlined />}
-                  onClick={() => props.onUpdateState(comment, CommentState.Published)}
+                  onClick={() => props.onUpdateStatus(comment, CommentStatus.Published)}
                 >
-                  <Typography.Text type="success">审核通过</Typography.Text>
+                  审核通过
                 </Button>
               )}
-              {comment.state === CommentState.Published && (
+              {comment.status === CommentStatus.Published && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="danger"
                   block={true}
-                  danger={true}
                   icon={<Icons.StopOutlined />}
-                  onClick={() => props.onUpdateState(comment, CommentState.Spam)}
+                  onClick={() => props.onUpdateStatus(comment, CommentStatus.Spam)}
                 >
                   标为垃圾
                 </Button>
               )}
-              {(comment.state === CommentState.Auditing ||
-                comment.state === CommentState.Published) && (
+              {(comment.status === CommentStatus.Pending ||
+                comment.status === CommentStatus.Published) && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="orange"
                   block={true}
-                  danger={true}
                   icon={<Icons.DeleteOutlined />}
-                  onClick={() => props.onUpdateState(comment, CommentState.Deleted)}
+                  onClick={() => props.onUpdateStatus(comment, CommentStatus.Trash)}
                 >
                   移回收站
                 </Button>
               )}
-              {(comment.state === CommentState.Deleted ||
-                comment.state === CommentState.Spam) && (
+              {(comment.status === CommentStatus.Trash ||
+                comment.status === CommentStatus.Spam) && (
                 <>
                   <Button
                     size="small"
-                    type="text"
+                    variant="text"
+                    color="blue"
                     block={true}
-                    icon={<Icons.EditOutlined />}
-                    onClick={() => props.onUpdateState(comment, CommentState.Auditing)}
+                    icon={<Icons.RollbackOutlined />}
+                    onClick={() => props.onUpdateStatus(comment, CommentStatus.Pending)}
                   >
-                    <Typography.Text type="warning">退为草稿</Typography.Text>
+                    退至审核
                   </Button>
                   <Button
                     size="small"

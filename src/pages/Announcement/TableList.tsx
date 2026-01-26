@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Button, Tag, Space } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { Pagination } from '@/constants/nodepress'
-import { Announcement, getAnnouncementState } from '@/constants/announcement'
+import { Announcement, getAnnouncementStatus } from '@/constants/announcement'
 import { stringToYMD } from '@/transforms/date'
 
 export interface TableListProps {
@@ -54,12 +54,12 @@ export const TableList: React.FC<TableListProps> = (props) => {
         {
           title: '状态',
           width: 120,
-          dataIndex: 'state',
+          dataIndex: 'status',
           render: (_, ann) => {
-            const state = getAnnouncementState(ann.state)
+            const status = getAnnouncementStatus(ann.status)
             return (
-              <Tag icon={state.icon} color={state.color}>
-                {state.name}
+              <Tag variant="outlined" icon={status.icon} color={status.color}>
+                {status.name}
               </Tag>
             )
           }

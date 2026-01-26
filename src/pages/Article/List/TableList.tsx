@@ -7,8 +7,13 @@ import { RoutesPather } from '@/routes'
 import { Pagination } from '@/constants/nodepress'
 import { Tag as TagType } from '@/constants/tag'
 import { Category } from '@/constants/category'
-import { Article, ArticlePublish } from '@/constants/article'
-import { getArticleOrigin, getArticlePublic, getArticlePublish } from '@/constants/article'
+import {
+  Article,
+  ArticleStatus,
+  getArticleStatus,
+  getArticleOrigin,
+  getArticleLanguage
+} from '@/constants/article'
 import { getBlogArticleUrl } from '@/transforms/url'
 import { numberToKilo } from '@/transforms/number'
 import { stringToYMD } from '@/transforms/date'
@@ -20,7 +25,7 @@ export interface TableListProps {
   selectedIds: string[]
   onSelect(ids: any[]): void
   onPaginate(page: number, pageSize?: number): void
-  onUpdateState(article: Article, state: ArticlePublish): void
+  onUpdateState(article: Article, state: ArticleStatus): void
   onClickCategory(category: Category): void
   onClickTag(tag: TagType): void
 }
@@ -85,7 +90,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
                   style={{ color: 'rgba(255, 255, 255, 0.65)' }}
                   ellipsis={{ rows: 2, expandable: true }}
                 >
-                  {article.description}
+                  {article.summary}
                 </Typography.Paragraph>
               </Card>
             </Badge.Ribbon>
@@ -121,15 +126,15 @@ export const TableList: React.FC<TableListProps> = (props) => {
               <Space orientation="vertical">
                 <Space size="small">
                   <Icons.EyeOutlined />
-                  浏览 {numberToKilo(article.meta?.views ?? 0)} 次
+                  浏览 {numberToKilo(article.stats?.views ?? 0)} 次
                 </Space>
                 <Space size="small">
                   <Icons.HeartOutlined />
-                  喜欢 {article.meta?.likes} 次
+                  喜欢 {article.stats?.likes} 次
                 </Space>
                 <Space size="small">
                   <Icons.CommentOutlined />
-                  评论 {article.meta?.comments} 条
+                  评论 {article.stats?.comments} 条
                 </Space>
               </Space>
             )
@@ -167,18 +172,19 @@ export const TableList: React.FC<TableListProps> = (props) => {
             return (
               <Space orientation="vertical">
                 {[
-                  getArticlePublish(article.state),
-                  getArticlePublic(article.public),
-                  getArticleOrigin(article.origin)
-                ].map((state) =>
-                  state ? (
-                    <Tag icon={state.icon} color={state.color} key={state.id + state.name}>
-                      {state.name}
-                    </Tag>
-                  ) : (
-                    '-'
-                  )
-                )}
+                  getArticleStatus(article.status),
+                  getArticleOrigin(article.origin),
+                  getArticleLanguage(article.lang)
+                ].map((state) => (
+                  <Tag
+                    variant="outlined"
+                    icon={state.icon}
+                    color={state.color}
+                    key={state.id + state.name}
+                  >
+                    {state.name}
+                  </Tag>
+                ))}
               </Space>
             )
           }
@@ -191,47 +197,50 @@ export const TableList: React.FC<TableListProps> = (props) => {
             <Space orientation="vertical">
               <Link to={RoutesPather.articleDetail(article._id!)}>
                 <Button size="small" type="text" block={true} icon={<Icons.EditOutlined />}>
-                  文章详情
+                  编辑文章
                 </Button>
               </Link>
-              {article.state === ArticlePublish.Draft && (
+              {article.status === ArticleStatus.Draft && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="green"
                   block={true}
                   icon={<Icons.CheckOutlined />}
-                  onClick={() => props.onUpdateState(article, ArticlePublish.Published)}
+                  onClick={() => props.onUpdateState(article, ArticleStatus.Published)}
                 >
-                  <Typography.Text type="success">直接发布</Typography.Text>
+                  直接发布
                 </Button>
               )}
-              {article.state === ArticlePublish.Published && (
+              {(article.status === ArticleStatus.Published ||
+                article.status === ArticleStatus.Private) && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="danger"
                   block={true}
-                  danger={true}
                   icon={<Icons.DeleteOutlined />}
-                  onClick={() => props.onUpdateState(article, ArticlePublish.Recycle)}
+                  onClick={() => props.onUpdateState(article, ArticleStatus.Trash)}
                 >
                   移回收站
                 </Button>
               )}
-              {article.state === ArticlePublish.Recycle && (
+              {article.status === ArticleStatus.Trash && (
                 <Button
                   size="small"
-                  type="text"
+                  variant="text"
+                  color="orange"
                   block={true}
                   icon={<Icons.RollbackOutlined />}
-                  onClick={() => props.onUpdateState(article, ArticlePublish.Draft)}
+                  onClick={() => props.onUpdateState(article, ArticleStatus.Draft)}
                 >
-                  <Typography.Text type="warning">退至草稿</Typography.Text>
+                  退至草稿
                 </Button>
               )}
               <Button
                 size="small"
-                block={true}
                 type="link"
+                block={true}
                 target="_blank"
                 icon={<Icons.ExportOutlined />}
                 href={getBlogArticleUrl(article.id!)}

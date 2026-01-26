@@ -9,7 +9,7 @@ import { Space, Row, Col, Button, Card, Divider, Radio } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useLoading } from '@/hooks/useLoading'
 import { APP_LAYOUT_SPACE_SIZE, APP_LAYOUT_GUTTER_SIZE } from '@/config'
-import { StatisticsCalendarItem, getArticleCalendar, getCommentCalendar } from '@/apis/system'
+import { StatisticsCalendarItem, getArticlesCalendar, getCommentsCalendar } from '@/apis/system'
 import { Statistics, getStatistics } from '@/apis/system'
 import * as gaHelper from './GoogleAnalytics/common/helper'
 import { GA_DATE_RANGE_OPTIONS } from './GoogleAnalytics/common/config'
@@ -29,7 +29,7 @@ export const DashboardPage: React.FC = () => {
   const [articleCalendar, setArticleCalendar] = useState<StatisticsCalendarItem[]>([])
   const [commentCalendar, setCommentCalendar] = useState<StatisticsCalendarItem[]>([])
   const fetchCalendarData = async () => {
-    const request = Promise.all([getArticleCalendar(), getCommentCalendar()])
+    const request = Promise.all([getArticlesCalendar(), getCommentsCalendar()])
     const [articleData, commentData] = await calendarFetching.promise(request)
     setArticleCalendar(articleData)
     setCommentCalendar(commentData)

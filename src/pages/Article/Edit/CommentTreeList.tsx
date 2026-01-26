@@ -4,7 +4,7 @@ import * as Icons from '@ant-design/icons'
 import { IPLocation } from '@/components/common/IPLocation'
 import { UniversalText } from '@/components/common/UniversalText'
 import { CommentAvatar } from '@/pages/Comment/Avatar'
-import { getCommentState } from '@/constants/comment'
+import { getCommentStatus } from '@/constants/comment'
 import { CommentTree } from '@/apis/comment'
 import { stringToYMD } from '@/transforms/date'
 import { parseBrowser, parseOS } from '@/transforms/ua'
@@ -52,10 +52,10 @@ export const CommentTreeList: React.FC<CommentTreeListProps> = (props) => {
                   </Typography.Text>
                 </div>
                 <Tag
-                  color={getCommentState(comment.state).color}
-                  icon={getCommentState(comment.state).icon}
+                  color={getCommentStatus(comment.status).color}
+                  icon={getCommentStatus(comment.status).icon}
                 >
-                  {getCommentState(comment.state).name}
+                  {getCommentStatus(comment.status).name}
                 </Tag>
               </Flex>
               <Typography.Paragraph style={{ margin: 0 }}>{comment.content}</Typography.Paragraph>

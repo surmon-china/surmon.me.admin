@@ -4,22 +4,20 @@
  */
 
 import { GeneralKeyValue, IPLocation } from '../general'
-import { CommentState } from './state'
+import { CommentStatus } from './status'
 
-/** 留言板 ID */
 export const COMMENT_GUESTBOOK_POST_ID = 0
 
-/** 评论 */
 export interface Comment {
   id: number
   _id: string
   pid: number
   post_id: number
   content: string
-  agent: string
-  state: CommentState
+  status: CommentStatus
   likes: number
   dislikes: number
+  agent: string
   author: {
     name: string
     site?: string
@@ -28,7 +26,7 @@ export interface Comment {
   }
   ip: string | null
   ip_location: IPLocation | null
+  extras: GeneralKeyValue[]
   updated_at?: string
   created_at?: string
-  extends: GeneralKeyValue[]
 }

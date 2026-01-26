@@ -1,45 +1,42 @@
 /**
- * @file General sort state
+ * @file General sort modes
  * @author Surmon <https://github.com/surmon-china>
  */
 
 import React from 'react'
 import * as Icons from '@ant-design/icons'
 
-const ASC = 1 // 升序
-const DESC = -1 // 降序
-
-export enum SortTypeBase {
-  Asc = ASC,
-  Desc = DESC
+export enum SortOrder {
+  Asc = 1, // 升序
+  Desc = -1 // 降序
 }
 
-export enum SortTypeWithHot {
-  Asc = ASC,
-  Desc = DESC,
-  Hot = 2
+export enum SortMode {
+  Oldest = SortOrder.Asc,
+  Latest = SortOrder.Desc,
+  Hottest = 2
 }
 
-const sortTypes = [
+const sortModes = [
   {
-    id: SortTypeWithHot.Desc,
+    id: SortMode.Latest,
     name: '最新',
     icon: <Icons.SortDescendingOutlined />
   },
   {
-    id: SortTypeWithHot.Asc,
+    id: SortMode.Oldest,
     name: '最早',
     icon: <Icons.SortAscendingOutlined />
   },
   {
-    id: SortTypeWithHot.Hot,
+    id: SortMode.Hottest,
     name: '最热',
     icon: <Icons.FireOutlined />
   }
 ]
 
-const sortTypeMap = new Map(sortTypes.map((item) => [item.id, item]))
+const sortModesMap = new Map(sortModes.map((item) => [item.id, item]))
 
-export const getSortType = (state: number) => {
-  return sortTypeMap.get(state)!
+export const getSortMode = (id: number) => {
+  return sortModesMap.get(id)!
 }

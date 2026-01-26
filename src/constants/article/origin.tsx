@@ -6,7 +6,6 @@
 import React from 'react'
 import * as Icons from '@ant-design/icons'
 
-/** 文章来源 */
 export enum ArticleOrigin {
   Original = 0, // 原创
   Reprint = 1, // 转载
@@ -28,14 +27,14 @@ export const articleOrigins = [
   },
   {
     id: ArticleOrigin.Hybrid,
-    name: '衍生',
+    name: '混合',
     icon: <Icons.PullRequestOutlined />,
     color: 'default'
   }
 ]
 
-const articleOriginMap = new Map(articleOrigins.map((item) => [item.id, item]))
+const articleOriginsMap = new Map(articleOrigins.map((item) => [item.id, item]))
 
-export const getArticleOrigin = (state: ArticleOrigin) => {
-  return articleOriginMap.get(state)!
+export const getArticleOrigin = (origin: ArticleOrigin) => {
+  return articleOriginsMap.get(origin)!
 }

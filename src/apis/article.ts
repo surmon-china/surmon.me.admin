@@ -3,9 +3,9 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { SortTypeWithHot } from '@/constants/sort'
+import { SortMode } from '@/constants/sort'
 import type { ArticleId, Article } from '@/constants/article'
-import { ArticleOrigin, ArticlePublic, ArticlePublish } from '@/constants/article'
+import { ArticleOrigin, ArticleStatus } from '@/constants/article'
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
 import nodepress from '@/services/nodepress'
 
@@ -14,9 +14,8 @@ export const ARTICLE_API_PATH = '/article'
 /** 获取文章参数 */
 export interface GetArticleParams extends GeneralPaginateQueryParams {
   featured?: boolean
-  sort?: SortTypeWithHot
-  state?: ArticlePublish
-  public?: ArticlePublic
+  sort?: SortMode
+  status?: ArticleStatus
   origin?: ArticleOrigin
   keyword?: string
   tag_slug?: string
@@ -57,9 +56,9 @@ export function updateArticle(article: Article) {
 }
 
 /** 批量修改文章状态 */
-export function patchArticlesState(articleIds: ArticleId[], state: ArticlePublish) {
+export function patchArticlesStatus(articleIds: ArticleId[], status: ArticleStatus) {
   return nodepress
-    .patch(ARTICLE_API_PATH, { article_ids: articleIds, state })
+    .patch(ARTICLE_API_PATH, { article_ids: articleIds, status })
     .then((response) => response.result)
 }
 

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Form, Select, Modal, Space, Divider, Typography, ModalProps } from 'antd'
 import { UniversalEditor } from '@/components/common/UniversalEditor'
-import { Announcement, AnnouncementState, announcementStates } from '@/constants/announcement'
 import { stringToYMD } from '@/transforms/date'
+import { Announcement, AnnouncementStatus, announcementStatuses } from '@/constants/announcement'
 
 const formLayout = {
   labelCol: { span: 4 },
@@ -60,18 +60,18 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
         )}
         <Form.Item
           label="发布状态"
-          name="state"
-          initialValue={AnnouncementState.Published}
+          name="status"
+          initialValue={AnnouncementStatus.Published}
           rules={[{ required: true, message: '请选择状态' }]}
         >
           <Select
             placeholder="选择状态"
-            options={announcementStates.map((state) => ({
-              value: state.id,
+            options={announcementStatuses.map((status) => ({
+              value: status.id,
               label: (
                 <Space size="small">
-                  {state.icon}
-                  {state.name}
+                  {status.icon}
+                  {status.name}
                 </Space>
               )
             }))}

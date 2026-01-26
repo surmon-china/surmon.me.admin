@@ -1,12 +1,12 @@
 import React from 'react'
 import * as Icons from '@ant-design/icons'
 import { Button, Flex, Select, Input, Space } from 'antd'
-import { DisqusPostState, DisqusOrderType } from '@/constants/disqus'
+import { DisqusPostStatus, DisqusSortOrder } from '@/constants/disqus'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = {
-  order: DisqusOrderType.Desc,
-  include: SELECT_ALL_VALUE as any as DisqusPostState | typeof SELECT_ALL_VALUE
+  order: DisqusSortOrder.Desc,
+  include: SELECT_ALL_VALUE as any as DisqusPostStatus | typeof SELECT_ALL_VALUE
 }
 
 export type FilterParams = typeof DEFAULT_FILTER_PARAMS
@@ -37,27 +37,27 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
               label: 'All state'
             },
             {
-              value: DisqusPostState.Approved,
+              value: DisqusPostStatus.Approved,
               label: 'Approved'
             },
             {
-              value: DisqusPostState.Unapproved,
+              value: DisqusPostStatus.Unapproved,
               label: 'Unapproved'
             },
             {
-              value: DisqusPostState.Spam,
+              value: DisqusPostStatus.Spam,
               label: 'Spam'
             },
             {
-              value: DisqusPostState.Deleted,
+              value: DisqusPostStatus.Deleted,
               label: 'Deleted'
             },
             {
-              value: DisqusPostState.Flagged,
+              value: DisqusPostStatus.Flagged,
               label: 'Flagged'
             },
             {
-              value: DisqusPostState.Highlighted,
+              value: DisqusPostStatus.Highlighted,
               label: 'Highlighted'
             }
           ]}
@@ -69,11 +69,11 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
           onChange={(order) => props.onParamsChange({ order })}
           options={[
             {
-              value: DisqusOrderType.Desc,
+              value: DisqusSortOrder.Desc,
               label: 'Desc'
             },
             {
-              value: DisqusOrderType.Asc,
+              value: DisqusSortOrder.Asc,
               label: 'Asc'
             }
           ]}

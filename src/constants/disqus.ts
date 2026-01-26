@@ -3,17 +3,17 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-export enum DisqusOrderType {
+export enum DisqusSortOrder {
   Desc = 'desc',
   Asc = 'asc'
 }
 
-export enum DisqusThreadState {
+export enum DisqusThreadStatus {
   Open = 'open',
   Closed = 'closed'
 }
 
-export enum DisqusPostState {
+export enum DisqusPostStatus {
   Unapproved = 'unapproved',
   Approved = 'approved',
   Spam = 'spam',

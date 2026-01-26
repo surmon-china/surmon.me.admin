@@ -9,7 +9,7 @@ import { useLoading } from 'veact-use'
 import { Button, Card, Divider, Flex, Typography } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { scrollTo } from '@/utils/scroller'
-import { DisqusPostState } from '@/constants/disqus'
+import { DisqusPostStatus } from '@/constants/disqus'
 import { getDisqusConfig, getDisqusPosts, GeneralDisqusParams } from '@/apis/disqus'
 import { ListFilters, DEFAULT_FILTER_PARAMS, SELECT_ALL_VALUE } from './ListFilters'
 import { TableList } from './TableList'
@@ -37,7 +37,7 @@ export const DisqusPostsPage: React.FC = () => {
       include:
         filterParams.value.include !== SELECT_ALL_VALUE
           ? [filterParams.value.include]
-          : [...Object.values(DisqusPostState)]
+          : [...Object.values(DisqusPostStatus)]
     }
 
     fetching.promise(getDisqusPosts(getParams)).then((response) => {

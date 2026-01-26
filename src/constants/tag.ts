@@ -5,15 +5,14 @@
 
 import { GeneralKeyValue } from './general'
 
-/** 标签数据 */
 export interface Tag {
-  id?: number
   _id?: string
+  id?: number
   name: string
   slug: string
   description: string
+  extras: GeneralKeyValue[]
   updated_at: string
   created_at: string
-  extends: GeneralKeyValue[]
   article_count?: number
 }

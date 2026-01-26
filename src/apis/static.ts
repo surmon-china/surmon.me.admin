@@ -7,8 +7,8 @@ import _isNumber from 'lodash/isNumber'
 import nodepress from '@/services/nodepress'
 
 export const STATIC_API_PATHS = {
-  UPLOAD: '/extension/static/upload',
-  LIST: '/extension/static/list'
+  UPLOAD: '/system/static/upload',
+  LIST: '/system/static/list'
 }
 
 export interface StaticFileObject {

@@ -4,7 +4,7 @@ import { Form, Typography, Input, Button, Divider, InputNumber, Select, Space } 
 import * as Icons from '@ant-design/icons'
 import { getArticle } from '@/apis/article'
 import { Article } from '@/constants/article'
-import { Comment, commentStates, COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
+import { Comment, commentStatuses, COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
 import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
 import { UniversalEditor } from '@/components/common/UniversalEditor'
 import { UniversalText } from '@/components/common/UniversalText'
@@ -145,16 +145,16 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
           <Typography.Text strong>#{props.comment?.pid}</Typography.Text>
         </Form.Item>
       ) : null}
-      <Form.Item name="state" label="状态" rules={[{ required: true, message: '请选择状态' }]}>
+      <Form.Item name="status" label="状态" rules={[{ required: true, message: '请选择状态' }]}>
         <Select
           placeholder="选择状态"
-          options={commentStates.map((state) => {
+          options={commentStatuses.map((status) => {
             return {
-              value: state.id,
+              value: status.id,
               label: (
                 <Space size="small">
-                  {state.icon}
-                  {state.name}
+                  {status.icon}
+                  {status.name}
                 </Space>
               )
             }
@@ -176,7 +176,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
         />
       </Form.Item>
       <Form.Item label="自定义扩展" extra="可以为当前评论增加自定义扩展属性" shouldUpdate={true}>
-        <FormKeyValueInput fieldName="extends" />
+        <FormKeyValueInput formFieldName="extras" />
       </Form.Item>
       <Form.Item label=" ">
         <Button

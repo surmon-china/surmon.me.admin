@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### 3.11.0 (2026-01-26)
+
+- Update all APIs and data structures to match NodePress v6 changes.
+
 ### 3.10.0 (2026-01-10)
 
 - Added all article export feature to the Setting page.

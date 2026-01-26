@@ -5,7 +5,7 @@
 
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
 import { Vote, VoteTarget, VoteType, VoteAuthorType } from '@/constants/vote'
-import { SortTypeBase } from '@/constants/sort'
+import { SortOrder } from '@/constants/sort'
 import nodepress from '@/services/nodepress'
 
 export const VOTE_API_PATH = '/vote'
@@ -15,7 +15,7 @@ export interface GetVotesParams extends GeneralPaginateQueryParams {
   target_id?: number
   vote_type?: VoteType
   author_type?: VoteAuthorType
-  sort?: SortTypeBase
+  sort?: SortOrder
 }
 
 export function getVotes(params: GetVotesParams = {}) {

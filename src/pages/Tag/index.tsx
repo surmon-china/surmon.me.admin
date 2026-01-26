@@ -97,7 +97,7 @@ export const TagPage: React.FC = () => {
 
   const deleteTag = (tag: Tag) => {
     Modal.confirm({
-      title: `确定要删除标签「 ${tag.name} 」吗？`,
+      title: `确定要删除标签「${tag.name}」吗？`,
       content: '删除后不可恢复',
       centered: true,
       onOk: () => {

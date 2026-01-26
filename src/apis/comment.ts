@@ -5,8 +5,8 @@
 
 import { arrayToTree } from 'performant-array-to-tree'
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
-import { Comment, CommentState } from '@/constants/comment'
-import { SortTypeWithHot } from '@/constants/sort'
+import { Comment, CommentStatus } from '@/constants/comment'
+import { SortMode } from '@/constants/sort'
 import nodepress from '@/services/nodepress'
 
 export const COMMENT_API_PATH = '/comment'
@@ -31,8 +31,8 @@ export const transformCommentListToTree = (comments: Comment[]) => {
 export interface GetCommentsParams extends GeneralPaginateQueryParams {
   keyword?: string
   post_id?: number
-  state?: CommentState
-  sort?: SortTypeWithHot
+  status?: CommentStatus
+  sort?: SortMode
 }
 
 /** 获取评论列表 */
@@ -57,11 +57,15 @@ export function updateComment(comment: Comment): Promise<any> {
 }
 
 /** 更新评论状态 */
-export function patchCommentsState(commentIds: string[], postIds: number[], state: CommentState) {
+export function patchCommentsStatus(
+  commentIds: string[],
+  postIds: number[],
+  status: CommentStatus
+) {
   const payload = {
     comment_ids: commentIds,
     post_ids: postIds,
-    state
+    status
   }
 
   return nodepress.patch(COMMENT_API_PATH, payload).then((response) => response.result)

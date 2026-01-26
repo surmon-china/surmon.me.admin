@@ -5,7 +5,7 @@
 
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
 import { Feedback, MarkedState } from '@/constants/feedback'
-import { SortTypeBase } from '@/constants/sort'
+import { SortOrder } from '@/constants/sort'
 import nodepress from '@/services/nodepress'
 
 export const FEEDBACK_API_PATH = '/feedback'
@@ -14,7 +14,7 @@ export interface GetFeedbacksParams extends GeneralPaginateQueryParams {
   keyword?: string
   tid?: number
   marked?: MarkedState
-  sort?: SortTypeBase
+  sort?: SortOrder
 }
 
 export function getFeedbacks(params: GetFeedbacksParams = {}) {

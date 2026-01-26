@@ -4,7 +4,7 @@ import * as Icons from '@ant-design/icons'
 import { Trans } from '@/i18n'
 import { SortSelect } from '@/components/common/SortSelect'
 import { SelectWithInput } from '@/components/common/SelectWithInput'
-import { SortTypeBase } from '@/constants/sort'
+import { SortOrder } from '@/constants/sort'
 import { MarkedState } from '@/constants/feedback'
 
 export const SELECT_ALL_VALUE = 'ALL'
@@ -12,7 +12,7 @@ export const DEFAULT_FILTER_PARAMS = {
   marked: false as boolean,
   tid: SELECT_ALL_VALUE as number | typeof SELECT_ALL_VALUE,
   emotion: SELECT_ALL_VALUE as number | typeof SELECT_ALL_VALUE,
-  sort: SortTypeBase.Desc
+  sort: SortOrder.Desc
 }
 
 export type FilterParams = typeof DEFAULT_FILTER_PARAMS
