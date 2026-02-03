@@ -31,7 +31,8 @@ export const getBarChartConfig = (config: ChartOptionsConfig): ChartOptions => (
     name: item.name,
     data: item.data,
     itemStyle: {
-      color: item.color
+      color: item.color,
+      borderRadius: [2, 2, 0, 0]
     }
   })),
   xAxis: [
