@@ -12,8 +12,6 @@ import { App as AntdAppContainer } from 'antd'
 import { AntdConfigProvider } from '@/contexts/AntdConfig'
 import { AdminProfileProvider } from '@/contexts/AdminProfile'
 import { AxiosTopLoadingBar } from '@/components/common/AxiosTopLoadingBar'
-import { useLocale } from '@/contexts/Locale'
-import { useTheme } from '@/contexts/Theme'
 import { nodepress } from '@/services/nodepress'
 import { routes } from './routes'
 
@@ -23,9 +21,6 @@ export const router = ENABLED_HASH_ROUTER
   : createBrowserRouter(routes as RouteObject[])
 
 export const App: React.FC = () => {
-  const { theme } = useTheme()
-  const { language } = useLocale()
-
   onMounted(() => {
     console.group('🟢 App is running.')
     console.table({ VITE_ENV })
@@ -35,7 +30,7 @@ export const App: React.FC = () => {
   return (
     <AntdConfigProvider>
       <AntdAppContainer className="app-container">
-        <div id="app" className="app" data-theme={theme} data-lang={language}>
+        <div id="app" className="app">
           <AxiosTopLoadingBar
             axios={nodepress}
             color={APP_PRIMARY_COLOR}

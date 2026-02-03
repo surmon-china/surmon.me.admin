@@ -40,12 +40,12 @@ export const LocaleContext = React.createContext({} as LocaleContext)
 export const useLocale = () => useContext(LocaleContext)
 
 export interface LocaleProviderProps extends React.PropsWithChildren {
-  initLanguage: Language
+  initialLanguage: Language
   onChange?(language: Language): void | Promise<any>
 }
 
 export const LocaleProvider: React.FC<LocaleProviderProps> = (props) => {
-  const [language, setLanguage] = useState<Language>(props.initLanguage)
+  const [language, setLanguage] = useState<Language>(props.initialLanguage)
   const changeLanguage = (value: Language) => {
     const result = props.onChange?.(value)
     if (result instanceof Promise) {

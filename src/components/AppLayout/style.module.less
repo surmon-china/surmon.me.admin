@@ -77,18 +77,8 @@
         padding: 4px;
         height: calc(100vh - @header-height - @userinfo-height - 3em);
         overflow-y: auto;
-        &::-webkit-scrollbar {
-          width: 3px;
-          height: 3px;
-          background: @body-background;
-        }
-        &::-webkit-scrollbar-track {
-          border-radius: 0;
-        }
-        &::-webkit-scrollbar-thumb {
-          border-radius: 0;
-          background-color: @color-border-secondary;
-        }
+        overscroll-behavior-y: contain;
+        scrollbar-width: thin;
       }
 
       .footerLink {

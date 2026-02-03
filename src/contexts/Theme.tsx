@@ -25,13 +25,19 @@ export const ThemeContext = React.createContext({} as IThemeContext)
 export const useTheme = () => useContext(ThemeContext)
 
 export interface ThemeProviderProps extends React.PropsWithChildren {
-  initTheme: Theme
+  initialTheme: Theme
+  onChange?(theme: Theme): void
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
-  const [theme, setTheme] = useState<Theme>(props.initTheme)
+  const [theme, _setTheme] = useState<Theme>(props.initialTheme)
   const isDark = useMemo(() => isDarkTheme(theme), [theme])
   const isLight = useMemo(() => isLightTheme(theme), [theme])
+
+  const setTheme = (theme: Theme) => {
+    props.onChange?.(theme)
+    _setTheme(theme)
+  }
 
   const toggleTheme = () => {
     setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)

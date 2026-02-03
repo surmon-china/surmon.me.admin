@@ -95,9 +95,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
   const handleEditExtrasAsJSON = () => {
     openJSONEditor({
       title: '以 JSON 编辑自定义扩展',
-      initTheme: theme,
+      initialTheme: theme,
       initLanguage: language,
-      initValue: extrasFormModel.getFieldsValue(),
+      initialValue: extrasFormModel.getFieldsValue(),
       callback: (newValue) => extrasFormModel.setFieldsValue(newValue)
     })
   }

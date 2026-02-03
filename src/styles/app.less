@@ -15,8 +15,20 @@
   unicode-range: U+21-3B, U+3D, U+3F-5F, U+61-7D;
 }
 
+:root {
+  color-scheme: light dark;
+
+  &[data-theme='light'] {
+    color-scheme: light;
+  }
+  &[data-theme='dark'] {
+    color-scheme: dark;
+  }
+}
+
 body {
   margin: 0;
+  overflow-y: scroll;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family:

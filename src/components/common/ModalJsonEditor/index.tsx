@@ -13,16 +13,16 @@ import { i18n } from '@/i18n'
 export interface ModalJsonEditorOptions {
   title: string
   initLanguage: Language
-  initTheme: Theme
-  initValue: Record<string, any>
+  initialTheme: Theme
+  initialValue: Record<string, any>
   callback: (data: Record<string, any>) => any
 }
 
 export function openJSONEditor(options: ModalJsonEditorOptions) {
-  let data: string | undefined = JSON.stringify(options.initValue, null, 2)
+  let data: string | undefined = JSON.stringify(options.initialValue, null, 2)
   const EditorComponent = getUnEditorWithProviders({
-    initTheme: options.initTheme,
-    initLanguage: options.initLanguage
+    initialTheme: options.initialTheme,
+    initialLanguage: options.initLanguage
   })
 
   return Modal.confirm({

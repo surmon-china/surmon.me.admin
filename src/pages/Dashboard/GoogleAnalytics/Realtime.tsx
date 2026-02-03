@@ -95,7 +95,12 @@ export const GoogleAnalyticsRealtime: React.FC<GoogleAnalyticsRealtimeProps> = (
 
   const renderRegionList = (dataSource: ReportRowItem[]) => (
     <List
-      style={{ maxHeight: 120, overflowY: 'auto' }}
+      style={{
+        maxHeight: 120,
+        overflowY: 'auto',
+        scrollbarWidth: 'thin',
+        overscrollBehavior: 'contain'
+      }}
       size="small"
       itemLayout="vertical"
       dataSource={dataSource}

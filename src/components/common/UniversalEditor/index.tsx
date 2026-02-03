@@ -27,14 +27,14 @@ export const UniversalEditor: React.FC<UniversalEditorProps> = (props) => {
 }
 
 export interface UnEditorWithProvidersOptions {
-  initTheme: Theme
-  initLanguage: Language
+  initialTheme: Theme
+  initialLanguage: Language
 }
 
 export const getUnEditorWithProviders = (options: UnEditorWithProvidersOptions) => {
   return (props: UniversalEditorProps) => (
-    <ThemeProvider initTheme={options.initTheme}>
-      <LocaleProvider initLanguage={options.initLanguage}>
+    <ThemeProvider initialTheme={options.initialTheme}>
+      <LocaleProvider initialLanguage={options.initialLanguage}>
         <UniversalEditor {...props} />
       </LocaleProvider>
     </ThemeProvider>
