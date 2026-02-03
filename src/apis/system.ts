@@ -57,11 +57,11 @@ export function updateDatabaseBackup() {
 }
 
 /** 获取系统配置 */
-export function getOption() {
+export function getOptions() {
   return nodepress.get<Options>(OPTIONS_API_PATH).then((response) => response.result)
 }
 
 /** 更新系统配置 */
-export function putOption(option: Options) {
-  return nodepress.put<Options>(OPTIONS_API_PATH, option).then((response) => response.result)
+export function putOptions(options: Options) {
+  return nodepress.put<Options>(OPTIONS_API_PATH, options).then((response) => response.result)
 }

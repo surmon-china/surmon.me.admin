@@ -21,24 +21,24 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
   const data = useRef<Options | null>(null)
   const [form] = Form.useForm<Options>()
 
-  const resetForm = (option: Options) => {
-    data.value = option
+  const resetForm = (options: Options) => {
+    data.value = options
     form.setFieldsValue({
-      ...option,
-      app_config: formatJSONString(option.app_config, 2)
+      ...options,
+      app_config: formatJSONString(options.app_config, 2)
     })
   }
 
   const fetchOptions = () => {
-    return fetching.promise(api.getOption()).then(resetForm)
+    return fetching.promise(api.getOptions()).then(resetForm)
   }
 
-  const updateOptions = (newOption: Options) => {
+  const updateOptions = (newOptions: Options) => {
     const payload = {
-      ...newOption,
-      app_config: formatJSONString(newOption.app_config)
+      ...newOptions,
+      app_config: formatJSONString(newOptions.app_config)
     }
-    return updating.promise(api.putOption(payload)).then(resetForm)
+    return updating.promise(api.putOptions(payload)).then(resetForm)
   }
 
   const handleSubmit = () => {
