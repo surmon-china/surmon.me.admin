@@ -153,6 +153,11 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
             </Card>
           </Col>
           <Col span={24}>
+            <Card title={i18n.t('page.article.editor.ai')} variant="borderless">
+              <Spin spinning={props.loading}>TODO</Spin>
+            </Card>
+          </Col>
+          <Col span={24}>
             <Card
               title={i18n.t('page.article.editor.extras')}
               variant="borderless"
