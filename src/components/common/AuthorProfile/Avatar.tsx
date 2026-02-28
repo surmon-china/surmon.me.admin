@@ -66,7 +66,7 @@ export const AuthorAvatar: React.FC<AuthorAvatarProps> = (props) => {
       title: state.tooltip,
       content: (
         <div>
-          <Divider />
+          <Divider size="small" />
           <Descriptions
             layout="horizontal"
             column={1}
@@ -92,7 +92,7 @@ export const AuthorAvatar: React.FC<AuthorAvatarProps> = (props) => {
           />
           {props.user && (
             <>
-              <Divider />
+              <Divider size="middle" />
               <Descriptions
                 layout="horizontal"
                 column={2}
