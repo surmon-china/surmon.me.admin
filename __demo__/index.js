@@ -40,7 +40,12 @@ function generateCalendar({ start = '2018-01-01', prob = 0.08, maxCount = 4 } = 
 
 // Set a mock token immediately on page load so the dashboard page can be accessed directly.
 console.info('mock token')
-window.localStorage.setItem('id_token', 'veact_admin.mock.token')
+window.localStorage.setItem('token_expires_in', '3153600000')
+window.localStorage.setItem('token_birth_time', String(Math.floor(Date.now() / 1000)))
+window.localStorage.setItem(
+  'id_token',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQxMDI0NDQ4MDAsImlhdCI6MTcwNDA2NzIwMCwicm9sZSI6ImFkbWluIn0.mock_signature'
+)
 
 const mockHandlers = {
   // --------------------------------
@@ -48,26 +53,26 @@ const mockHandlers = {
     post: () => ensureJSON('admin/login')
   },
   '/admin/check-token': {
-    get: () => ensureJSON('admin/check-token')
+    post: () => ensureJSON('admin/check-token')
   },
   '/admin/profile': {
     get: () => ensureJSON('admin/profile')
   },
   // --------------------------------
-  '/comment': {
+  '/users': {
+    get: () => ensureJSON('user-list')
+  },
+  '/comments': {
     get: () => ensureJSON('comment-list')
   },
-  '/announcement': {
+  '/announcements': {
     get: () => ensureJSON('announcement-list')
   },
-  '/vote': {
+  '/votes': {
     get: () => ensureJSON('vote-list')
   },
   '/feedback': {
     get: () => ensureJSON('feedback-list')
-  },
-  '/disqus/config': {
-    get: () => ensureJSON('disqus-config')
   },
   '/options': {
     get: () => ensureJSON('options')
@@ -79,21 +84,21 @@ const mockHandlers = {
     get: () => ensureJSON('system-uptoken')
   },
   // --------------------------------
-  '/category/all': {
+  '/categories/all': {
     get: async () => ({
       status: 'success',
       message: 'Get all categories succeeded',
       result: await ensureJSON('all-categories')
     })
   },
-  '/tag/all': {
+  '/tags/all': {
     get: async () => ({
       status: 'success',
       message: 'Get all tags succeeded',
       result: await ensureJSON('all-tags')
     })
   },
-  '/tag': {
+  '/tags': {
     get: async () => {
       const allTags = await ensureJSON('all-tags')
       return {
@@ -112,14 +117,14 @@ const mockHandlers = {
     }
   },
   // --------------------------------
-  '/comment/calendar': {
+  '/comments/calendar': {
     get: () => ({
       status: 'success',
       message: 'Get comments calendar succeeded',
       result: generateCalendar({ prob: 0.5, maxCount: 6 })
     })
   },
-  '/article/calendar': {
+  '/articles/calendar': {
     get: () => ({
       status: 'success',
       message: 'Get articles calendar succeeded',
@@ -127,22 +132,22 @@ const mockHandlers = {
     })
   },
   // --------------------------------
-  '/article': {
+  '/articles': {
     get: () => ensureJSON('article-list')
   },
-  '/article/676fa1321a53290533a7f206': {
+  '/articles/2': {
     get: () => ensureJSON('article-detail')
   },
-  '/article/6667b9438a907384c63ff205': {
+  '/articles/3': {
     get: () => ensureJSON('article-detail')
   },
-  '/article/65bd8c1f1a53290533a7f204': {
+  '/articles/4': {
     get: () => ensureJSON('article-detail')
   },
-  '/article/6558e1d11a53290533a7f203': {
+  '/articles/5': {
     get: () => ensureJSON('article-detail')
   },
-  '/article/656f2f5fcf1faa098ee1f202': {
+  '/articles/6': {
     get: () => ensureJSON('article-detail')
   }
 }

@@ -2,7 +2,7 @@
   "status": "success",
   "message": "Login succeeded",
   "result": {
-    "access_token": "veact_admin.mock.token",
-    "expires_in": 3600
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQxMDI0NDQ4MDAsImlhdCI6MTcwNDA2NzIwMCwicm9sZSI6ImFkbWluIn0.mock_signature",
+    "expires_in": 3153600000
   }
 }

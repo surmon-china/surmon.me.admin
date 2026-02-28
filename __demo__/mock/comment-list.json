@@ -4,338 +4,310 @@
   "result": {
     "data": [
       {
-        "pid": 0,
+        "_id": "6602e91a1a53290533a7d00c",
+        "id": 101,
+        "parent_id": null,
         "status": 1,
         "likes": 24,
         "dislikes": 0,
-        "_id": "6602e91a1a53290533a7d00c",
-        "post_id": 3,
+        "target_id": 6,
+        "target_type": "article",
         "content": "读完这篇文章的时候，我停下来想了一会儿。你没有急着给结论，而是把过程完整地铺陈出来，这一点让我觉得很舒服。",
-        "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "author": {
-          "name": "Lin",
-          "email": "lin@example.com",
-          "site": "https://example.com"
-        },
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "author_name": "Lin",
+        "author_email": "lin@example.com",
+        "author_website": "https://example.com",
+        "author_type": "guest",
         "ip": "103.21.244.12",
         "ip_location": {
           "country": "Singapore",
           "country_code": "SG",
           "region": "Central",
           "region_code": "SG",
-          "city": "Singapore",
-          "zip": "018989"
+          "city": "Singapore"
         },
-        "created_at": "2024-05-09T09:18:44.221Z",
-        "updated_at": "2024-05-09T09:18:44.221Z",
-        "extras": [],
-        "id": 12
+        "created_at": "2026-02-22T09:18:44.221Z",
+        "updated_at": "2026-02-22T09:18:44.221Z",
+        "extras": []
       },
       {
-        "pid": 0,
+        "_id": "6602ea3b1a53290533a7d00d",
+        "id": 102,
+        "parent_id": 101,
         "status": 1,
-        "likes": 8,
+        "likes": 5,
         "dislikes": 0,
-        "_id": "65f0c7b01a53290533a7d00b",
-        "post_id": 1,
-        "content": "有些句子读的时候会下意识地放慢速度，像是在确认自己的感受。这种节奏感在技术文章里其实并不常见。",
-        "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.6167.85 Safari/537.36",
-        "author": {
-          "name": "Echo",
-          "email": "echo@gmail.com"
-        },
-        "ip": "45.76.88.103",
-        "ip_location": {
-          "country": "Japan",
-          "country_code": "JP",
-          "region": "Tokyo",
-          "region_code": "13",
-          "city": "Tokyo",
-          "zip": "100-0001"
-        },
-        "created_at": "2024-04-17T03:12:55.102Z",
-        "updated_at": "2024-04-17T03:12:55.102Z",
-        "extras": [],
-        "id": 11
-      },
-      {
-        "pid": 0,
-        "status": 0,
-        "likes": 0,
-        "dislikes": 0,
-        "_id": "65d8b9121a53290533a7d00a",
-        "post_id": 4,
-        "content": "这里提到的这个点我之前其实也想过，但一直没法用语言描述清楚。现在看到你的表述，感觉心里被点了一下。",
-        "agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/605.1.15",
-        "author": {
-          "name": "匿名",
-          "email": "anon@unknown.com"
-        },
-        "ip": "14.198.77.42",
-        "ip_location": {
-          "country": "China",
-          "country_code": "CN",
-          "region": "Guangdong",
-          "region_code": "GD",
-          "city": "Shenzhen",
-          "zip": ""
-        },
-        "created_at": "2024-03-26T11:08:09.773Z",
-        "updated_at": "2024-03-26T11:08:09.773Z",
-        "extras": [],
-        "id": 10
-      },
-      {
-        "pid": 0,
-        "status": 1,
-        "likes": 31,
-        "dislikes": 1,
-        "_id": "64f1a0be1a53290533a7d009",
-        "post_id": 2,
-        "content": "把技术问题放在真实经历里讲出来，本身就需要很强的自觉。我能感受到你在取舍哪些内容，以及哪些选择是刻意留下的。",
-        "agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36",
-        "author": {
-          "name": "Neo",
-          "email": "neo@matrix.io",
-          "site": "https://matrix.io"
-        },
-        "ip": "91.132.54.210",
-        "ip_location": {
-          "country": "Germany",
-          "country_code": "DE",
-          "region": "Berlin",
-          "region_code": "BE",
-          "city": "Berlin",
-          "zip": "10115"
-        },
-        "created_at": "2023-10-08T07:44:18.221Z",
-        "updated_at": "2023-10-08T07:44:18.221Z",
-        "extras": [],
-        "id": 9
-      },
-      {
-        "pid": 0,
-        "status": -1,
-        "likes": 0,
-        "dislikes": 0,
-        "_id": "64c22a4d1a53290533a7d008",
-        "post_id": 2,
-        "content": "看完之后不知道该说什么，只是停在页面上很久。",
-        "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        "author": {
-          "name": "test",
-          "email": "test@test.com"
-        },
-        "ip": "8.210.25.119",
-        "ip_location": {
-          "country": "Hong Kong",
-          "country_code": "HK",
-          "region": "Central and Western",
-          "region_code": "HCW",
-          "city": "Central",
-          "zip": ""
-        },
-        "created_at": "2023-07-29T15:33:41.900Z",
-        "updated_at": "2023-07-29T15:33:41.900Z",
-        "extras": [],
-        "id": 8
-      },
-      {
-        "pid": 0,
-        "status": 1,
-        "likes": 14,
-        "dislikes": 0,
-        "_id": "63f80c1f1a53290533a7d007",
-        "post_id": 0,
-        "content": "从很早以前就开始读你的文章了，中间断断续续，但每次回来都能找到一些熟悉的感觉。",
-        "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6) AppleWebKit/537.36 (KHTML, like Gecko) Safari/605.1.15",
-        "author": {
-          "name": "Kai",
-          "email": "kai@mail.com",
-          "site": "https://kai.dev"
-        },
-        "ip": "54.179.33.18",
-        "ip_location": {
-          "country": "Singapore",
-          "country_code": "SG",
-          "region": "Central",
-          "region_code": "SG",
-          "city": "Singapore",
-          "zip": "018989"
-        },
-        "created_at": "2023-03-18T06:22:54.600Z",
-        "updated_at": "2023-03-18T06:22:54.600Z",
-        "extras": [],
-        "id": 7
-      },
-      {
-        "pid": 0,
-        "status": 1,
-        "likes": 6,
-        "dislikes": 0,
-        "_id": "62a1f5f81a53290533a7d006",
-        "post_id": 5,
-        "content": "有些观点我不一定完全同意，但能理解你为什么会这样思考，这本身就很难得。",
-        "agent": "Mozilla/5.0 (iPad; CPU OS 15_7 like Mac OS X)",
-        "author": {
-          "name": "Guest",
-          "email": "guest@guest.com"
-        },
-        "ip": "203.0.113.88",
-        "ip_location": {
-          "country": "Australia",
-          "country_code": "AU",
-          "region": "NSW",
-          "region_code": "NSW",
-          "city": "Sydney",
-          "zip": "2000"
-        },
-        "created_at": "2022-06-21T10:01:18.112Z",
-        "updated_at": "2022-06-21T10:01:18.112Z",
-        "extras": [],
-        "id": 6
-      },
-      {
-        "pid": 0,
-        "status": 1,
-        "likes": 4,
-        "dislikes": 0,
-        "_id": "61a0e1d11a53290533a7d005",
-        "post_id": 0,
-        "content": "第一次点进这个站点的时候就收藏了，现在偶尔会回来看看有没有新内容。",
-        "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        "author": {
-          "name": "Visitor",
-          "email": "visitor@mail.com"
-        },
-        "ip": "52.220.14.90",
-        "ip_location": {
-          "country": "United States",
-          "country_code": "US",
-          "region": "California",
-          "region_code": "CA",
-          "city": "San Jose",
-          "zip": "95112"
-        },
-        "created_at": "2022-01-15T02:15:44.903Z",
-        "updated_at": "2022-01-15T02:15:44.903Z",
-        "extras": [],
-        "id": 5
-      },
-      {
-        "pid": 0,
-        "status": 0,
-        "likes": 0,
-        "dislikes": 0,
-        "_id": "6190c5d91a53290533a7d004",
-        "post_id": 6,
-        "content": "这里的表达方式我还在消化中，也许之后会再回来看一次。",
-        "agent": "Mozilla/5.0 (Android 12; Mobile)",
-        "author": {
-          "name": "reader",
-          "email": "reader@mail.com"
-        },
-        "ip": "117.136.45.220",
+        "target_id": 6,
+        "target_type": "article",
+        "content": "确实，相比于直接给答案，这种推演过程对工程化思维的启发更大。特别是关于构建边界的思考，受教了！",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
+        "author_name": "Dev_Leo",
+        "author_email": "leo.dev@gmail.com",
+        "author_website": "",
+        "author_type": "guest",
+        "ip": "202.108.14.12",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Beijing",
           "region_code": "BJ",
-          "city": "Beijing",
-          "zip": ""
+          "city": "Beijing"
         },
-        "created_at": "2021-11-18T08:45:12.600Z",
-        "updated_at": "2021-11-18T08:45:12.600Z",
-        "extras": [],
-        "id": 4
+        "created_at": "2026-02-22T10:20:00.000Z",
+        "updated_at": "2026-02-22T10:20:00.000Z",
+        "extras": []
       },
       {
-        "pid": 0,
-        "status": 1,
-        "likes": 2,
-        "dislikes": 0,
-        "_id": "6180b4a81a53290533a7d003",
-        "post_id": 7,
-        "content": "写得不多，但每一句都能看出你花过时间。",
-        "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_6)",
-        "author": {
-          "name": "OldReader",
-          "email": "old@mail.com"
-        },
-        "ip": "34.96.123.11",
-        "ip_location": {
-          "country": "United Kingdom",
-          "country_code": "GB",
-          "region": "England",
-          "region_code": "ENG",
-          "city": "London",
-          "zip": "EC1A"
-        },
-        "created_at": "2021-10-10T14:02:33.221Z",
-        "updated_at": "2021-10-10T14:02:33.221Z",
-        "extras": [],
-        "id": 3
-      },
-      {
-        "pid": 0,
-        "status": 1,
-        "likes": 1,
-        "dislikes": 0,
-        "_id": "6170a3971a53290533a7d002",
-        "post_id": 8,
-        "content": "路过，读完，留下一个脚印。",
-        "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        "author": {
-          "name": "Passerby",
-          "email": "pass@mail.com"
-        },
-        "ip": "66.102.9.88",
-        "ip_location": {
-          "country": "United States",
-          "country_code": "US",
-          "region": "New York",
-          "region_code": "NY",
-          "city": "New York",
-          "zip": "10001"
-        },
-        "created_at": "2021-09-02T03:11:22.110Z",
-        "updated_at": "2021-09-02T03:11:22.110Z",
-        "extras": [],
-        "id": 2
-      },
-      {
-        "pid": 0,
+        "_id": "6603a1f11a53290533a7d00e",
+        "id": 103,
+        "parent_id": null,
         "status": 1,
         "likes": 0,
         "dislikes": 0,
-        "_id": "616093861a53290533a7d001",
-        "post_id": 0,
-        "content": "很安静的地方，适合慢慢读。",
-        "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-        "author": {
-          "name": "Visitor",
-          "email": "visitor2@mail.com"
-        },
-        "ip": "101.40.101.190",
+        "target_id": 0,
+        "target_type": "page",
+        "content": "博客的新版设计真的很惊艳，极简但很有质感，想问下是完全用 Veact 重构的吗？",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X)",
+        "author_name": "Anonymous UI",
+        "author_email": null,
+        "author_website": null,
+        "author_type": "anonymous",
+        "ip": "8.8.8.8",
         "ip_location": {
           "country": "United States",
           "country_code": "US",
-          "region": "Nevada",
-          "region_code": "NV",
-          "city": "Minden",
-          "zip": "89423"
+          "region": "California",
+          "region_code": "CA",
+          "city": "Mountain View"
         },
-        "created_at": "2021-08-14T18:45:43.617Z",
-        "updated_at": "2021-08-14T18:45:43.617Z",
-        "extras": [],
-        "id": 1
+        "created_at": "2026-02-23T14:30:00.000Z",
+        "updated_at": "2026-02-23T14:30:00.000Z",
+        "extras": []
+      },
+      {
+        "_id": "6603bb221a53290533a7d00f",
+        "id": 104,
+        "parent_id": null,
+        "status": 1,
+        "likes": 88,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "Veact 的设计思路确实有些巧妙，结合了 Vue 的响应式和 React 的 JSX，这种探索很有意思。另外重构掉 ObjectId 是个明智的选择。",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "author_name": "Evan You",
+        "author_email": "evan.you.mock@gmail.com",
+        "author_website": "https://evanyou.me",
+        "author_type": "user",
+        "user": {
+          "id": 12,
+          "name": "Evan You",
+          "avatar_url": "https://avatars.githubusercontent.com/u/499550?v=4",
+          "website": "https://evanyou.me"
+        },
+        "ip": "13.250.177.223",
+        "ip_location": {
+          "country": "Singapore",
+          "country_code": "SG",
+          "region": "Singapore",
+          "region_code": "SG",
+          "city": "Singapore"
+        },
+        "created_at": "2026-02-24T09:12:33.112Z",
+        "updated_at": "2026-02-24T09:12:33.112Z",
+        "extras": []
+      },
+      {
+        "_id": "6603c1441a53290533a7d010",
+        "id": 105,
+        "parent_id": 104,
+        "status": 1,
+        "likes": 12,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "Great write-up! I especially like the part about flattening the data models. Over-nesting in document databases is the root of all evil. 😂",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15",
+        "author_name": "Dan Abramov",
+        "author_email": "dan.abramov.mock@gmail.com",
+        "author_website": "https://overreacted.io",
+        "author_type": "user",
+        "user": {
+          "id": 10,
+          "name": "Dan Abramov",
+          "avatar_url": "https://avatars.githubusercontent.com/u/810438?v=4",
+          "website": "https://overreacted.io"
+        },
+        "ip": "3.101.44.22",
+        "ip_location": {
+          "country": "United States",
+          "country_code": "US",
+          "region": "California",
+          "region_code": "CA",
+          "city": "San Jose"
+        },
+        "created_at": "2026-02-24T10:05:11.421Z",
+        "updated_at": "2026-02-24T10:05:11.421Z",
+        "extras": []
+      },
+      {
+        "_id": "6604a5551a53290533a7d011",
+        "id": 106,
+        "parent_id": null,
+        "status": 1,
+        "likes": 3,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "蹲一个开源仓库地址，感觉这套多态关联的后台架构可以直接拿来当公司的新业务脚手架了！",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/119.0.0.0",
+        "author_name": "前端搬砖工",
+        "author_email": "worker@test.com",
+        "author_website": "",
+        "author_type": "guest",
+        "ip": "116.22.14.99",
+        "ip_location": {
+          "country": "China",
+          "country_code": "CN",
+          "region": "Guangdong",
+          "region_code": "GD",
+          "city": "Guangzhou"
+        },
+        "created_at": "2026-02-25T14:22:00.000Z",
+        "updated_at": "2026-02-25T14:22:00.000Z",
+        "extras": []
+      },
+      {
+        "_id": "6604a9881a53290533a7d012",
+        "id": 107,
+        "parent_id": 106,
+        "status": 1,
+        "likes": 6,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "可以关注一下项目的 GitHub，作者已经完全开源了前端和后台的部分，代码质量很高。",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/120.0.0.0 Safari/537.36",
+        "author_name": "Evan You",
+        "author_email": "evan.you.mock@gmail.com",
+        "author_website": "https://evanyou.me",
+        "author_type": "user",
+        "user": {
+          "id": 12,
+          "name": "Evan You",
+          "avatar_url": "https://avatars.githubusercontent.com/u/499550?v=4",
+          "website": "https://evanyou.me"
+        },
+        "ip": "13.250.177.223",
+        "ip_location": {
+          "country": "Singapore",
+          "country_code": "SG",
+          "region": "Singapore",
+          "region_code": "SG",
+          "city": "Singapore"
+        },
+        "created_at": "2026-02-25T15:01:44.221Z",
+        "updated_at": "2026-02-25T15:01:44.221Z",
+        "extras": []
+      },
+      {
+        "_id": "6605b1221a53290533a7d013",
+        "id": 108,
+        "parent_id": null,
+        "status": 1,
+        "likes": 1,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "这个重构看起来非常爽，把 MongoDB 里的坑都填了。但是数据迁移的时候没出问题吗？特别是那个 ID 的转换。",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) Firefox/112.0",
+        "author_name": null,
+        "author_email": null,
+        "author_website": null,
+        "author_type": "anonymous",
+        "ip": "154.12.33.44",
+        "ip_location": {
+          "country": "Hong Kong",
+          "country_code": "HK",
+          "region": "Central and Western",
+          "region_code": "HCW",
+          "city": "Hong Kong"
+        },
+        "created_at": "2026-02-26T08:11:22.000Z",
+        "updated_at": "2026-02-26T08:11:22.000Z",
+        "extras": []
+      },
+      {
+        "_id": "6605b1551a53290533a7d014",
+        "id": 109,
+        "parent_id": 108,
+        "status": 1,
+        "likes": 0,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "同问，特别是 ObjectId 到 Number 的映射，历史 SEO 链接怎么平滑过渡的？",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/118.0.0.0",
+        "author_name": "DBA_Mike",
+        "author_email": "mike.dba@test.com",
+        "author_website": "",
+        "author_type": "guest",
+        "ip": "61.144.22.11",
+        "ip_location": {
+          "country": "China",
+          "country_code": "CN",
+          "region": "Shanghai",
+          "region_code": "SH",
+          "city": "Shanghai"
+        },
+        "created_at": "2026-02-26T08:45:00.000Z",
+        "updated_at": "2026-02-26T08:45:00.000Z",
+        "extras": []
+      },
+      {
+        "_id": "6605b2991a53290533a7d015",
+        "id": 110,
+        "parent_id": 109,
+        "status": 1,
+        "likes": 32,
+        "dislikes": 0,
+        "target_id": 6,
+        "target_type": "article",
+        "content": "好问题！做了一个简单的中间件拦截，把 24 位的 ObjectId 正则匹配出来 301 重定向到新的 Number ID，短期内带着跑，等搜索引擎收录慢慢洗掉历史包袱就可以了。",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "author_name": "Surmon",
+        "author_email": "i@surmon.me",
+        "author_website": "https://surmon.me",
+        "author_type": "user",
+        "user": {
+          "id": 1,
+          "name": "Surmon",
+          "avatar_url": "https://avatars.githubusercontent.com/u/14019524?v=4",
+          "website": "https://surmon.me"
+        },
+        "ip": "127.0.0.1",
+        "ip_location": {
+          "country": "Localhost",
+          "country_code": "XX",
+          "region": "Local",
+          "region_code": "XX",
+          "city": "Local"
+        },
+        "created_at": "2026-02-26T10:20:11.341Z",
+        "updated_at": "2026-02-26T10:20:11.341Z",
+        "extras": [
+          {
+            "key": "is_admin",
+            "value": "true"
+          }
+        ]
       }
     ],
     "pagination": {
-      "total": 12,
+      "total": 10,
       "current_page": 1,
-      "total_page": 1,
-      "per_page": 16
+      "per_page": 16,
+      "total_page": 1
     }
   }
 }

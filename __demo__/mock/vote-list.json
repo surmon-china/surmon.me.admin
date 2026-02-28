@@ -5,19 +5,19 @@
     "data": [
       {
         "_id": "64a93f40145e45b682e765c0",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 27,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "171.22.78.144",
         "ip_location": {
           "country": "United States",
           "country_code": "US",
           "region": "Florida",
           "region_code": "FL",
-          "city": "Jacksonville",
-          "zip": "32202"
+          "city": "Jacksonville"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67",
         "created_at": "2023-07-08T10:49:36.265Z",
@@ -26,19 +26,19 @@
       },
       {
         "_id": "64a8ba66145e45b682e75657",
-        "target_type": 2,
+        "target_type": "comment",
         "target_id": 2605,
         "vote_type": -1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "124.113.192.136",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Anhui",
           "region_code": "AH",
-          "city": "Rongcheng",
-          "zip": ""
+          "city": "Rongcheng"
         },
         "user_agent": "Mozilla/5.0 (Linux; Android 12; HarmonyOS; LIO-AL00; HMSCore 6.11.0.302) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.88 HuaweiBrowser/14.0.0.322 Mobile Safari/537.36",
         "created_at": "2023-07-08T01:22:46.795Z",
@@ -47,19 +47,19 @@
       },
       {
         "_id": "64a84aa2145e45b682e749bc",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 213,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "49.36.183.203",
         "ip_location": {
           "country": "India",
           "country_code": "IN",
           "region": "National Capital Territory of Delhi",
           "region_code": "DL",
-          "city": "Delhi",
-          "zip": "110001"
+          "city": "Delhi"
         },
         "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1",
         "created_at": "2023-07-07T17:25:54.449Z",
@@ -68,19 +68,19 @@
       },
       {
         "_id": "64a6c37d145e45b682e70aac",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 222,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "172.104.90.51",
         "ip_location": {
           "country": "Japan",
           "country_code": "JP",
           "region": "Tokyo",
           "region_code": "13",
-          "city": "Tokyo",
-          "zip": "151-0053"
+          "city": "Tokyo"
         },
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-07-06T13:37:01.390Z",
@@ -89,19 +89,19 @@
       },
       {
         "_id": "64a6518e145e45b682e6f990",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 223,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "43.207.156.201",
         "ip_location": {
           "country": "Japan",
           "country_code": "JP",
           "region": "Tokyo",
           "region_code": "13",
-          "city": "Tokyo",
-          "zip": "150-0002"
+          "city": "Tokyo"
         },
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-07-06T05:30:54.116Z",
@@ -110,19 +110,19 @@
       },
       {
         "_id": "64a3d92c145e45b682e68def",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 27,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "211.94.220.205",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Beijing",
           "region_code": "BJ",
-          "city": "Beijing",
-          "zip": ""
+          "city": "Beijing"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-07-04T08:32:44.833Z",
@@ -131,19 +131,19 @@
       },
       {
         "_id": "64a3d825145e45b682e68d98",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 221,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "211.94.220.205",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Beijing",
           "region_code": "BJ",
-          "city": "Beijing",
-          "zip": ""
+          "city": "Beijing"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-07-04T08:28:21.684Z",
@@ -152,23 +152,19 @@
       },
       {
         "_id": "649e777c145e45b682e5952d",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 182,
         "vote_type": 1,
-        "author_type": 1,
-        "author": {
-          "name": "Guest",
-          "email": "xxx@gmail.com",
-          "email_hash": "3c42c8f4b894646edebd174357b11912"
-        },
+        "author_type": "guest",
+        "author_name": "Guest",
+        "author_email": "xxx@gmail.com",
         "ip": "194.87.188.204",
         "ip_location": {
           "country": "Turkey",
           "country_code": "TR",
           "region": "Istanbul",
           "region_code": "34",
-          "city": "Istanbul",
-          "zip": "34165"
+          "city": "Istanbul"
         },
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.55",
         "created_at": "2023-06-30T06:34:36.926Z",
@@ -177,19 +173,19 @@
       },
       {
         "_id": "649d525d145e45b682e55a2b",
-        "target_type": 2,
+        "target_type": "comment",
         "target_id": 2312,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "123.149.113.128",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Henan",
           "region_code": "HA",
-          "city": "Zhengzhou",
-          "zip": ""
+          "city": "Zhengzhou"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-06-29T09:43:57.454Z",
@@ -198,19 +194,19 @@
       },
       {
         "_id": "649d524f145e45b682e55a24",
-        "target_type": 2,
+        "target_type": "comment",
         "target_id": 2163,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "123.149.113.128",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Henan",
           "region_code": "HA",
-          "city": "Zhengzhou",
-          "zip": ""
+          "city": "Zhengzhou"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-06-29T09:43:43.513Z",
@@ -219,19 +215,19 @@
       },
       {
         "_id": "649d202c145e45b682e54d38",
-        "target_type": 1,
+        "target_type": "article",
         "target_id": 27,
         "vote_type": 1,
-        "author_type": 0,
-        "author": null,
+        "author_type": "anonymous",
+        "author_name": null,
+        "author_email": null,
         "ip": "60.181.101.184",
         "ip_location": {
           "country": "China",
           "country_code": "CN",
           "region": "Zhejiang",
           "region_code": "ZJ",
-          "city": "Wenzhou",
-          "zip": ""
+          "city": "Wenzhou"
         },
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "created_at": "2023-06-29T06:09:48.917Z",
