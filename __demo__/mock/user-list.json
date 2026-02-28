@@ -1,0 +1,167 @@
+{
+  "status": "success",
+  "message": "Get users succeeded",
+  "context": {
+    "url": "/users?sort=-1",
+    "method": "GET",
+    "route_params": {},
+    "query_params": {},
+    "identity": {
+      "role": "admin",
+      "is_guest": false,
+      "is_admin": true,
+      "is_user": false,
+      "uid": null
+    }
+  },
+  "result": {
+    "data": [
+      {
+        "_id": "699fb8a1f4ae1607b093f88a",
+        "type": 3,
+        "name": "Evan You",
+        "email": "evan.you.mock@gmail.com",
+        "website": "https://evanyou.me",
+        "avatar_url": "https://avatars.githubusercontent.com/u/499550?v=4",
+        "identities": [
+          {
+            "provider": "github",
+            "uid": "499550",
+            "email": "evan.you.mock@gmail.com",
+            "username": "yyx990803",
+            "display_name": "Evan You",
+            "avatar_url": "https://avatars.githubusercontent.com/u/499550?v=4",
+            "profile_url": "https://github.com/yyx990803",
+            "linked_at": "2026-02-28T10:15:22.000Z"
+          }
+        ],
+        "extras": [],
+        "disabled": false,
+        "created_at": "2026-02-28T10:15:22.000Z",
+        "updated_at": "2026-02-28T10:15:22.000Z",
+        "id": 12
+      },
+      {
+        "_id": "699fb8c5f4ae1607b093f88b",
+        "type": 3,
+        "name": "Alice Wonderland",
+        "email": "alice.in.code@gmail.com",
+        "website": null,
+        "avatar_url": "http://googleusercontent.com/profile/picture/8",
+        "identities": [
+          {
+            "provider": "google",
+            "uid": "104829103847291029384",
+            "email": "alice.in.code@gmail.com",
+            "username": null,
+            "display_name": "Alice Wonderland",
+            "avatar_url": "http://googleusercontent.com/profile/picture/8",
+            "profile_url": null,
+            "linked_at": "2026-02-27T14:33:11.120Z"
+          }
+        ],
+        "extras": [],
+        "disabled": false,
+        "created_at": "2026-02-27T14:33:11.120Z",
+        "updated_at": "2026-02-27T16:01:45.333Z",
+        "id": 11
+      },
+      {
+        "_id": "699fb8d8f4ae1607b093f88c",
+        "type": 3,
+        "name": "Dan Abramov",
+        "email": "dan.abramov.mock@gmail.com",
+        "website": "https://overreacted.io",
+        "avatar_url": "https://avatars.githubusercontent.com/u/810438?v=4",
+        "identities": [
+          {
+            "provider": "github",
+            "uid": "810438",
+            "email": "dan.abramov.mock@gmail.com",
+            "username": "gaearon",
+            "display_name": "Dan Abramov",
+            "avatar_url": "https://avatars.githubusercontent.com/u/810438?v=4",
+            "profile_url": "https://github.com/gaearon",
+            "linked_at": "2026-02-26T09:12:05.421Z"
+          },
+          {
+            "provider": "google",
+            "uid": "119283746501928374650",
+            "email": "dan.abramov.mock@gmail.com",
+            "username": null,
+            "display_name": "Dan Abramov (React)",
+            "avatar_url": "https://lh3.googleusercontent.com/a/ACg8ocLJ3nrrbRMP92n057BzqbrBTr5jCUWWdeUDjOp0vSf7C0Z53GC9=s96-c2",
+            "profile_url": null,
+            "linked_at": "2026-02-27T08:22:10.000Z"
+          }
+        ],
+        "extras": [],
+        "disabled": false,
+        "created_at": "2026-02-26T09:12:05.421Z",
+        "updated_at": "2026-02-27T08:22:10.000Z",
+        "id": 10
+      },
+      {
+        "_id": "699fb8ebf4ae1607b093f88d",
+        "type": 3,
+        "name": "Design Ninja",
+        "email": "ninja.ui.ux@gmail.com",
+        "website": "https://dribbble.com/ninja",
+        "avatar_url": "http://googleusercontent.com/profile/picture/5",
+        "identities": [
+          {
+            "provider": "google",
+            "uid": "120394857612345678901",
+            "email": "ninja.ui.ux@gmail.com",
+            "username": null,
+            "display_name": "Design Ninja",
+            "avatar_url": "http://googleusercontent.com/profile/picture/5",
+            "profile_url": null,
+            "linked_at": "2026-02-25T11:45:30.222Z"
+          }
+        ],
+        "extras": [
+          {
+            "key": "role_preference",
+            "value": "designer"
+          }
+        ],
+        "disabled": false,
+        "created_at": "2026-02-25T11:45:30.222Z",
+        "updated_at": "2026-02-25T11:45:30.222Z",
+        "id": 9
+      },
+      {
+        "_id": "699fb8fcf4ae1607b093f88e",
+        "type": 3,
+        "name": "Spammer Bot 001",
+        "email": "spam.bot.test@gmail.com",
+        "website": "http://buy-cheap-watches.com",
+        "avatar_url": "http://googleusercontent.com/profile/picture/99",
+        "identities": [
+          {
+            "provider": "google",
+            "uid": "192837465019283746501",
+            "email": "spam.bot.test@gmail.com",
+            "username": null,
+            "display_name": "Spammer Bot 001",
+            "avatar_url": "http://googleusercontent.com/profile/picture/99",
+            "profile_url": null,
+            "linked_at": "2026-02-24T03:12:44.111Z"
+          }
+        ],
+        "extras": [],
+        "disabled": true,
+        "created_at": "2026-02-24T03:12:44.111Z",
+        "updated_at": "2026-02-24T05:22:11.000Z",
+        "id": 8
+      }
+    ],
+    "pagination": {
+      "total": 5,
+      "current_page": 1,
+      "per_page": 16,
+      "total_page": 1
+    }
+  }
+}

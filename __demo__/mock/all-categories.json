@@ -1,8 +1,8 @@
 [
   {
-    "pid": null,
     "_id": "589e0ad54a4ad562430953d2",
     "id": 1,
+    "parent_id": null,
     "name": "技术探索",
     "slug": "code",
     "description": "和技术相关的思考与实践",
@@ -18,51 +18,48 @@
     "article_count": 72
   },
   {
-    "pid": "589e0ad54a4ad562430953d2",
     "_id": "65a10ad54a4ad562430953e1",
     "id": 5,
-    "name": "架构与工程",
-    "slug": "architecture",
+    "parent_id": 1,
+    "name": "架构工程",
+    "slug": "arch",
     "description": "系统设计、工程实践与架构思考",
     "extras": [{ "key": "icon-name", "value": "icon-architecture" }],
-    "created_at": "2019-05-06T12:24:10.442Z",
-    "updated_at": "2023-10-02T08:41:55.912Z",
-    "article_count": 21
+    "created_at": "2019-05-06T12:24:10.000Z",
+    "updated_at": "2024-01-10T08:10:00.000Z",
+    "article_count": 15
   },
   {
-    "pid": "589e0ad54a4ad562430953d2",
-    "_id": "65a10ad54a4ad562430953e2",
+    "_id": "65c30ad54a4ad562430955b2",
     "id": 6,
-    "name": "前端与交互",
-    "slug": "frontend",
-    "description": "前端技术、交互设计与用户体验",
-    "extras": [{ "key": "icon-name", "value": "icon-frontend" }],
-    "created_at": "2020-03-12T09:18:33.771Z",
-    "updated_at": "2024-01-06T16:22:19.330Z",
+    "parent_id": null,
+    "name": "开源项目",
+    "slug": "open-source",
+    "description": "Veact, Nodepress 等开源项目的版本发布与维护日志",
+    "extras": [{ "key": "icon-name", "value": "icon-github" }],
+    "created_at": "2020-05-20T10:00:00.000Z",
+    "updated_at": "2024-02-15T09:30:00.000Z",
     "article_count": 28
   },
   {
-    "pid": null,
     "_id": "589e07c04a4ad562430953d0",
     "id": 2,
+    "parent_id": null,
     "name": "生活随笔",
     "slug": "insight",
     "description": "记录生活点滴和思考",
     "extras": [
       { "key": "icon-name", "value": "icon-thinking" },
-      {
-        "key": "background",
-        "value": "https://static.surmon.me/18-10-30/42118397.jpg"
-      }
+      { "key": "background", "value": "https://static.surmon.me/18-10-30/42118397.jpg" }
     ],
     "created_at": "2017-02-10T18:34:40.680Z",
     "updated_at": "2023-06-12T18:12:07.019Z",
     "article_count": 164
   },
   {
-    "pid": "589e07c04a4ad562430953d0",
     "_id": "65b20ad54a4ad562430954a1",
     "id": 7,
+    "parent_id": 2,
     "name": "日常记录",
     "slug": "daily",
     "description": "日常生活与即时感受",
@@ -72,39 +69,15 @@
     "article_count": 46
   },
   {
-    "pid": null,
     "_id": "65a20ad54a4ad562430953f0",
     "id": 3,
-    "name": "阅读与思考",
+    "parent_id": null,
+    "name": "阅读思考",
     "slug": "reading",
     "description": "阅读记录与延伸思考",
     "extras": [{ "key": "icon-name", "value": "icon-book" }],
-    "created_at": "2018-09-21T07:11:02.551Z",
-    "updated_at": "2022-12-19T10:05:44.903Z",
-    "article_count": 39
-  },
-  {
-    "pid": "65a20ad54a4ad562430953f0",
-    "_id": "65b30ad54a4ad562430954b2",
-    "id": 8,
-    "name": "书摘与笔记",
-    "slug": "notes",
-    "description": "阅读过程中的摘录与简评",
-    "extras": [{ "key": "icon-name", "value": "icon-note" }],
-    "created_at": "2019-11-14T13:02:44.311Z",
-    "updated_at": "2023-03-18T06:28:51.904Z",
-    "article_count": 17
-  },
-  {
-    "pid": null,
-    "_id": "65c40ad54a4ad562430955c3",
-    "id": 4,
-    "name": "项目与发布",
-    "slug": "project",
-    "description": "项目记录、发布说明与里程碑",
-    "extras": [{ "key": "icon-name", "value": "icon-project" }],
-    "created_at": "2020-08-01T00:00:00.000Z",
-    "updated_at": "2024-02-02T10:20:31.552Z",
-    "article_count": 12
+    "created_at": "2018-01-10T12:00:00.000Z",
+    "updated_at": "2023-01-10T12:00:00.000Z",
+    "article_count": 32
   }
 ]
