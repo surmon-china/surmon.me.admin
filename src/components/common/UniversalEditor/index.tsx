@@ -9,7 +9,8 @@ import { ThemeProvider, Theme } from '@/contexts/Theme'
 import { LocaleProvider, Language } from '@/contexts/Locale'
 import type { UniversalEditorProps } from './Editor'
 
-export { UnEditorLanguage, UnEditorLanguages, getUnEditorCache } from './shared'
+export { getUnEditorCache } from './shared/cache'
+export { UnEditorLanguage, UnEditorLanguages } from './shared/language'
 export type { UniversalEditorProps } from './Editor'
 
 const EditorComponent = React.lazy(() => {

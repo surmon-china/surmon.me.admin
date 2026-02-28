@@ -6,15 +6,15 @@
 import { GeneralKeyValue } from './general'
 
 export interface Category {
-  _id?: string
-  id?: number
-  pid?: string | null
+  _id: string
+  id: number
+  parent_id: number | null
   name: string
   slug: string
   description: string
-  children?: Category[]
   extras: GeneralKeyValue[]
   updated_at: string
   created_at: string
   article_count?: number
+  children?: Category[]
 }

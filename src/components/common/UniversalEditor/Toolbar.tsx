@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Select, Space, Typography, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { UnEditorLanguage, UnEditorLanguages } from './shared'
+import { UnEditorLanguage, UnEditorLanguages } from './shared/language'
 import { UniversalEditorProps } from './'
 
 import styles from './style.module.less'

@@ -7,22 +7,18 @@ import { RoutesPather } from '@/routes'
 import { Pagination } from '@/constants/nodepress'
 import { Tag as TagType } from '@/constants/tag'
 import { Category } from '@/constants/category'
-import {
-  Article,
-  ArticleStatus,
-  getArticleStatus,
-  getArticleOrigin,
-  getArticleLanguage
-} from '@/constants/article'
+import { Article, ArticleStatus } from '@/constants/article'
+import { getArticleStatus, getArticleOrigin, getArticleLanguage } from '@/constants/article'
 import { getBlogArticleUrl } from '@/transforms/url'
 import { numberToKilo } from '@/transforms/number'
 import { stringToYMD } from '@/transforms/date'
+import { APP_PAGE_SIZE_OPTIONS } from '@/config'
 
 export interface TableListProps {
   loading: boolean
   data: Article[]
   pagination: Pagination
-  selectedIds: string[]
+  selectedIds: number[]
   onSelect(ids: any[]): void
   onPaginate(page: number, pageSize?: number): void
   onUpdateState(article: Article, state: ArticleStatus): void
@@ -33,7 +29,7 @@ export interface TableListProps {
 export const TableList: React.FC<TableListProps> = (props) => {
   return (
     <Table<Article>
-      rowKey={(aticle) => aticle._id!}
+      rowKey={(aticle) => aticle.id}
       loading={props.loading}
       dataSource={props.data}
       rowSelection={{
@@ -41,7 +37,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
         onChange: props.onSelect
       }}
       pagination={{
-        pageSizeOptions: ['10', '20', '50'],
+        pageSizeOptions: APP_PAGE_SIZE_OPTIONS,
         current: props.pagination?.current_page,
         pageSize: props.pagination?.per_page,
         total: props.pagination?.total,
@@ -51,13 +47,13 @@ export const TableList: React.FC<TableListProps> = (props) => {
       columns={[
         {
           title: 'ID',
-          width: 40,
+          width: 50,
           dataIndex: 'id',
           responsive: ['md']
         },
         {
           title: '文章',
-          width: 360,
+          width: 380,
           dataIndex: 'title',
           render: (_, article) => (
             <Badge.Ribbon
@@ -68,54 +64,37 @@ export const TableList: React.FC<TableListProps> = (props) => {
                 size="small"
                 variant="borderless"
                 styles={{
-                  body: { minHeight: '108px' }
+                  body: { minHeight: '110px' }
                 }}
                 style={{
                   margin: 'var(--app-padding-xs) 0',
-                  background: `linear-gradient(
-                  to right bottom,
-                  rgba(0, 0, 0, 0.8),
-                  rgba(0, 0, 0, 0.4)
-                ),
-                url("${article.thumbnail}") center / cover`
+                  background: `linear-gradient(to right bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), url("${article.thumbnail}") center / cover`
                 }}
               >
-                <Typography.Title
-                  level={5}
-                  style={{ marginTop: 'var(--app-padding-xs)', color: 'white' }}
-                >
+                <Typography.Title level={5} style={{ color: 'white' }}>
                   {article.title}
                 </Typography.Title>
                 <Typography.Paragraph
                   style={{ color: 'rgba(255, 255, 255, 0.65)' }}
-                  ellipsis={{ rows: 2, expandable: true }}
+                  ellipsis={{ rows: 1, expandable: true }}
                 >
                   {article.summary}
                 </Typography.Paragraph>
+                <Space size="small" wrap>
+                  {article.tags.map((tag) => (
+                    <Tag
+                      key={tag._id}
+                      style={{ cursor: 'pointer' }}
+                      icon={<Icons.TagOutlined />}
+                      onClick={() => props.onClickTag(tag)}
+                    >
+                      {tag.name}
+                    </Tag>
+                  ))}
+                </Space>
               </Card>
             </Badge.Ribbon>
           )
-        },
-        {
-          title: '标签',
-          width: 110,
-          dataIndex: 'tags',
-          render(_, article) {
-            return (
-              <Space orientation="vertical" size="small" wrap>
-                {article.tags.map((tag) => (
-                  <Tag
-                    key={tag._id}
-                    style={{ cursor: 'pointer' }}
-                    icon={<Icons.TagOutlined />}
-                    onClick={() => props.onClickTag(tag)}
-                  >
-                    {tag.name}
-                  </Tag>
-                ))}
-              </Space>
-            )
-          }
         },
         {
           title: '被关注',
@@ -141,7 +120,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
           }
         },
         {
-          title: '分类 / 更新周期',
+          title: '分类 / 时间',
           width: 220,
           dataIndex: 'created_at',
           render(_, article) {
@@ -149,14 +128,16 @@ export const TableList: React.FC<TableListProps> = (props) => {
               <Space orientation="vertical">
                 <div>
                   分类：
-                  {article.categories.map((category, index) => (
-                    <span key={index}>
-                      <Typography.Link onClick={() => props.onClickCategory(category)}>
+                  <Space size="small" separator={<Divider orientation="vertical" />}>
+                    {article.categories.map((category, index) => (
+                      <Typography.Link
+                        key={index}
+                        onClick={() => props.onClickCategory(category)}
+                      >
                         {category.name}
                       </Typography.Link>
-                      {article.categories[index + 1] ? <Divider orientation="vertical" /> : ''}
-                    </span>
-                  ))}
+                    ))}
+                  </Space>
                 </div>
                 <div>发布：{stringToYMD(article.created_at!)}</div>
                 <div>更新：{stringToYMD(article.updated_at!)}</div>
@@ -175,16 +156,18 @@ export const TableList: React.FC<TableListProps> = (props) => {
                   getArticleStatus(article.status),
                   getArticleOrigin(article.origin),
                   getArticleLanguage(article.lang)
-                ].map((state) => (
-                  <Tag
-                    variant="outlined"
-                    icon={state.icon}
-                    color={state.color}
-                    key={state.id + state.name}
-                  >
-                    {state.name}
-                  </Tag>
-                ))}
+                ]
+                  .filter(Boolean)
+                  .map((state) => (
+                    <Tag
+                      variant="outlined"
+                      icon={state.icon}
+                      color={state.color}
+                      key={state.id + state.name}
+                    >
+                      {state.name}
+                    </Tag>
+                  ))}
               </Space>
             )
           }
@@ -195,15 +178,21 @@ export const TableList: React.FC<TableListProps> = (props) => {
           dataIndex: 'actions',
           render: (_, article) => (
             <Space orientation="vertical">
-              <Link to={RoutesPather.articleDetail(article._id!)}>
-                <Button size="small" type="text" block={true} icon={<Icons.EditOutlined />}>
+              <Link to={RoutesPather.articleDetail(article.id)}>
+                <Button
+                  size="small"
+                  color="default"
+                  variant="link"
+                  block={true}
+                  icon={<Icons.EditOutlined />}
+                >
                   编辑文章
                 </Button>
               </Link>
               {article.status === ArticleStatus.Draft && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="green"
                   block={true}
                   icon={<Icons.CheckOutlined />}
@@ -216,7 +205,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
                 article.status === ArticleStatus.Private) && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="danger"
                   block={true}
                   icon={<Icons.DeleteOutlined />}
@@ -228,7 +217,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
               {article.status === ArticleStatus.Trash && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="orange"
                   block={true}
                   icon={<Icons.RollbackOutlined />}

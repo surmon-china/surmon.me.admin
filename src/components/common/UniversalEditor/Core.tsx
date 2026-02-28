@@ -8,7 +8,7 @@ import { languages as languageDescriptions } from '@codemirror/language-data'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { json as jsonLanguageSupport } from '@codemirror/lang-json'
 import { yaml as yamlLanguageSupport } from '@codemirror/lang-yaml'
-import { UnEditorLanguage } from './shared'
+import { UnEditorLanguage } from './shared/language'
 import unfoldSvgString from './icons/unfold.svg?raw'
 import foldSvgString from './icons/fold.svg?raw'
 

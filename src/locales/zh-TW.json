@@ -57,7 +57,6 @@
   "page.article.editor.content": "文章內容",
   "page.article.editor.categories": "分類目錄",
   "page.article.editor.thumbnail": "縮略圖",
-  "page.article.editor.ai": "AI 助理",
   "page.article.editor.extras": "自定義擴展",
   "page.article.editor.states": "發佈選項",
 
@@ -70,10 +69,8 @@
   "page.feedback.title": "站點反饋",
   "page.feedback.list.title": "反饋列表（{{total}}）",
 
-  "page.disqus.title": "Disqus",
-  "page.disqus.posts": "Posts",
-  "page.disqus.threads": "Threads",
-  "page.disqus.synchronize": "Synchronize",
+  "page.user.title": "用戶管理",
+  "page.user.list.title": "用戶列表 ({{total}})",
 
   "page.setting.title": "系統設置",
   "page.setting.general.title": "通用設置",

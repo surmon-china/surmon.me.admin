@@ -54,7 +54,7 @@ export const AppSider: React.FC<AppSiderProps> = ({ isSiderCollapsed }) => {
           <img
             draggable={false}
             className={styles.avatar}
-            src={adminProfile.data.avatar}
+            src={adminProfile.data.avatar_url}
             alt={adminProfile.data.name}
           />
           <Typography.Title level={5} className={styles.name} title={adminProfile.data.name}>

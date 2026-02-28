@@ -19,25 +19,22 @@ export const ProfileForm: React.FC = () => {
   const globalAdminProfile = useAdminProfile()
   const [form] = Form.useForm<AdminProfile>()
 
-  const fetchLatestProfile = () => {
-    fetching.promise(api.getAdminProfile()).then(form.setFieldsValue)
+  const fetchProfile = () => {
+    return fetching.promise(api.getAdminProfile()).then(form.setFieldsValue)
   }
 
-  const updateProfile = (adminProfile: AdminProfile) => {
-    return updating.promise(api.updateAdminProfile(adminProfile)).then(() => {
-      if (adminProfile.new_password) {
-        notification.info({
-          title: '修改了新密码，即将跳转到登录页...'
-        })
-        setTimeout(() => {
-          removeToken()
-          navigate(RoutesPath[RoutesKey.Hello])
-        }, 1688)
-      } else {
-        fetchLatestProfile()
-        globalAdminProfile.refresh()
-      }
-    })
+  const updateProfile = async (adminProfile: AdminProfile) => {
+    const result = await updating.promise(api.updateAdminProfile(adminProfile))
+    if (adminProfile.new_password) {
+      notification.info({ title: '修改了新密码，即将跳转到登录页...' })
+      setTimeout(() => {
+        removeToken()
+        navigate(RoutesPath[RoutesKey.Hello])
+      }, 1688)
+    } else {
+      form.setFieldsValue(result)
+      globalAdminProfile.refresh()
+    }
   }
 
   const handleFormSubmit = () => {
@@ -62,15 +59,13 @@ export const ProfileForm: React.FC = () => {
     }
   }
 
-  onMounted(() => {
-    fetchLatestProfile()
-  })
+  onMounted(() => fetchProfile())
 
   return (
     <Spin spinning={fetching.state.value || updating.state.value}>
       <Form layout="vertical" form={form} colon={false} scrollToFirstError={true}>
         <Form.Item
-          name="avatar"
+          name="avatar_url"
           label="头像"
           required={true}
           rules={[{ required: true, message: '请上传图片' }]}
@@ -79,11 +74,11 @@ export const ProfileForm: React.FC = () => {
         </Form.Item>
         <Form.Item
           name="name"
-          label="昵称"
+          label="名称"
           required={true}
-          rules={[{ required: true, message: '请输入昵称' }]}
+          rules={[{ required: true, message: '请输入名称' }]}
         >
-          <Input placeholder="昵称" />
+          <Input placeholder="名称" />
         </Form.Item>
         <Form.Item
           name="slogan"

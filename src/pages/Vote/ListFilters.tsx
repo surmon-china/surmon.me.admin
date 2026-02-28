@@ -5,15 +5,15 @@ import { Trans } from '@/i18n'
 import { SortOrder } from '@/constants/sort'
 import { SortSelect } from '@/components/common/SortSelect'
 import { SelectWithInput } from '@/components/common/SelectWithInput'
-import { VoteTarget, VoteType, VoteAuthorType, voteTypes } from '@/constants/vote'
-import { getVoteTargetText, getVoteAuthorTypeText } from '@/constants/vote'
+import { VoteTargetType, VoteType, voteTypes, getVoteTargetText } from '@/constants/vote'
+import { GeneralAuthorType, generalAuthorTypes } from '@/constants/author'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_TARGET_ID = void 0
 export const DEFAULT_FILTER_PARAMS = {
-  target_type: SELECT_ALL_VALUE as VoteTarget | typeof SELECT_ALL_VALUE,
+  target_type: SELECT_ALL_VALUE as VoteTargetType | typeof SELECT_ALL_VALUE,
   vote_type: SELECT_ALL_VALUE as VoteType | typeof SELECT_ALL_VALUE,
-  author_type: SELECT_ALL_VALUE as VoteAuthorType | typeof SELECT_ALL_VALUE,
+  author_type: SELECT_ALL_VALUE as GeneralAuthorType | typeof SELECT_ALL_VALUE,
   sort: SortOrder.Desc
 }
 
@@ -44,7 +44,7 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
         <Space.Compact>
           <SelectWithInput
             disabled={props.loading}
-            inputStyle={{ width: 140 }}
+            inputStyle={{ width: 130 }}
             inputPlaceholder={
               (props.params.target_type === SELECT_ALL_VALUE
                 ? '目标'
@@ -60,7 +60,7 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
                 props.onTargetIdChange(void 0)
               }
             }}
-            selectStyle={{ width: 110 }}
+            selectStyle={{ width: 100 }}
             selectValue={props.params.target_type}
             onSelectChange={(target_type) => {
               props.onTargetIdChange(void 0)
@@ -68,8 +68,8 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
             }}
             selectOptions={[
               { value: SELECT_ALL_VALUE, label: '所有类型' },
-              { value: VoteTarget.Article, label: getVoteTargetText(VoteTarget.Article) },
-              { value: VoteTarget.Comment, label: getVoteTargetText(VoteTarget.Comment) }
+              { value: VoteTargetType.Article, label: getVoteTargetText(VoteTargetType.Article) },
+              { value: VoteTargetType.Comment, label: getVoteTargetText(VoteTargetType.Comment) }
             ]}
           />
         </Space.Compact>
@@ -97,13 +97,11 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
           value={props.params.author_type}
           onChange={(author_type) => props.onParamsChange({ author_type })}
           options={[
-            { value: SELECT_ALL_VALUE, label: '所有用户' },
-            ...[VoteAuthorType.Anonymous, VoteAuthorType.Guest, VoteAuthorType.Disqus].map(
-              (type) => ({
-                value: type,
-                label: getVoteAuthorTypeText(type)
-              })
-            )
+            { value: SELECT_ALL_VALUE, label: '所有作者' },
+            ...generalAuthorTypes.map((type) => ({
+              value: type.id,
+              label: type.name
+            }))
           ]}
         />
         <SortSelect

@@ -9,18 +9,15 @@ import { ArticleCreatePage } from '@/pages/Article/Create'
 import { AnnouncementPage } from '@/pages/Announcement'
 import { CategoryPage } from '@/pages/Category'
 import { TagPage } from '@/pages/Tag'
-import { CommentPage } from '@/pages/Comment'
 import { VotePage } from '@/pages/Vote'
+import { CommentPage } from '@/pages/Comment'
 import { FeedbackPage } from '@/pages/Feedback'
-import { DisqusThreadsPage } from '@/pages/Dsiqus/Thread'
-import { DisqusPostsPage } from '@/pages/Dsiqus/Post'
-import { DisqusSynchronizePage } from '@/pages/Dsiqus/Synchronize'
 import { SettingPage } from '@/pages/Setting'
 import { StaticPage } from '@/pages/Static'
+import { UserPage } from '@/pages/User'
 
 import { RouteObject } from '.'
 import { RoutesKey } from './keys'
-import { getResourceUrl } from '@/transforms/url'
 
 export const pageRoutes: RouteObject[] = [
   {
@@ -121,50 +118,6 @@ export const pageRoutes: RouteObject[] = [
     }
   },
   {
-    id: RoutesKey.Disqus,
-    path: '/disqus',
-    handle: {
-      i18nKey: 'page.disqus.title',
-      icon: <img src={getResourceUrl('/images/disqus.svg')} width="1em" />
-    },
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/disqus/posts" />,
-        handle: {
-          hiddenInMenu: true
-        }
-      },
-      {
-        id: RoutesKey.DisqusPost,
-        path: '/disqus/posts',
-        element: <DisqusPostsPage />,
-        handle: {
-          i18nKey: 'page.disqus.posts',
-          icon: <Icons.OrderedListOutlined />
-        }
-      },
-      {
-        id: RoutesKey.DisqusThread,
-        path: '/disqus/threads',
-        element: <DisqusThreadsPage />,
-        handle: {
-          i18nKey: 'page.disqus.threads',
-          icon: <Icons.FolderOpenOutlined />
-        }
-      },
-      {
-        id: RoutesKey.DisqusSync,
-        path: '/disqus/synchronize',
-        element: <DisqusSynchronizePage />,
-        handle: {
-          i18nKey: 'page.disqus.synchronize',
-          icon: <Icons.CloudSyncOutlined />
-        }
-      }
-    ]
-  },
-  {
     id: RoutesKey.Vote,
     path: '/vote',
     element: <VotePage />,
@@ -180,6 +133,15 @@ export const pageRoutes: RouteObject[] = [
     handle: {
       i18nKey: 'page.feedback.title',
       icon: <Icons.SmileOutlined />
+    }
+  },
+  {
+    id: RoutesKey.User,
+    path: '/user',
+    element: <UserPage />,
+    handle: {
+      i18nKey: 'page.user.title',
+      icon: <Icons.UserOutlined />
     }
   },
   {

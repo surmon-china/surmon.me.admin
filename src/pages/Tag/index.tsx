@@ -32,7 +32,7 @@ export const TagPage: React.FC = () => {
   const searchKeyword = useRef('')
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
 
   // form modal
   const isFormModalOpen = useRef(false)
@@ -101,14 +101,14 @@ export const TagPage: React.FC = () => {
       content: '删除后不可恢复',
       centered: true,
       onOk: () => {
-        return api.deleteTag(tag._id!).then(() => {
+        return api.deleteTag(tag.id).then(() => {
           refreshList()
         })
       }
     })
   }
 
-  const deleteTags = (tagIds: string[]) => {
+  const deleteTags = (tagIds: number[]) => {
     Modal.confirm({
       title: `确定要删除 ${tagIds.length} 个标签吗？`,
       content: '删除后不可恢复',
@@ -181,7 +181,7 @@ export const TagPage: React.FC = () => {
         title={activeEditTag.value ? '编辑标签' : '新标签'}
         submitting={posting.state.value}
         open={isFormModalOpen.value}
-        initData={activeEditTag.value}
+        initialData={activeEditTag.value}
         onCancel={closeModal}
         onSubmit={(tag) => (activeEditTag.value ? updateTag(tag) : createTag(tag))}
       />

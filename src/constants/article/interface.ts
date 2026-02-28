@@ -6,15 +6,14 @@
 import { GeneralKeyValue } from '../general'
 import { Category } from '../category'
 import { Tag } from '../tag'
+
 import { ArticleStatus } from './status'
 import { ArticleOrigin } from './origin'
 import { ArticleLanguage } from './language'
 
-export type ArticleId = string | number
-
 export interface Article {
-  id?: number
-  _id?: string
+  _id: string
+  id: number
   slug: string | null
   title: string
   summary: string

@@ -1,16 +1,13 @@
 import React from 'react'
-import { onMounted, useShallowRef } from 'veact'
+import { onMounted } from 'veact'
 import { Form, Typography, Input, Button, Divider, InputNumber, Select, Space } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { getArticle } from '@/apis/article'
-import { Article } from '@/constants/article'
-import { Comment, commentStatuses, COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
+import { Comment, commentStatuses, getCommentTargetType } from '@/constants/comment'
 import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
 import { UniversalEditor } from '@/components/common/UniversalEditor'
 import { UniversalText } from '@/components/common/UniversalText'
 import { IPLocation } from '@/components/common/IPLocation'
-import { parseBrowser, parseOS, parseDevice } from '@/transforms/ua'
-import { getBlogURLByPostId } from '@/transforms/url'
+import { UserAgent } from '@/components/common/UserAgent'
 import { stringToYMD } from '@/transforms/date'
 import { CommentAvatar } from './Avatar'
 
@@ -22,12 +19,6 @@ export interface EditFormProps {
 
 export const EditForm: React.FC<EditFormProps> = (props) => {
   const [form] = Form.useForm<Comment>()
-  const commentArticle = useShallowRef<Article | null>(null)
-  const fetchArticle = (articleId: number) => {
-    getArticle(articleId).then((result) => {
-      commentArticle.value = result
-    })
-  }
 
   const handleSubmit = () => {
     form.validateFields().then((formValue) => {
@@ -37,9 +28,6 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
 
   onMounted(() => {
     form.setFieldsValue(props.comment)
-    if (props.comment.post_id !== COMMENT_GUESTBOOK_POST_ID) {
-      fetchArticle(props.comment.post_id)
-    }
   })
 
   return (
@@ -52,26 +40,35 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
     >
       <Form.Item label="ID">
         <Space size="small">
-          <Typography.Text copyable={true}>{props.comment?.id}</Typography.Text>
+          <Typography.Text>{props.comment?.id}</Typography.Text>
           <Divider orientation="vertical" />
-          <Typography.Text copyable={true}>{props.comment?._id}</Typography.Text>
+          <Typography.Text type="secondary">{props.comment._id}</Typography.Text>
         </Space>
       </Form.Item>
-      <Form.Item label="发布于">{stringToYMD(props.comment?.created_at!)}</Form.Item>
-      <Form.Item label="最后修改于">{stringToYMD(props.comment?.updated_at!)}</Form.Item>
-      <Form.Item label="用户头像">
-        <CommentAvatar size="large" comment={props.comment!} />
+      <Form.Item label="发布于">{stringToYMD(props.comment.created_at)}</Form.Item>
+      <Form.Item label="宿主页面">
+        {getCommentTargetType(props.comment?.target_type).name}{' '}
+        <span>#{props.comment?.target_id}</span>
+      </Form.Item>
+      <Form.Item label="父级评论">
+        <UniversalText
+          text={props.comment?.parent_id ? `#${props.comment.parent_id}` : null}
+          placeholder="无"
+        />
+      </Form.Item>
+      <Form.Item label="作者头像">
+        <CommentAvatar size={56} shape="square" comment={props.comment!} />
       </Form.Item>
       <Form.Item
-        name={['author', 'name']}
-        label="用户昵称"
+        name="author_name"
+        label="作者名称"
         rules={[{ required: true, message: '必填' }]}
       >
         <Input prefix={<Icons.UserOutlined />} />
       </Form.Item>
       <Form.Item
-        name={['author', 'email']}
-        label="用户邮箱"
+        name="author_email"
+        label="作者邮箱"
         rules={[
           {
             message: '请输入正确的邮箱',
@@ -82,8 +79,8 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
         <Input prefix={<Icons.MailOutlined />} placeholder="email" type="email" />
       </Form.Item>
       <Form.Item
-        name={['author', 'site']}
-        label="用户网址"
+        name="author_website"
+        label="作者网址"
         rules={[
           {
             message: '请输入正确的 URL',
@@ -98,7 +95,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
           suffix={
             <Icons.SendOutlined
               onClick={() => {
-                const url = props.comment?.author.site
+                const url = props.comment?.author_website
                 if (url) {
                   window.open(url)
                 }
@@ -108,17 +105,18 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
         />
       </Form.Item>
       <Form.Item label="IP 地址">
-        <UniversalText text={props.comment?.ip} copyable={true} />
+        <UniversalText text={props.comment?.ip} copyable={true} placeholder="无" />
       </Form.Item>
       <Form.Item label="IP 地理位置">
-        <IPLocation data={props.comment?.ip_location} fullname={true} />
+        <IPLocation ipLocation={props.comment?.ip_location} emoji={true} detailed={true} />
       </Form.Item>
-      <Form.Item label="终端">
-        <UniversalText text={parseBrowser(props.comment?.agent!)} placeholder="未知浏览器" />
-        <Divider orientation="vertical" />
-        <UniversalText text={parseOS(props.comment?.agent!)} placeholder="未知系统" />
-        <Divider orientation="vertical" />
-        <UniversalText text={parseDevice(props.comment?.agent!)} placeholder="未知设备" />
+      <Form.Item label="设备">
+        <UserAgent
+          userAgent={props.comment.user_agent}
+          orientation="horizontal"
+          size="small"
+          separator={<Divider orientation="vertical" />}
+        />
       </Form.Item>
       <Form.Item name="likes" label="被赞" rules={[{ required: true, message: '必填' }]}>
         <InputNumber suffix={<Icons.LikeOutlined />} min={0} placeholder="多少" />
@@ -126,25 +124,6 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
       <Form.Item name="dislikes" label="被踩" rules={[{ required: true, message: '必填' }]}>
         <InputNumber suffix={<Icons.DislikeOutlined />} min={0} placeholder="多少" />
       </Form.Item>
-      <Form.Item label="宿主页面">
-        <Button
-          type="link"
-          target="_blank"
-          icon={<Icons.LinkOutlined />}
-          href={getBlogURLByPostId(props.comment?.post_id!)}
-        >
-          {props.comment?.post_id === COMMENT_GUESTBOOK_POST_ID
-            ? '留言板'
-            : (commentArticle.value?.title ?? '加载中⋯')}
-          <Divider orientation="vertical" />
-          <span>#{props.comment?.id}</span>
-        </Button>
-      </Form.Item>
-      {props.comment?.pid ? (
-        <Form.Item label="父级评论">
-          <Typography.Text strong>#{props.comment?.pid}</Typography.Text>
-        </Form.Item>
-      ) : null}
       <Form.Item name="status" label="状态" rules={[{ required: true, message: '请选择状态' }]}>
         <Select
           placeholder="选择状态"
@@ -178,6 +157,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
       <Form.Item label="自定义扩展" extra="可以为当前评论增加自定义扩展属性" shouldUpdate={true}>
         <FormKeyValueInput formFieldName="extras" />
       </Form.Item>
+      <Form.Item label="最后修改于">{stringToYMD(props.comment?.updated_at!)}</Form.Item>
       <Form.Item label=" ">
         <Button
           type="primary"

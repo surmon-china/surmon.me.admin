@@ -17,7 +17,7 @@ export const ArticleCreatePage: React.FC = () => {
   const creating = useLoading()
   const createArticle = (article: Article) => {
     return creating.promise(api.createArticle(article)).then((result) => {
-      navigate(RoutesPather.articleDetail(result._id!))
+      navigate(RoutesPather.articleDetail(result.id))
       scrollTo(document.body)
     })
   }
@@ -26,6 +26,7 @@ export const ArticleCreatePage: React.FC = () => {
     <ArticleEditor
       loading={false}
       article={null}
+      editorCacheId="article-new"
       submitting={creating.state.value}
       onSubmit={(article) => createArticle(article)}
     />

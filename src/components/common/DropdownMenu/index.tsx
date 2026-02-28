@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { Button, Dropdown } from 'antd'
+import type { ItemType as MenuItemType } from 'antd/es/menu/interface'
 import * as Icons from '@ant-design/icons'
 
 export interface ButtonMenuProps {
@@ -12,11 +13,15 @@ export interface ButtonMenuProps {
   className?: string
   disabled?: boolean
   onClick?(): any
-  options: Array<{
-    icon?: React.ReactNode
-    label: React.ReactNode
-    onClick(): any
-  }>
+  options: Array<
+    | { type: 'divider' }
+    | {
+        type?: 'item'
+        icon?: React.ReactNode
+        label: React.ReactNode
+        onClick(): any
+      }
+  >
 }
 
 export const DropdownMenu: React.FC<React.PropsWithChildren<ButtonMenuProps>> = (props) => {
@@ -25,12 +30,16 @@ export const DropdownMenu: React.FC<React.PropsWithChildren<ButtonMenuProps>> = 
       className={props.className}
       disabled={props.disabled}
       menu={{
-        items: props.options.map((option, index) => ({
-          key: index,
-          icon: option.icon,
-          label: option.label,
-          onClick: option.onClick
-        }))
+        items: props.options.map((option, index) => {
+          return option.type === 'divider'
+            ? option
+            : {
+                key: index,
+                icon: option.icon,
+                label: option.label,
+                onClick: option.onClick
+              }
+        })
       }}
     >
       <Button disabled={props.disabled} icon={<Icons.DownOutlined />} iconPlacement="end">

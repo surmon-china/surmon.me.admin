@@ -12,7 +12,6 @@ export const FEEDBACK_API_PATH = '/feedback'
 
 export interface GetFeedbacksParams extends GeneralPaginateQueryParams {
   keyword?: string
-  tid?: number
   marked?: MarkedState
   sort?: SortOrder
 }
@@ -25,11 +24,11 @@ export function getFeedbacks(params: GetFeedbacksParams = {}) {
 
 export function updateFeedback(feedback: Feedback): Promise<any> {
   return nodepress
-    .put<Comment>(`${FEEDBACK_API_PATH}/${feedback._id}`, feedback)
+    .patch<Comment>(`${FEEDBACK_API_PATH}/${feedback.id}`, feedback)
     .then((response) => response.result)
 }
 
-export function deleteFeedbacks(feedbackIds: string[]) {
+export function deleteFeedbacks(feedbackIds: number[]) {
   return nodepress
     .delete(FEEDBACK_API_PATH, { data: { feedback_ids: feedbackIds } })
     .then((response) => response.result)

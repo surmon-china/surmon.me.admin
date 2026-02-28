@@ -38,7 +38,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
       ...newOptions,
       app_config: formatJSONString(newOptions.app_config)
     }
-    return updating.promise(api.putOptions(payload)).then(resetForm)
+    return updating.promise(api.updateOptions(payload)).then(resetForm)
   }
 
   const handleSubmit = () => {
@@ -134,7 +134,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
           <Select placeholder="回车以输入多个 IP 地址" mode="tags" />
         </Form.Item>
         <Form.Item
-          name={['blocklist', 'mails']}
+          name={['blocklist', 'emails']}
           label="Blocklist 邮箱"
           extra="这些邮箱来源的评论将被拒绝"
         >

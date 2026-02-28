@@ -22,7 +22,7 @@ export const TagSelect: React.FC<TagSelectProps> = (props) => {
 
   const values = props.value || []
   const handleClick = (tag: Tag, checked: boolean) => {
-    const tagId = tag._id!
+    const tagId = tag._id
     const tagIds = checked ? [...values, tagId] : values.filter((t) => t !== tagId)
     props.onChange?.(tagIds)
   }
@@ -32,11 +32,11 @@ export const TagSelect: React.FC<TagSelectProps> = (props) => {
   })
 
   const renderTagListItem = (tag: Tag) => {
-    const isChecked = values.includes(tag._id!)
+    const isChecked = values.includes(tag._id)
     return (
       <Button
         size="small"
-        key={tag._id!}
+        key={tag._id}
         onClick={() => handleClick(tag, !isChecked)}
         type={isChecked ? 'primary' : 'default'}
         icon={

@@ -6,8 +6,8 @@
 import { GeneralKeyValue } from './general'
 
 export interface Tag {
-  _id?: string
-  id?: number
+  _id: string
+  id: number
   name: string
   slug: string
   description: string

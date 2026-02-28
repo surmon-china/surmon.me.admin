@@ -8,7 +8,9 @@ import nodepress from '@/services/nodepress'
 import { Options } from '@/constants/options'
 
 export const OPTIONS_API_PATH = '/options'
-export const ARCHIVE_API_PATH = '/archive'
+export const ARCHIVE_API_PATHS = {
+  refresh: '/archive/refresh'
+}
 export const SYSTEM_API_PATHS = {
   STATISTICS: '/system/statistics',
   DATA_BASE_BACKUP: '/system/database-backup'
@@ -34,7 +36,7 @@ export interface StatisticsCalendarItem {
 export function getArticlesCalendar() {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   return nodepress
-    .get<StatisticsCalendarItem[]>('/article/calendar', { params: { timezone } })
+    .get<StatisticsCalendarItem[]>('/articles/calendar', { params: { timezone } })
     .then((response) => response.result)
 }
 
@@ -42,18 +44,18 @@ export function getArticlesCalendar() {
 export function getCommentsCalendar() {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   return nodepress
-    .get<StatisticsCalendarItem[]>('/comment/calendar', { params: { timezone } })
+    .get<StatisticsCalendarItem[]>('/comments/calendar', { params: { timezone } })
     .then((response) => response.result)
 }
 
 /** 更新 Archive 缓存 */
 export function updateArchiveCache() {
-  return nodepress.patch<void>(ARCHIVE_API_PATH).then((response) => response.result)
+  return nodepress.post<void>(ARCHIVE_API_PATHS.refresh).then((response) => response.result)
 }
 
 /** 更新数据库备份 */
 export function updateDatabaseBackup() {
-  return nodepress.patch(SYSTEM_API_PATHS.DATA_BASE_BACKUP).then((response) => response.result)
+  return nodepress.post(SYSTEM_API_PATHS.DATA_BASE_BACKUP).then((response) => response.result)
 }
 
 /** 获取系统配置 */
@@ -62,6 +64,6 @@ export function getOptions() {
 }
 
 /** 更新系统配置 */
-export function putOptions(options: Options) {
-  return nodepress.put<Options>(OPTIONS_API_PATH, options).then((response) => response.result)
+export function updateOptions(options: Options) {
+  return nodepress.patch<Options>(OPTIONS_API_PATH, options).then((response) => response.result)
 }

@@ -7,7 +7,7 @@ import { Announcement, AnnouncementStatus } from '@/constants/announcement'
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
 import nodepress from '@/services/nodepress'
 
-export const ANNOUNCEMENT_API_PATH = '/announcement'
+export const ANNOUNCEMENT_API_PATH = '/announcements'
 
 /** 获取公告参数 */
 export interface GetAnnouncementsParams extends GeneralPaginateQueryParams {
@@ -34,19 +34,19 @@ export function createAnnouncement(announcement: Announcement): Promise<any> {
 /** 更新公告 */
 export function updateAnnouncement(announcement: Announcement): Promise<any> {
   return nodepress
-    .put<Announcement>(`${ANNOUNCEMENT_API_PATH}/${announcement._id}`, announcement)
+    .patch<Announcement>(`${ANNOUNCEMENT_API_PATH}/${announcement.id}`, announcement)
     .then((response) => response.result)
 }
 
 /** 删除公告 */
-export function deleteAnnouncement(id: string) {
+export function deleteAnnouncement(id: number) {
   return nodepress
     .delete<Announcement>(`${ANNOUNCEMENT_API_PATH}/${id}`)
     .then((response) => response.result)
 }
 
 /** 批量删除公告 */
-export function deleteAnnouncements(ids: string[]) {
+export function deleteAnnouncements(ids: number[]) {
   return nodepress
     .delete<any>(ANNOUNCEMENT_API_PATH, { data: { announcement_ids: ids } })
     .then((response) => response.result)

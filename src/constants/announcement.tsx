@@ -12,8 +12,8 @@ export enum AnnouncementStatus {
 }
 
 export interface Announcement {
-  _id?: string
-  id?: number
+  _id: string
+  id: number
   status: AnnouncementStatus
   content: string
   updated_at: string

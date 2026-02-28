@@ -24,7 +24,7 @@ export const TreeList: React.FC<TreeListProps> = (props) => {
       loading={props.loading}
       dataSource={props.tree}
       renderItem={(category) => (
-        <div style={{ paddingLeft: (props.level ?? 0) * 2.6 + 'rem' }}>
+        <div style={{ paddingLeft: (props.level ?? 0) * 3 + 'rem' }}>
           <Flex justify="space-between" align="start" className={styles.categoryTreeNode}>
             {props.level && (
               <div className={styles.levelIcon}>
@@ -44,7 +44,8 @@ export const TreeList: React.FC<TreeListProps> = (props) => {
             <div className={styles.actions}>
               <Button
                 size="small"
-                type="text"
+                color="default"
+                variant="link"
                 icon={<Icons.EditOutlined />}
                 onClick={() => props.onEdit(category)}
               >
@@ -53,7 +54,8 @@ export const TreeList: React.FC<TreeListProps> = (props) => {
               <Divider orientation="vertical" />
               <Button
                 size="small"
-                type="text"
+                color="danger"
+                variant="link"
                 danger={true}
                 icon={<Icons.DeleteOutlined />}
                 onClick={() => props.onDelete(category)}

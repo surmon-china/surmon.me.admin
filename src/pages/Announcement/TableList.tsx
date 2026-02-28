@@ -4,12 +4,13 @@ import * as Icons from '@ant-design/icons'
 import { Pagination } from '@/constants/nodepress'
 import { Announcement, getAnnouncementStatus } from '@/constants/announcement'
 import { stringToYMD } from '@/transforms/date'
+import { APP_PAGE_SIZE_OPTIONS } from '@/config'
 
 export interface TableListProps {
   loading: boolean
   data: Announcement[]
   pagination?: Pagination
-  selectedIds: string[]
+  selectedIds: number[]
   onSelect(ids: any[]): void
   onPaginate(page: number, pageSize?: number): void
   onEdit(announcement: Announcement, index: number): void
@@ -19,7 +20,7 @@ export interface TableListProps {
 export const TableList: React.FC<TableListProps> = (props) => {
   return (
     <Table<Announcement>
-      rowKey="_id"
+      rowKey="id"
       loading={props.loading}
       dataSource={props.data}
       rowSelection={{
@@ -27,7 +28,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
         onChange: props.onSelect
       }}
       pagination={{
-        pageSizeOptions: ['10', '20', '50'],
+        pageSizeOptions: APP_PAGE_SIZE_OPTIONS,
         current: props.pagination?.current_page,
         pageSize: props.pagination?.per_page,
         total: props.pagination?.total,
@@ -71,14 +72,16 @@ export const TableList: React.FC<TableListProps> = (props) => {
           render: (_, ann, index) => (
             <Space.Compact size="small">
               <Button
-                type="text"
+                color="default"
+                variant="link"
                 icon={<Icons.EditOutlined />}
                 onClick={() => props.onEdit(ann, index)}
               >
                 编辑
               </Button>
               <Button
-                type="text"
+                color="danger"
+                variant="link"
                 danger={true}
                 icon={<Icons.DeleteOutlined />}
                 onClick={() => props.onDelete(ann, index)}

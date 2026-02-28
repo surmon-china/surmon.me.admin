@@ -4,17 +4,18 @@
  */
 
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
-import { Vote, VoteTarget, VoteType, VoteAuthorType } from '@/constants/vote'
+import { Vote, VoteTargetType, VoteType } from '@/constants/vote'
+import { GeneralAuthorType } from '@/constants/author'
 import { SortOrder } from '@/constants/sort'
 import nodepress from '@/services/nodepress'
 
-export const VOTE_API_PATH = '/vote'
+export const VOTE_API_PATH = '/votes'
 
 export interface GetVotesParams extends GeneralPaginateQueryParams {
-  target_type?: VoteTarget
+  target_type?: VoteTargetType
   target_id?: number
   vote_type?: VoteType
-  author_type?: VoteAuthorType
+  author_type?: GeneralAuthorType
   sort?: SortOrder
 }
 
@@ -24,7 +25,7 @@ export function getVotes(params: GetVotesParams = {}) {
     .then((response) => response.result)
 }
 
-export function deleteVotes(voteIds: string[]) {
+export function deleteVotes(voteIds: number[]) {
   return nodepress
     .delete(VOTE_API_PATH, { data: { vote_ids: voteIds } })
     .then((response) => response.result)

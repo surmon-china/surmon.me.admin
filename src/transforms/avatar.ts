@@ -3,28 +3,23 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { Comment } from '@/constants/comment'
-import { getDisqusUserName } from './disqus'
-
-export const getGravatar = (emailhash: string) => {
-  // https://en.gravatar.com/site/implement/images/
+// https://en.gravatar.com/site/implement/images/
+export const getGravatarByHash = (emailhash: string) => {
   return `https://www.gravatar.com/avatar/${emailhash}`
 }
 
-export const getDisqusAvatar = (username: string) => {
-  // https://disqus.com/api/docs/images/
+// https://disqus.com/api/docs/images/
+export const getDisqusAvatarByUsername = (username: string) => {
   return `https://disqus.com/api/users/avatars/${username}.jpg`
 }
 
-export const autoCommentAvatar = (comment: Comment) => {
-  if (comment.author.email_hash) {
-    return getGravatar(comment.author.email_hash)
-  }
-
-  const disqusUsername = getDisqusUserName(comment.extras)
-  if (disqusUsername) {
-    return getDisqusAvatar(disqusUsername)
-  }
-
-  return ''
+// https://docs.gravatar.com/rest/hash/
+export const getGravatarByEmail = async (email: string) => {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(email.trim().toLowerCase())
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hash = Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
+  return getGravatarByHash(hash)
 }

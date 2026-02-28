@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Select, Divider, Space, Switch, FormInstance } from 'antd'
+import { Button, Form, Select, Divider, Space, Switch, FormInstance, message } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { articleStatuses, articleOrigins, articleLanguages } from '@/constants/article'
 import { StatesFormModel } from '.'
@@ -12,7 +12,9 @@ const REQUIRED_RULE = {
 export interface StatesFormProps {
   form: FormInstance<StatesFormModel>
   submitting: boolean
+  showDeleteButton?: boolean
   onSubmit(): void
+  onDelete?(): void
 }
 
 export const StatesForm: React.FC<StatesFormProps> = (props) => {
@@ -100,6 +102,22 @@ export const StatesForm: React.FC<StatesFormProps> = (props) => {
       >
         提交
       </Button>
+      {props.showDeleteButton && (
+        <>
+          <Divider />
+          <Button
+            type="dashed"
+            danger={true}
+            block={true}
+            icon={<Icons.DeleteOutlined />}
+            loading={props.submitting}
+            onClick={() => message.warning('双击执行删除操作')}
+            onDoubleClick={props.onDelete}
+          >
+            删除文章
+          </Button>
+        </>
+      )}
     </Form>
   )
 }

@@ -57,7 +57,6 @@
   "page.article.editor.content": "Basic Content",
   "page.article.editor.categories": "Categories",
   "page.article.editor.thumbnail": "Thumbnail",
-  "page.article.editor.ai": "AI Assistant",
   "page.article.editor.extras": "Extras",
   "page.article.editor.states": "States",
 
@@ -70,10 +69,8 @@
   "page.feedback.title": "Feedbacks",
   "page.feedback.list.title": "Feedbacks ({{total}})",
 
-  "page.disqus.title": "Disqus",
-  "page.disqus.posts": "Posts",
-  "page.disqus.threads": "Threads",
-  "page.disqus.synchronize": "Synchronize",
+  "page.user.title": "Users",
+  "page.user.list.title": "Users ({{total}})",
 
   "page.setting.title": "Setting",
   "page.setting.general.title": "General Settings",

@@ -2,24 +2,24 @@ import React from 'react'
 import { Button, Input, Select, Space, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { Trans } from '@/i18n'
-import { SortSelect } from '@/components/common/SortSelect'
-import { SelectWithInput } from '@/components/common/SelectWithInput'
+import { GeneralAuthorType, generalAuthorTypes } from '@/constants/author'
 import { SortOrder } from '@/constants/sort'
+import { SortSelect } from '@/components/common/SortSelect'
 import { MarkedState } from '@/constants/feedback'
 
 export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = {
   marked: false as boolean,
-  tid: SELECT_ALL_VALUE as number | typeof SELECT_ALL_VALUE,
   emotion: SELECT_ALL_VALUE as number | typeof SELECT_ALL_VALUE,
+  author_type: SELECT_ALL_VALUE as GeneralAuthorType | typeof SELECT_ALL_VALUE,
   sort: SortOrder.Desc
 }
 
 export type FilterParams = typeof DEFAULT_FILTER_PARAMS
 export const getQueryParams = (params: FilterParams) => ({
   marked: params.marked ? MarkedState.Yes : void 0,
-  tid: params.tid !== SELECT_ALL_VALUE ? params.tid : void 0,
   emotion: params.emotion !== SELECT_ALL_VALUE ? params.emotion : void 0,
+  author_type: params.author_type !== SELECT_ALL_VALUE ? params.author_type : void 0,
   sort: params.sort
 })
 
@@ -46,21 +46,17 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
         >
           标记数据
         </Button>
-        <SelectWithInput
+        <Select
           disabled={props.loading}
-          inputStyle={{ width: 100 }}
-          inputPlaceholder="TID"
-          inputType="number"
-          onInputSearch={(value) => {
-            const tid = value ? Number(value) : SELECT_ALL_VALUE
-            props.onParamsChange({ tid })
-          }}
-          selectStyle={{ width: 110 }}
-          selectValue={props.params.tid}
-          onSelectChange={(tid) => props.onParamsChange({ tid })}
-          selectOptions={[
-            { value: SELECT_ALL_VALUE, label: '所有反馈' },
-            { value: 0, label: '站点反馈' }
+          style={{ width: 110 }}
+          value={props.params.author_type}
+          onChange={(author_type) => props.onParamsChange({ author_type })}
+          options={[
+            { value: SELECT_ALL_VALUE, label: '所有作者' },
+            ...generalAuthorTypes.map((type) => ({
+              value: type.id,
+              label: type.name
+            }))
           ]}
         />
         <Select

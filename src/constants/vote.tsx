@@ -5,21 +5,25 @@
 
 import React from 'react'
 import * as Icons from '@ant-design/icons'
+import { GeneralAuthorType } from './author'
 import { IPLocation } from './general'
+import { User } from './user'
 
 export interface Vote {
   _id: string
   id: number
-  target_type: VoteTarget
+  target_type: VoteTargetType
   target_id: number
   vote_type: VoteType
-  author_type: VoteAuthorType
-  author: Record<string, any> | null
+  user: User | null
+  author_name: string | null
+  author_email: string | null
+  author_type: GeneralAuthorType
   ip: string | null
   ip_location: Partial<IPLocation> | null
-  user_agent?: string | null
-  created_at?: string
-  updated_at?: string
+  user_agent: string
+  created_at: string
+  updated_at: string
 }
 
 export enum VoteType {
@@ -27,34 +31,18 @@ export enum VoteType {
   Downvote = -1
 }
 
-export enum VoteTarget {
-  Article = 1,
-  Comment = 2
-}
-
-export enum VoteAuthorType {
-  Anonymous = 0,
-  Guest = 1,
-  Disqus = 2
+export enum VoteTargetType {
+  Article = 'article',
+  Comment = 'comment'
 }
 
 const voteTargetTextsMap = new Map([
-  [VoteTarget.Article, '文章'],
-  [VoteTarget.Comment, '评论']
+  [VoteTargetType.Article, '文章'],
+  [VoteTargetType.Comment, '评论']
 ])
 
-export const getVoteTargetText = (voteTarget: VoteTarget) => {
+export const getVoteTargetText = (voteTarget: VoteTargetType) => {
   return voteTargetTextsMap.get(voteTarget)!
-}
-
-const voteAuthorTypesMap = new Map([
-  [VoteAuthorType.Anonymous, '匿名用户'],
-  [VoteAuthorType.Guest, '本地访客'],
-  [VoteAuthorType.Disqus, 'Disqus 用户']
-])
-
-export const getVoteAuthorTypeText = (voteAuthorType: VoteAuthorType) => {
-  return voteAuthorTypesMap.get(voteAuthorType)!
 }
 
 export const voteTypes = [

@@ -39,9 +39,9 @@ export const FeedbackPage: React.FC = () => {
   }
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
   const selectedFeedbacks = useComputed(() => {
-    return feedbacks.data.filter((c) => selectedIds.value.includes(c._id!))
+    return feedbacks.data.filter((c) => selectedIds.value.includes(c.id))
   })
 
   // edit drawer
@@ -88,7 +88,7 @@ export const FeedbackPage: React.FC = () => {
       content: '该行为是物理删除，不可恢复！',
       centered: true,
       onOk: () => {
-        return api.deleteFeedbacks(feedbacks.map((f) => f._id!)).then(() => {
+        return api.deleteFeedbacks(feedbacks.map(({ id }) => id)).then(() => {
           refreshList()
         })
       }

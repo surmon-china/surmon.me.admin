@@ -9,25 +9,27 @@ import _uniq from 'lodash/uniq'
 import { useLocation } from 'react-router'
 import { useShallowReactive, useRef, onMounted, useWatch, useComputed } from 'veact'
 import { useLoading } from 'veact-use'
-import { Card, Divider, Modal, Drawer, Spin } from 'antd'
+import { Card, Divider, Modal, Drawer, Spin, Button, message } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/comment'
 import type { GetCommentsParams } from '@/apis/comment'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
-import { Comment as CommentType, CommentStatus, getCommentStatus } from '@/constants/comment'
+import { Comment as CommentType, CommentStatus, CommentTargetType } from '@/constants/comment'
+import { getCommentStatus } from '@/constants/comment'
 import { ResponsePaginationData } from '@/constants/nodepress'
+import { getBlogGuestbookUrl } from '@/transforms/url'
 import { scrollTo } from '@/utils/scroller'
 import { useTranslation } from '@/i18n'
 import { ListFilters, DEFAULT_FILTER_PARAMS, getQueryParams } from './ListFilters'
-import { ExtraActions } from './ExtraActions'
 import { TableList } from './TableList'
 import { EditForm } from './EditForm'
+import { ClaimUserSelector } from './ClaimUserSelector'
 
 export const CommentPage: React.FC = () => {
   const location = useLocation()
   const { i18n } = useTranslation()
-  const { post_id } = queryString.parse(location.search)
-  const postIdParam = post_id ? Number(post_id) : void 0
+  const { target_type, target_id } = queryString.parse(location.search)
+  const targetIdParam = target_id ? Number(target_id) : void 0
 
   // comments
   const fetching = useLoading()
@@ -39,31 +41,33 @@ export const CommentPage: React.FC = () => {
 
   // filters
   const searchKeyword = useRef('')
-  const filterPostIdInput = useRef(String(postIdParam ?? ''))
+  const filterTargetIdInput = useRef(String(targetIdParam ?? ''))
   const filterParams = useRef({
     ...DEFAULT_FILTER_PARAMS,
-    postId: postIdParam ?? DEFAULT_FILTER_PARAMS.postId
+    target_type: (target_type as any) ?? DEFAULT_FILTER_PARAMS.target_type,
+    target_id: targetIdParam ?? DEFAULT_FILTER_PARAMS.target_id
   })
 
   const resetFiltersToDefault = () => {
     searchKeyword.value = ''
-    filterPostIdInput.value = ''
+    filterTargetIdInput.value = ''
     filterParams.value = { ...DEFAULT_FILTER_PARAMS }
   }
 
-  const resetFiltersToPostId = (postId: number) => {
+  const resetFiltersToPostId = (targetType: CommentTargetType, targetId: number) => {
     searchKeyword.value = ''
-    filterPostIdInput.value = String(postId)
+    filterTargetIdInput.value = String(targetId)
     filterParams.value = {
       ...DEFAULT_FILTER_PARAMS,
-      postId: Number(postId)
+      target_type: targetType,
+      target_id: Number(targetId)
     }
   }
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
   const selectedComments = useComputed(() => {
-    return comments.data.filter((comment) => selectedIds.value.includes(comment._id!))
+    return comments.data.filter((comment) => selectedIds.value.includes(comment.id))
   })
 
   // drawer
@@ -122,14 +126,9 @@ export const CommentPage: React.FC = () => {
       content: '该行为是物理删除，不可恢复！',
       centered: true,
       onOk: () => {
-        return api
-          .deleteComments(
-            comments.map((comment) => comment._id!),
-            _uniq(comments.map((comment) => comment.post_id))
-          )
-          .then(() => {
-            refreshList()
-          })
+        return api.deleteComments(comments.map((comment) => comment.id)).then(() => {
+          refreshList()
+        })
       }
     })
   }
@@ -141,12 +140,46 @@ export const CommentPage: React.FC = () => {
       centered: true,
       onOk: () => {
         return api
-          .patchCommentsStatus(
-            comments.map((comment) => comment._id!),
-            _uniq(comments.map((comment) => comment.post_id)),
+          .updateCommentsStatus(
+            comments.map((comment) => comment.id),
             status
           )
           .then(() => {
+            refreshList()
+          })
+      }
+    })
+  }
+
+  const claimCommentsUser = (comments: CommentType[]) => {
+    let selectedUserId: number | null = null
+    Modal.confirm({
+      title: '认领评论',
+      width: 680,
+      centered: true,
+      content: <ClaimUserSelector comments={comments} onChange={(id) => (selectedUserId = id)} />,
+      okText: '确认认领',
+      onOk: () => {
+        if (!selectedUserId) {
+          message.warning('请先搜索并选择目标用户')
+          return Promise.reject()
+        }
+
+        return api
+          .claimCommentsUser(
+            comments.map((comment) => comment.id),
+            selectedUserId
+          )
+          .then((result) => {
+            if (result.modifiedCount === comments.length) {
+              message.success(`${comments.length} 个评论全部认领成功`)
+            } else if (result.modifiedCount === 0) {
+              message.error(`${comments.length} 个评论全部认领失败！`)
+            } else {
+              message.warning(
+                `部分认领成功！成功：${result.modifiedCount}，失败：${comments.length - result.modifiedCount}`
+              )
+            }
             refreshList()
           })
       }
@@ -167,7 +200,17 @@ export const CommentPage: React.FC = () => {
     <Card
       variant="borderless"
       title={i18n.t('page.comment.list.title', { total: comments.pagination?.total ?? '-' })}
-      extra={<ExtraActions comments={comments.data} loading={fetching.state.value} />}
+      extra={
+        <Button
+          type="primary"
+          size="small"
+          target="_blank"
+          icon={<Icons.RocketOutlined />}
+          href={getBlogGuestbookUrl()}
+        >
+          去留言板
+        </Button>
+      }
     >
       <ListFilters
         loading={fetching.state.value}
@@ -176,14 +219,22 @@ export const CommentPage: React.FC = () => {
         onKeywordSearch={() => fetchList()}
         params={filterParams.value}
         onParamsChange={(value) => Object.assign(filterParams.value, value)}
-        postIdInput={filterPostIdInput.value}
-        onPostIdInputChange={(value) => (filterPostIdInput.value = value)}
+        targetIdInput={filterTargetIdInput.value}
+        onTargetIdInputChange={(value) => (filterTargetIdInput.value = value)}
         onResetRefresh={resetFiltersToDefault}
         extra={
           <DropdownMenu
             text="批量操作"
             disabled={!selectedIds.value.length}
             options={[
+              {
+                label: '用户认领',
+                icon: <Icons.UserSwitchOutlined />,
+                onClick: () => claimCommentsUser(selectedComments.value)
+              },
+              {
+                type: 'divider'
+              },
               {
                 label: '退为草稿',
                 icon: <Icons.EditOutlined />,
@@ -225,7 +276,7 @@ export const CommentPage: React.FC = () => {
         onDetail={(_, index) => openEditDrawer(index)}
         onDelete={(comment) => deleteComments([comment])}
         onUpdateStatus={(comment, status) => updateCommentsStatus([comment], status)}
-        onClickPostId={resetFiltersToPostId}
+        onGoToTarget={resetFiltersToPostId}
       />
       <Drawer
         size="large"

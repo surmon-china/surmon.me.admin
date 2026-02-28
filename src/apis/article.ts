@@ -4,12 +4,12 @@
  */
 
 import { SortMode } from '@/constants/sort'
-import type { ArticleId, Article } from '@/constants/article'
+import type { Article } from '@/constants/article'
 import { ArticleOrigin, ArticleStatus } from '@/constants/article'
 import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/nodepress'
 import nodepress from '@/services/nodepress'
 
-export const ARTICLE_API_PATH = '/article'
+export const ARTICLE_API_PATH = '/articles'
 
 /** 获取文章参数 */
 export interface GetArticleParams extends GeneralPaginateQueryParams {
@@ -37,7 +37,7 @@ export function getAllArticles() {
 }
 
 /** 获取文章详情 */
-export function getArticle(articleId: ArticleId) {
+export function getArticleDetail(articleId: number) {
   return nodepress
     .get<Article>(`${ARTICLE_API_PATH}/${articleId}`)
     .then((response) => response.result)
@@ -51,19 +51,19 @@ export function createArticle(article: Article) {
 /** 修改文章 */
 export function updateArticle(article: Article) {
   return nodepress
-    .put<Article>(`${ARTICLE_API_PATH}/${article._id}`, article)
+    .patch<Article>(`${ARTICLE_API_PATH}/${article.id}`, article)
     .then((response) => response.result)
 }
 
 /** 批量修改文章状态 */
-export function patchArticlesStatus(articleIds: ArticleId[], status: ArticleStatus) {
+export function updateArticlesStatus(articleIds: number[], status: ArticleStatus) {
   return nodepress
     .patch(ARTICLE_API_PATH, { article_ids: articleIds, status })
     .then((response) => response.result)
 }
 
 /** 批量删除文章 */
-export function deleteArticles(articleIds: ArticleId[]) {
+export function deleteArticles(articleIds: number[]) {
   return nodepress
     .delete(ARTICLE_API_PATH, { data: { article_ids: articleIds } })
     .then((response) => response.result)

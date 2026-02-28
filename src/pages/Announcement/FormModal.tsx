@@ -14,7 +14,7 @@ export interface FormModalProps {
   title: string
   open: boolean
   submitting: boolean
-  initData: Announcement | null
+  initialData: Announcement | null
   onSubmit(data: Announcement): void
   onCancel(): void
 }
@@ -28,8 +28,8 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
 
   useEffect(() => {
     form.resetFields()
-    form.setFieldsValue(props.initData ?? {})
-  }, [props.initData, props.open])
+    form.setFieldsValue(props.initialData ?? {})
+  }, [props.initialData, props.open])
 
   return (
     <Modal
@@ -45,17 +45,17 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
       okText="提交"
     >
       <Form {...formLayout} colon={false} form={form}>
-        {props.initData && (
+        {props.initialData && (
           <>
             <Form.Item label="ID">
               <Space size="small">
-                <Typography.Text copyable={true}>{props.initData.id}</Typography.Text>
+                <Typography.Text>{props.initialData.id}</Typography.Text>
                 <Divider orientation="vertical" />
-                <Typography.Text copyable={true}>{props.initData._id}</Typography.Text>
+                <Typography.Text type="secondary">{props.initialData._id}</Typography.Text>
               </Space>
             </Form.Item>
-            <Form.Item label="发布于">{stringToYMD(props.initData.created_at)}</Form.Item>
-            <Form.Item label="最后修改于">{stringToYMD(props.initData.updated_at)}</Form.Item>
+            <Form.Item label="发布于">{stringToYMD(props.initialData.created_at)}</Form.Item>
+            <Form.Item label="最后修改于">{stringToYMD(props.initialData.updated_at)}</Form.Item>
           </>
         )}
         <Form.Item

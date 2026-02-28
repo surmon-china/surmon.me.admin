@@ -13,7 +13,7 @@ export { RoutesKey } from './keys'
 export { RoutesPath, RoutesMap, flatRoutes } from './flats'
 
 export const RoutesPather = {
-  articleDetail: (articleId: string) => `/article/edit/${articleId}`
+  articleDetail: (articleId: number) => `/article/edit/${articleId}`
 }
 
 export interface RouteHandle {

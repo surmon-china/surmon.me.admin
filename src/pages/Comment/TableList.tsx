@@ -1,14 +1,18 @@
 import React from 'react'
-import { Table, Button, Typography, Popover, Tag, Space } from 'antd'
+import { Table, Button, Typography, Popover, Tag, Space, Divider } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { UniversalText } from '@/components/common/UniversalText'
-import { Placeholder } from '@/components/common/Placeholder'
+import { UserAgent } from '@/components/common/UserAgent'
 import { IPLocation } from '@/components/common/IPLocation'
+import { AuthorName } from '@/components/common/AuthorProfile'
 import { Pagination } from '@/constants/nodepress'
-import { Comment, CommentStatus, getCommentStatus } from '@/constants/comment'
-import { parseBrowser, parseOS, parseDevice } from '@/transforms/ua'
+import { Comment, CommentStatus, CommentTargetType } from '@/constants/comment'
+import { getCommentStatus } from '@/constants/comment'
+import { getCommentTargetType } from '@/constants/comment'
 import { stringToYMD } from '@/transforms/date'
+import { APP_PAGE_SIZE_OPTIONS } from '@/config'
 import { CommentAvatar } from './Avatar'
+import { CommentLike, CommentDislike } from './Vote'
 
 import styles from './style.module.less'
 
@@ -16,19 +20,20 @@ export interface TableListProps {
   loading: boolean
   data: Comment[]
   pagination?: Pagination
-  selectedIds: string[]
+  selectedIds: number[]
   onSelecte(ids: any[]): void
   onPaginate(page: number, pageSize?: number): void
   onDetail(comment: Comment, index: number): void
   onDelete(comment: Comment, index: number): void
   onUpdateStatus(comment: Comment, status: CommentStatus): void
-  onClickPostId(id: number): void
+  onGoToTarget(type: CommentTargetType, id: number): void
 }
 
 export const TableList: React.FC<TableListProps> = (props) => {
   return (
     <Table<Comment>
-      rowKey="_id"
+      rowKey="id"
+      tableLayout="auto"
       loading={props.loading}
       dataSource={props.data}
       rowSelection={{
@@ -36,7 +41,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
         onChange: props.onSelecte
       }}
       pagination={{
-        pageSizeOptions: ['10', '20', '50'],
+        pageSizeOptions: APP_PAGE_SIZE_OPTIONS,
         current: props.pagination?.current_page,
         pageSize: props.pagination?.per_page,
         total: props.pagination?.total,
@@ -45,156 +50,100 @@ export const TableList: React.FC<TableListProps> = (props) => {
       }}
       columns={[
         {
-          title: 'ID',
-          width: 60,
-          dataIndex: 'id',
-          responsive: ['md']
-        },
-        {
-          title: 'POST_ID',
-          width: 50,
-          dataIndex: 'post_id',
-          responsive: ['md'],
-          render(_, comment) {
-            return (
-              <Button size="small" onClick={() => props.onClickPostId(comment.post_id)}>
-                {comment.post_id}
-              </Button>
-            )
-          }
+          title: '作者',
+          width: 90,
+          dataIndex: 'author_type',
+          render: (_, comment) => <CommentAvatar comment={comment} shape="square" size={52} />
         },
         {
           title: '评论内容',
           dataIndex: 'content',
-          render: (_, comment) => (
-            <Space orientation="vertical">
-              <Typography.Paragraph
-                className={styles.commentContent}
-                ellipsis={{ rows: 5, expandable: true }}
-              >
-                {comment.content}
-              </Typography.Paragraph>
-              <UniversalText type="secondary" text={stringToYMD(comment.created_at!)} />
-            </Space>
-          )
-        },
-        {
-          title: '个人信息',
-          width: 220,
-          dataIndex: 'author',
-          render(_, comment) {
-            return (
-              <Space orientation="vertical">
-                <Space>
-                  <CommentAvatar comment={comment} size={28} />
-                  <UniversalText text={comment.author.name} />
-                </Space>
-                <Space orientation="vertical" size="small">
-                  <UniversalText
-                    placeholder="Left blank"
-                    prefix={<Icons.MailOutlined />}
-                    text={comment.author.email}
-                    copyable={true}
-                  />
-                  <Space size="small">
-                    <Icons.LinkOutlined />
-                    <Placeholder data={comment.author.site} placeholder="Left blank">
-                      {(site) => (
-                        <Popover placement="top" content={site}>
-                          <Typography.Link target="_blank" rel="noreferrer" href={site}>
-                            点击打开
-                          </Typography.Link>
-                        </Popover>
-                      )}
-                    </Placeholder>
-                  </Space>
-                </Space>
-              </Space>
-            )
-          }
-        },
-        {
-          title: '终端信息',
-          dataIndex: 'agent',
-          minWidth: 220,
-          render(_, comment) {
-            return (
-              <Space orientation="vertical">
-                <UniversalText
-                  prefix={<Icons.GlobalOutlined />}
-                  text={comment.ip}
-                  copyable={true}
-                />
-                <Space size="small">
-                  <Icons.EnvironmentOutlined />
-                  <IPLocation data={comment.ip_location} />
-                </Space>
-                <Space size="small">
-                  <Icons.CompassOutlined />
-                  <Popover
-                    title="终端信息"
-                    placement="right"
-                    content={
-                      <div>
-                        <Typography.Paragraph>
-                          <UniversalText prefix="浏览器" text={parseBrowser(comment.agent)} />
-                        </Typography.Paragraph>
-                        <Typography.Paragraph>
-                          <UniversalText prefix="系统" text={parseOS(comment.agent)} />
-                        </Typography.Paragraph>
-                        <div>
-                          <UniversalText prefix="设备" text={parseDevice(comment.agent)} />
-                        </div>
-                      </div>
-                    }
-                  >
-                    {parseBrowser(comment.agent) ||
-                      parseOS(comment.agent) ||
-                      parseDevice(comment.agent)}
-                  </Popover>
-                </Space>
-              </Space>
-            )
-          }
-        },
-        {
-          title: '状态',
-          width: 80,
-          dataIndex: 'status',
+          minWidth: 380,
           render: (_, comment) => {
             const status = getCommentStatus(comment.status)
             return (
               <Space orientation="vertical">
-                <Tag variant="outlined" icon={status.icon} color={status.color}>
-                  {status.name}
-                </Tag>
-                <Tag
-                  variant="outlined"
-                  icon={<Icons.LikeOutlined />}
-                  color={comment.likes > 0 ? 'blue' : undefined}
+                <Space size="small">
+                  <AuthorName
+                    user={comment.user}
+                    author_name={comment.author_name}
+                    author_type={comment.author_type}
+                    strong={true}
+                  />
+                  <Divider orientation="vertical" />
+                  <Popover
+                    title="IP 地址"
+                    placement="topLeft"
+                    content={<UniversalText text={comment.ip} copyable={true} />}
+                  >
+                    <span>
+                      <IPLocation ipLocation={comment.ip_location} emoji={true} />
+                    </span>
+                  </Popover>
+                  <Divider orientation="vertical" />
+                  <Tag variant="outlined" icon={status.icon} color={status.color}>
+                    {status.name}
+                  </Tag>
+                </Space>
+                <Typography.Paragraph
+                  className={styles.commentContent}
+                  ellipsis={{ rows: 3, expandable: true }}
                 >
-                  {comment.likes} 个赞
-                </Tag>
-                <Tag
-                  variant="outlined"
-                  icon={<Icons.DislikeOutlined />}
-                  color={comment.dislikes > 0 ? 'blue' : undefined}
-                >
-                  {comment.dislikes} 个踩
-                </Tag>
+                  {comment.content}
+                </Typography.Paragraph>
+                <Space size="small">
+                  <UniversalText type="secondary" text={stringToYMD(comment.created_at!)} />
+                  <Divider orientation="vertical" />
+                  <CommentLike likes={comment.likes} />
+                  <Divider orientation="vertical" />
+                  <CommentDislike dislikes={comment.dislikes} />
+                </Space>
               </Space>
             )
           }
         },
         {
+          title: 'ID 关系',
+          ellipsis: true,
+          dataIndex: 'id',
+          render: (_, comment) => (
+            <Space orientation="vertical">
+              <UniversalText prefix="评论" text={`#${comment.id}`} />
+              <UniversalText
+                prefix="父评"
+                text={comment.parent_id ? '#' + comment.parent_id : null}
+                placeholder="无"
+              />
+              <Typography.Link
+                onClick={() => props.onGoToTarget(comment.target_type, comment.target_id)}
+              >
+                <Space size="small">
+                  {getCommentTargetType(comment.target_type).name}
+                  <span>#{comment.target_id}</span>
+                </Space>
+              </Typography.Link>
+            </Space>
+          )
+        },
+        {
+          title: '设备',
+          ellipsis: true,
+          dataIndex: 'user_agent',
+          render: (_, comment) => (
+            <UserAgent userAgent={comment.user_agent} orientation="vertical" />
+          )
+        },
+        {
           title: '操作',
-          width: 110,
           dataIndex: 'actions',
+          width: 110,
+          ellipsis: true,
           render: (_, comment, index) => (
             <Space orientation="vertical">
               <Button
                 size="small"
-                type="text"
+                color="default"
+                variant="link"
                 block={true}
                 icon={<Icons.EditOutlined />}
                 onClick={() => props.onDetail(comment, index)}
@@ -204,7 +153,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
               {comment.status === CommentStatus.Pending && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="green"
                   block={true}
                   icon={<Icons.CheckOutlined />}
@@ -216,7 +165,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
               {comment.status === CommentStatus.Published && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="danger"
                   block={true}
                   icon={<Icons.StopOutlined />}
@@ -229,7 +178,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
                 comment.status === CommentStatus.Published) && (
                 <Button
                   size="small"
-                  variant="text"
+                  variant="link"
                   color="orange"
                   block={true}
                   icon={<Icons.DeleteOutlined />}
@@ -243,7 +192,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
                 <>
                   <Button
                     size="small"
-                    variant="text"
+                    variant="link"
                     color="blue"
                     block={true}
                     icon={<Icons.RollbackOutlined />}
@@ -253,8 +202,8 @@ export const TableList: React.FC<TableListProps> = (props) => {
                   </Button>
                   <Button
                     size="small"
-                    type="text"
-                    danger={true}
+                    variant="link"
+                    color="danger"
                     block={true}
                     icon={<Icons.DeleteOutlined />}
                     onClick={() => props.onDelete(comment, index)}

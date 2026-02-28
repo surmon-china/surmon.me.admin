@@ -103,7 +103,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
               size="small"
               icon={<Icons.UserOutlined />}
               className={styles.avatar}
-              src={adminProfile.data.avatar}
+              src={adminProfile.data.avatar_url}
             />
           </div>
         </Dropdown>

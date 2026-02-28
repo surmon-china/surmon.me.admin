@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form } from 'antd'
 import type { FormInstance } from 'antd'
-import { CategorySelectTree } from './components/CategorySelectTree'
 import type { CategoriesFormModel } from '.'
+import { CategoryTreeSelect } from './components/CategoryTreeSelect'
 
 export interface CategoriesFormProps {
   form: FormInstance<CategoriesFormModel>
@@ -28,7 +28,7 @@ export const CategoriesForm: React.FC<CategoriesFormProps> = (props) => {
           }
         ]}
       >
-        <CategorySelectTree />
+        <CategoryTreeSelect />
       </Form.Item>
     </Form>
   )

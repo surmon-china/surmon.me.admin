@@ -3,7 +3,6 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { COMMENT_GUESTBOOK_POST_ID } from '@/constants/comment'
 import { BLOG_BASE_URL, APP_BASE_URL } from '@/config'
 
 export const getResourceUrl = (uri: string) => {
@@ -33,5 +32,7 @@ export const getBlogGuestbookUrl = () => {
 }
 
 export const getBlogURLByPostId = (postId: number) => {
-  return postId === COMMENT_GUESTBOOK_POST_ID ? getBlogGuestbookUrl() : getBlogArticleUrl(postId)
+  // TODO: 做一些映射
+  return ''
+  // return postId === COMMENT_GUESTBOOK_POST_ID ? getBlogGuestbookUrl() : getBlogArticleUrl(postId)
 }

@@ -9,7 +9,7 @@ import { useLoading } from 'veact-use'
 import { Button, Card, Divider, Modal, Space } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
-import { Category as Category } from '@/constants/category'
+import type { Category } from '@/constants/category'
 import type { CategoryTree } from '@/apis/category'
 import * as api from '@/apis/category'
 import { FormModal } from './FormModal'
@@ -24,13 +24,13 @@ export const CategoryPage: React.FC = () => {
 
   // modal
   const isFormModalOpen = useRef(false)
-  const activeEditCategoryId = useRef<string | null>(null)
+  const activeEditCategoryId = useRef<number | null>(null)
   const activeEditCategory = useComputed(() => {
     if (!activeEditCategoryId.value) {
       return null
     }
     return categoriesList.value.find((category) => {
-      return category._id === activeEditCategoryId.value
+      return category.id === activeEditCategoryId.value
     })!
   })
 
@@ -38,7 +38,7 @@ export const CategoryPage: React.FC = () => {
     isFormModalOpen.value = false
   }
 
-  const openEditModal = (id: string) => {
+  const openEditModal = (id: number) => {
     activeEditCategoryId.value = id
     isFormModalOpen.value = true
   }
@@ -79,7 +79,7 @@ export const CategoryPage: React.FC = () => {
       content: '删除后不可恢复',
       centered: true,
       onOk: () => {
-        return api.deleteCategory(category._id!).then(() => {
+        return api.deleteCategory(category.id).then(() => {
           fetchCategories()
         })
       }
@@ -118,7 +118,7 @@ export const CategoryPage: React.FC = () => {
       <TreeList
         tree={categoriesTree.value}
         loading={fetching.state.value}
-        onEdit={(category) => openEditModal(category._id!)}
+        onEdit={(category) => openEditModal(category.id)}
         onDelete={(category) => deleteCategory(category)}
       />
       <FormModal
@@ -126,18 +126,18 @@ export const CategoryPage: React.FC = () => {
         title={activeEditCategory.value ? '编辑分类' : '新分类'}
         open={isFormModalOpen.value}
         submitting={posting.state.value}
-        initData={activeEditCategory.value}
+        initialData={activeEditCategory.value}
         onCancel={() => closeModal()}
         onSubmit={(category) => {
           activeEditCategory.value ? updateCategory(category) : createCategory(category)
         }}
         selectTree={api.getAntdTreeByTree({
           tree: categoriesTree.value,
-          valuer: (category) => category._id,
+          valuer: (category) => category.id,
           disabledWhen: (category) => {
-            if (category._id === activeEditCategory.value?._id) {
+            if (category.id === activeEditCategory.value?.id) {
               return true
-            } else if (category.pid === activeEditCategory.value?._id) {
+            } else if (category.parent_id === activeEditCategory.value?.id) {
               return true
             } else {
               return false

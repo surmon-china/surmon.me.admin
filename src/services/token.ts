@@ -3,39 +3,40 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import storage from './storage'
-
-const TOKEN_STORAGE_KEY = 'id_token'
-const TOKEN_BIRTH_TIME = 'token_birth_time'
-const TOKEN_EXPIRES_IN = 'token_expires_in'
+import localstorage from './localstorage'
+import { AppLocalStorageKey } from '@/config'
 
 export const getToken = () => {
-  return storage.get(TOKEN_STORAGE_KEY)
+  return localstorage.get(AppLocalStorageKey.IdToken)
 }
 
 export const setToken = (token: string, expires_in: number): void => {
-  storage.set(TOKEN_STORAGE_KEY, token)
-  storage.set(TOKEN_EXPIRES_IN, String(expires_in))
-  storage.set(TOKEN_BIRTH_TIME, String(+new Date() / 1000))
+  localstorage.set(AppLocalStorageKey.IdToken, token)
+  localstorage.set(AppLocalStorageKey.TokenExpiresIn, String(expires_in))
+  localstorage.set(AppLocalStorageKey.TokenBirthTime, String(Math.floor(Date.now() / 1000)))
 }
 
 export const removeToken = () => {
-  storage.remove(TOKEN_STORAGE_KEY)
-  storage.remove(TOKEN_EXPIRES_IN)
-  storage.remove(TOKEN_BIRTH_TIME)
-}
-
-export const isTokenValid = () => {
-  const token = getToken()
-  return token?.split('.').length === 3
+  localstorage.remove(AppLocalStorageKey.IdToken)
+  localstorage.remove(AppLocalStorageKey.TokenExpiresIn)
+  localstorage.remove(AppLocalStorageKey.TokenBirthTime)
 }
 
 export const getTokenCountdown = (): number => {
-  const expiresIn = Number(localStorage.getItem(TOKEN_EXPIRES_IN))
-  const borthTime = Number(localStorage.getItem(TOKEN_BIRTH_TIME))
-  const deadLine = borthTime + expiresIn
-  const now = +new Date() / 1000
-  return deadLine > now ? Math.floor(deadLine - now) : 0
+  const expiresIn = Number(localstorage.get(AppLocalStorageKey.TokenExpiresIn) || 0)
+  const birthTime = Number(localstorage.get(AppLocalStorageKey.TokenBirthTime) || 0)
+  if (!expiresIn || !birthTime) return 0
+
+  const deadLine = birthTime + expiresIn
+  const now = Math.floor(Date.now() / 1000)
+  return deadLine > now ? deadLine - now : 0
+}
+
+export const isTokenValid = (): boolean => {
+  const token = getToken()
+  const isFormatValid = !!token && token.split('.').length === 3
+  const isTimeValid = getTokenCountdown() > 0
+  return isFormatValid && isTimeValid
 }
 
 export default {

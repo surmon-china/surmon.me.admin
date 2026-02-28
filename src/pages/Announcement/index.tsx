@@ -38,7 +38,7 @@ export const AnnouncementPage: React.FC = () => {
   }
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
 
   // modal
   const isFormModalOpen = useRef(false)
@@ -102,7 +102,7 @@ export const AnnouncementPage: React.FC = () => {
     })
   }
 
-  const deleteAnnouncement = (id: string) => {
+  const deleteAnnouncement = (id: number) => {
     Modal.confirm({
       title: '确定要删除这个公告吗？',
       content: '删除后不可恢复',
@@ -115,7 +115,7 @@ export const AnnouncementPage: React.FC = () => {
     })
   }
 
-  const deleteAnnouncements = (ids: string[]) => {
+  const deleteAnnouncements = (ids: number[]) => {
     Modal.confirm({
       title: `确定要删除 ${ids.length} 个公告吗？`,
       content: '删除后不可恢复',
@@ -185,7 +185,7 @@ export const AnnouncementPage: React.FC = () => {
         selectedIds={selectedIds.value}
         onSelect={(ids) => (selectedIds.value = ids)}
         onEdit={(_, index) => openEditModal(index)}
-        onDelete={(announcement) => deleteAnnouncement(announcement._id!)}
+        onDelete={(announcement) => deleteAnnouncement(announcement.id)}
         onPaginate={(page, pageSize) => fetchList({ page, per_page: pageSize })}
       />
       <FormModal
@@ -193,7 +193,7 @@ export const AnnouncementPage: React.FC = () => {
         title={activeEditAnnouncement.value ? '编辑公告' : '新公告'}
         open={isFormModalOpen.value}
         submitting={posting.state.value}
-        initData={activeEditAnnouncement.value}
+        initialData={activeEditAnnouncement.value}
         onCancel={closeModal}
         onSubmit={(announcement) => {
           activeEditAnnouncement.value

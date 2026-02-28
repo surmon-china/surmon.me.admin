@@ -3,34 +3,45 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
+import _isNil from 'lodash/isNil'
 import React from 'react'
 import { Typography, Space } from 'antd'
 import { BaseType } from 'antd/lib/typography/Base'
-import { Placeholder, PlaceholderProps } from '../Placeholder'
 
 export interface UniversalTextProps {
   text: React.ReactNode
   type?: BaseType
-  className?: string
   copyable?: boolean
   strong?: boolean
   small?: boolean
+  delete?: boolean
   prefix?: React.ReactNode
   suffix?: React.ReactNode
-  placeholder?: PlaceholderProps['placeholder']
+  placeholder?: React.ReactNode
 }
 
 export const UniversalText: React.FC<UniversalTextProps> = (props) => {
+  const renderMainContent = () => {
+    if (_isNil(props.text) || props.text === '') {
+      return <Typography.Text type="secondary">{props.placeholder ?? '-'}</Typography.Text>
+    }
+
+    return (
+      <Typography.Text
+        copyable={props.copyable}
+        type={props.type}
+        strong={props.strong}
+        delete={props.delete}
+      >
+        {props.small ? <small>{props.text}</small> : props.text}
+      </Typography.Text>
+    )
+  }
+
   return (
-    <Space size="small" className={props.className}>
+    <Space size="small">
       {props.prefix}
-      <Placeholder<React.ReactNode> data={props.text} placeholder={props.placeholder}>
-        {(text) => (
-          <Typography.Text copyable={props.copyable} type={props.type} strong={props.strong}>
-            {props.small ? <small>{text}</small> : text}
-          </Typography.Text>
-        )}
-      </Placeholder>
+      {renderMainContent()}
       {props.suffix}
     </Space>
   )

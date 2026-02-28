@@ -6,7 +6,7 @@
 export interface AdminProfile {
   name: string
   slogan: string
-  avatar: string
+  avatar_url: string
   password?: string
   new_password?: string
 }

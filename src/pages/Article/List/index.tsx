@@ -14,8 +14,8 @@ import { scrollTo } from '@/utils/scroller'
 import { RoutesKey, RoutesPath } from '@/routes'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
-import { ArticleId, Article, ArticleStatus, getArticleStatus } from '@/constants/article'
-import { getArticles, GetArticleParams, patchArticlesStatus } from '@/apis/article'
+import { Article, ArticleStatus, getArticleStatus } from '@/constants/article'
+import { getArticles, GetArticleParams, updateArticlesStatus } from '@/apis/article'
 import { ListFilters, DEFAULT_FILTER_PARAMS, FilterParams, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
 
@@ -28,7 +28,7 @@ export const ArticleListPage: React.FC = () => {
   })
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
 
   // filters
   const searchKeyword = useRef('')
@@ -63,28 +63,26 @@ export const ArticleListPage: React.FC = () => {
     })
   }
 
-  const updateArticleState = (_article: Article, state: ArticleStatus) => {
-    const targetState = getArticleStatus(state).name
+  const updateStatus = (_article: Article, status: ArticleStatus) => {
     Modal.confirm({
-      title: `确定要将此文章更新为「${targetState}」状态吗？`,
+      title: `确定要将此文章更新为「${getArticleStatus(status).name}」状态吗？`,
       content: `《${_article.title}》`,
       centered: true,
       onOk: () => {
-        return patchArticlesStatus([_article._id!], state).then(() => {
+        return updateArticlesStatus([_article.id], status).then(() => {
           refreshList()
         })
       }
     })
   }
 
-  const updateArticlesState = (articleIds: ArticleId[], state: ArticleStatus) => {
-    const targetState = getArticleStatus(state).name
+  const batchUpdateStatus = (articleIds: number[], status: ArticleStatus) => {
     Modal.confirm({
-      title: `确定要将 ${articleIds.length} 个文章更新为「${targetState}」状态吗？`,
+      title: `确定要将 ${articleIds.length} 个文章更新为「${getArticleStatus(status).name}」状态吗？`,
       content: '请确认操作',
       centered: true,
       onOk: () => {
-        return patchArticlesStatus(articleIds, state).then(() => {
+        return updateArticlesStatus(articleIds, status).then(() => {
           refreshList()
         })
       }
@@ -129,17 +127,17 @@ export const ArticleListPage: React.FC = () => {
               {
                 label: '退为草稿',
                 icon: <Icons.RollbackOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Draft)
+                onClick: () => batchUpdateStatus(selectedIds.value, ArticleStatus.Draft)
               },
               {
                 label: '直接发布',
                 icon: <Icons.CheckOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Published)
+                onClick: () => batchUpdateStatus(selectedIds.value, ArticleStatus.Published)
               },
               {
                 label: '移回收站',
                 icon: <Icons.DeleteOutlined />,
-                onClick: () => updateArticlesState(selectedIds.value, ArticleStatus.Trash)
+                onClick: () => batchUpdateStatus(selectedIds.value, ArticleStatus.Trash)
               }
             ]}
           />
@@ -153,7 +151,7 @@ export const ArticleListPage: React.FC = () => {
         selectedIds={selectedIds.value}
         onSelect={(ids) => (selectedIds.value = ids)}
         onPaginate={(page, pageSize) => fetchList({ page, per_page: pageSize })}
-        onUpdateState={(article, state) => updateArticleState(article, state)}
+        onUpdateState={(article, state) => updateStatus(article, state)}
         onClickCategory={({ slug }) => resetFiltersToTarget({ category_slug: slug })}
         onClickTag={({ slug }) => resetFiltersToTarget({ tag_slug: slug })}
       />

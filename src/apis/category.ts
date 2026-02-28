@@ -8,7 +8,7 @@ import { arrayToTree } from 'performant-array-to-tree'
 import { Category } from '@/constants/category'
 import nodepress from '@/services/nodepress'
 
-export const CATEGORY_API_PATH = '/category'
+export const CATEGORY_API_PATH = '/categories'
 
 export interface CategoryTree extends Category {
   children?: CategoryTree[]
@@ -19,8 +19,8 @@ export function getAllCategories() {
   return nodepress.get<Category[]>(`${CATEGORY_API_PATH}/all`).then((response) => ({
     list: response.result,
     tree: arrayToTree(response.result, {
-      id: '_id',
-      parentId: 'pid',
+      id: 'id',
+      parentId: 'parent_id',
       childrenField: 'children',
       dataField: null
     }) as CategoryTree[]
@@ -54,20 +54,20 @@ export function createCategory(category: Category) {
 /** 修改分类 */
 export function updateCategory(category: Category) {
   return nodepress
-    .put(`${CATEGORY_API_PATH}/${category._id}`, category)
+    .patch(`${CATEGORY_API_PATH}/${category.id}`, category)
     .then((response) => response.result)
 }
 
 /** 删除分类 */
-export function deleteCategory(categoryId: string) {
+export function deleteCategory(categoryId: number) {
   return nodepress
     .delete(`${CATEGORY_API_PATH}/${categoryId}`)
     .then((response) => response.result)
 }
 
 /** 批量删除分类 */
-export function deleteCategories(categoriesIds: string[]) {
+export function deleteCategories(categorie_ids: number[]) {
   return nodepress
-    .delete(CATEGORY_API_PATH, { data: { categorie_ids: categoriesIds } })
+    .delete(CATEGORY_API_PATH, { data: { categorie_ids } })
     .then((response) => response.result)
 }

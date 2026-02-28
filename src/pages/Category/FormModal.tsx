@@ -5,20 +5,11 @@ import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
 import { Category as CategoryType } from '@/constants/category'
 import { stringToYMD } from '@/transforms/date'
 
+const PARENT_ID_NULL_VALUE = 0
+
 const formLayout = {
   labelCol: { span: 5 },
   wrapperCol: { span: 18 }
-}
-
-const CATEGORY_NULL_VALUE = 'null'
-const DEFAULT_CATEGORY_DATA: Partial<CategoryType> = {
-  pid: CATEGORY_NULL_VALUE,
-  extras: [
-    {
-      key: 'icon-name',
-      value: 'icon-category'
-    }
-  ]
 }
 
 export interface FormModalProps {
@@ -26,7 +17,7 @@ export interface FormModalProps {
   title: string
   open: boolean
   submitting: boolean
-  initData: CategoryType | null
+  initialData: CategoryType | null
   selectTree: TreeDataNode[]
   onSubmit(data: CategoryType): void
   onCancel(): void
@@ -39,23 +30,31 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
     form.validateFields().then((formValue) => {
       props.onSubmit({
         ...formValue,
-        pid: formValue.pid === CATEGORY_NULL_VALUE ? null : formValue.pid
+        parent_id: formValue.parent_id === PARENT_ID_NULL_VALUE ? null : formValue.parent_id
       })
     })
   }
 
   useEffect(() => {
-    if (props.initData) {
+    if (props.initialData) {
       form.resetFields()
       form.setFieldsValue({
-        ...props.initData,
-        pid: props.initData.pid ?? CATEGORY_NULL_VALUE
+        ...props.initialData,
+        parent_id: props.initialData.parent_id ?? PARENT_ID_NULL_VALUE
       })
     } else {
       form.resetFields()
-      form.setFieldsValue({ ...DEFAULT_CATEGORY_DATA })
+      form.setFieldsValue({
+        parent_id: PARENT_ID_NULL_VALUE,
+        extras: [
+          {
+            key: 'icon-name',
+            value: 'icon-category'
+          }
+        ]
+      } satisfies Partial<CategoryType>)
     }
-  }, [props.initData, props.open])
+  }, [props.initialData, props.open])
 
   return (
     <Modal
@@ -70,17 +69,17 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
       okText="提交"
     >
       <Form {...formLayout} colon={false} form={form}>
-        {props.initData && (
+        {props.initialData && (
           <>
             <Form.Item label="ID">
               <Space size="small">
-                <Typography.Text copyable={true}>{props.initData.id}</Typography.Text>
+                <Typography.Text>{props.initialData.id}</Typography.Text>
                 <Divider orientation="vertical" />
-                <Typography.Text copyable={true}>{props.initData._id}</Typography.Text>
+                <Typography.Text type="secondary">{props.initialData._id}</Typography.Text>
               </Space>
             </Form.Item>
-            <Form.Item label="创建于">{stringToYMD(props.initData.created_at)}</Form.Item>
-            <Form.Item label="最后修改于">{stringToYMD(props.initData.updated_at)}</Form.Item>
+            <Form.Item label="创建于">{stringToYMD(props.initialData.created_at)}</Form.Item>
+            <Form.Item label="最后修改于">{stringToYMD(props.initialData.updated_at)}</Form.Item>
           </>
         )}
         <Form.Item
@@ -100,16 +99,16 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
           <Input placeholder="分类别名" />
         </Form.Item>
         <Form.Item
-          name="pid"
+          name="parent_id"
           label="父分类"
           extra="可以选择父级分类"
           rules={[
             {
               message: '请选择正确的父分类',
               validator(_, value) {
-                if (value === CATEGORY_NULL_VALUE) {
+                if (value === PARENT_ID_NULL_VALUE) {
                   return Promise.resolve()
-                } else if (value === props.initData?._id) {
+                } else if (value === props.initialData?.id) {
                   return Promise.reject()
                 } else {
                   return Promise.resolve()
@@ -125,7 +124,7 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
               {
                 label: '无',
                 key: 'null',
-                value: CATEGORY_NULL_VALUE
+                value: PARENT_ID_NULL_VALUE
               },
               ...props.selectTree
             ]}

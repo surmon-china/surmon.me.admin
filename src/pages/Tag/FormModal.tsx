@@ -9,21 +9,12 @@ const formLayout = {
   wrapperCol: { span: 18 }
 }
 
-const DEFAULT_TAG_DATA: Partial<TagType> = {
-  extras: [
-    {
-      key: 'icon-name',
-      value: 'icon-tag'
-    }
-  ]
-}
-
 export interface FormModalProps {
   width?: ModalProps['width']
   title: string
   open: boolean
   submitting: boolean
-  initData: TagType | null
+  initialData: TagType | null
   onSubmit(tag: TagType): void
   onCancel(): void
 }
@@ -37,8 +28,18 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
 
   useEffect(() => {
     form.resetFields()
-    form.setFieldsValue(props.initData ?? DEFAULT_TAG_DATA)
-  }, [props.initData, props.open])
+    form.setFieldsValue(
+      props.initialData ??
+        ({
+          extras: [
+            {
+              key: 'icon-name',
+              value: 'icon-tag'
+            }
+          ]
+        } satisfies Partial<TagType>)
+    )
+  }, [props.initialData, props.open])
 
   return (
     <Modal
@@ -53,17 +54,17 @@ export const FormModal: React.FC<FormModalProps> = (props) => {
       okText="提交"
     >
       <Form {...formLayout} colon={false} form={form}>
-        {props.initData && (
+        {props.initialData && (
           <>
             <Form.Item label="ID">
               <Space size="small">
-                <Typography.Text copyable={true}>{props.initData?.id}</Typography.Text>
+                <Typography.Text>{props.initialData?.id}</Typography.Text>
                 <Divider orientation="vertical" />
-                <Typography.Text copyable={true}>{props.initData?._id}</Typography.Text>
+                <Typography.Text type="secondary">{props.initialData?._id}</Typography.Text>
               </Space>
             </Form.Item>
-            <Form.Item label="创建于">{stringToYMD(props.initData?.created_at)}</Form.Item>
-            <Form.Item label="最后修改于">{stringToYMD(props.initData?.updated_at)}</Form.Item>
+            <Form.Item label="创建于">{stringToYMD(props.initialData?.created_at)}</Form.Item>
+            <Form.Item label="最后修改于">{stringToYMD(props.initialData?.updated_at)}</Form.Item>
           </>
         )}
         <Form.Item

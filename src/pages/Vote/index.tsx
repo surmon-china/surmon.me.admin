@@ -48,9 +48,9 @@ export const VotePage: React.FC = () => {
   }
 
   // select
-  const selectedIds = useRef<string[]>([])
+  const selectedIds = useRef<number[]>([])
   const selectedVotes = useComputed(() => {
-    return votes.data.filter((vote) => selectedIds.value.includes(vote._id!))
+    return votes.data.filter((vote) => selectedIds.value.includes(vote.id))
   })
 
   const fetchList = (params?: GetVotesParams) => {
@@ -80,7 +80,7 @@ export const VotePage: React.FC = () => {
       content: '该行为是物理删除，不可恢复！',
       centered: true,
       onOk: () => {
-        return api.deleteVotes(votes.map((vote) => vote._id!)).then(() => {
+        return api.deleteVotes(votes.map((vote) => vote.id)).then(() => {
           refreshList()
         })
       }

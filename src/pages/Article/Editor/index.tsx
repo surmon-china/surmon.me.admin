@@ -29,7 +29,9 @@ export type ThumbnailFormModel = Pick<Article, 'thumbnail'>
 export type ExtrasFormModel = Pick<Article, 'extras'>
 export type StatesFormModel = Pick<Article, 'status' | 'origin'>
 
-const DEFAULT_ARTICLE: Article = Object.freeze({
+export type ArticleWithoutId = Omit<Article, 'id' | '_id'>
+
+const DEFAULT_ARTICLE: ArticleWithoutId = Object.freeze({
   slug: null,
   title: '',
   summary: '',
@@ -51,9 +53,10 @@ export interface ArticleEditorProps {
   submitting: boolean
   article: Article | null
   editorCacheId?: string
-  onSubmit(article: Article): void
   mainCardExtra?: React.ReactNode
   mainFormExtraItems?: MainFormExtraItem[]
+  onSubmit(article: Article): void
+  onDelete?(): void
 }
 
 export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
@@ -66,7 +69,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
   const [extrasFormModel] = Form.useForm<ExtrasFormModel>()
   const [statesFormModel] = Form.useForm<StatesFormModel>()
 
-  const setFormsValue = (formValue: Article) => {
+  const setFormsValue = (formValue: ArticleWithoutId) => {
     mainForm.setFieldsValue(formValue)
     categoriesFormModel.setFieldsValue(formValue)
     thumbnailFormModel.setFieldsValue(formValue)
@@ -153,11 +156,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
             </Card>
           </Col>
           <Col span={24}>
-            <Card title={i18n.t('page.article.editor.ai')} variant="borderless">
-              <Spin spinning={props.loading}>TODO</Spin>
-            </Card>
-          </Col>
-          <Col span={24}>
             <Card
               title={i18n.t('page.article.editor.extras')}
               variant="borderless"
@@ -188,7 +186,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
                 <StatesForm
                   form={statesFormModel}
                   submitting={props.submitting}
+                  showDeleteButton={!!props.article}
                   onSubmit={handleSubmit}
+                  onDelete={props.onDelete}
                 />
               </Spin>
             </Card>

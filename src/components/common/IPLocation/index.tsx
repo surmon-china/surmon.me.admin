@@ -4,35 +4,43 @@
  */
 
 import React from 'react'
+import { Space, Typography } from 'antd'
+import * as Icons from '@ant-design/icons'
 import { IPLocation as IPLocationType } from '@/constants/general'
 import { countryCodeToEmoji } from '@/transforms/country'
-import { Placeholder, PlaceholderProps } from '../Placeholder'
 
 import styles from './style.module.less'
 
 export interface IPLocationProps {
-  data?: IPLocationType | null
-  fullname?: boolean
-  className?: string
-  placeholder?: PlaceholderProps['placeholder']
+  ipLocation?: IPLocationType | null
+  icon?: boolean
+  emoji?: boolean
+  detailed?: boolean
+  placeholder?: React.ReactNode
 }
 
 export const IPLocation: React.FC<IPLocationProps> = (props) => {
-  return (
-    <Placeholder data={props.data} placeholder={props.placeholder}>
-      {(location) => {
-        const emoji = location.country_code && countryCodeToEmoji(location.country_code)
-        const texts = props.fullname
-          ? [location.country, location.region, location.city]
-          : [location.country_code || location.country, location.city]
+  let emoji = null as string | null
+  let locationText = null as string | null
 
-        return (
-          <span className={props.className}>
-            {emoji ? <span className={styles.emoji}>{emoji}</span> : null}
-            {texts.filter(Boolean).join(' · ')}
-          </span>
-        )
-      }}
-    </Placeholder>
+  if (props.ipLocation) {
+    const location = props.ipLocation
+    const texts = props.detailed
+      ? [location.country, location.region, location.city]
+      : [location.country_code || location.country, location.city]
+    locationText = texts.filter(Boolean).join(' · ')
+    emoji = location.country_code ? countryCodeToEmoji(location.country_code) : null
+  }
+
+  return (
+    <Space size="small">
+      {props.icon && <Icons.EnvironmentOutlined />}
+      {props.emoji && emoji && <span className={styles.emoji}>{emoji}</span>}
+      {locationText ? (
+        <Typography.Text>{locationText}</Typography.Text>
+      ) : (
+        <Typography.Text type="secondary">{props.placeholder ?? '未知 IP'}</Typography.Text>
+      )}
+    </Space>
   )
 }

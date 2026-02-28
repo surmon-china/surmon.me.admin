@@ -41,7 +41,7 @@ export function refreshToken() {
 
 /** 检查 Token 有效性 */
 export function checkTokenValidity() {
-  return nodepress.get<void>(ADMIN_AUTH_API_PATHS.CHECK_TOKEN)
+  return nodepress.post<void>(ADMIN_AUTH_API_PATHS.CHECK_TOKEN)
 }
 
 /** 获取管理员资料 */
@@ -57,6 +57,6 @@ export function updateAdminProfile(profile: AdminProfile) {
     new_password: profile.new_password ? Base64.encode(profile.new_password) : ''
   }
   return nodepress
-    .put<AdminProfile>(ADMIN_PROFILE_API_PATH, payload)
+    .patch<AdminProfile>(ADMIN_PROFILE_API_PATH, payload)
     .then((response) => response.result)
 }

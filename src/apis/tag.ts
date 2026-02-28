@@ -7,7 +7,7 @@ import { ResponsePaginationData, GeneralPaginateQueryParams } from '@/constants/
 import { Tag } from '@/constants/tag'
 import nodepress from '@/services/nodepress'
 
-export const TAG_API_PATH = '/tag'
+export const TAG_API_PATH = '/tags'
 
 /** 获取标签参数 */
 export interface GetTagParams extends GeneralPaginateQueryParams {
@@ -34,16 +34,16 @@ export function createTag(tag: Tag) {
 
 /** 修改标签 */
 export function updateTag(tag: Tag) {
-  return nodepress.put(`${TAG_API_PATH}/${tag._id}`, tag).then((response) => response.result)
+  return nodepress.patch(`${TAG_API_PATH}/${tag.id}`, tag).then((response) => response.result)
 }
 
 /** 删除标签 */
-export function deleteTag(tagId: string) {
+export function deleteTag(tagId: number) {
   return nodepress.delete(`${TAG_API_PATH}/${tagId}`).then((response) => response.result)
 }
 
 /** 批量删除标签 */
-export function deleteTags(tagIds: string[]) {
+export function deleteTags(tagIds: number[]) {
   return nodepress
     .delete(TAG_API_PATH, { data: { tag_ids: tagIds } })
     .then((response) => response.result)
