@@ -87,7 +87,7 @@ export const ArticleEditPage: React.FC = () => {
         ghost: true
       },
       onOk: () => {
-        return updating.promise(articleApis.deleteArticles([article.value!.id])).then(() => {
+        return updating.promise(articleApis.deleteArticle(article.value!.id)).then(() => {
           navigate(RoutesPath[RoutesKey.ArticleList])
           scrollTo(document.body)
         })

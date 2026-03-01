@@ -10,7 +10,6 @@ import { ExportArticles } from './ExportArticles'
 
 export const ActionsForm: React.FC = () => {
   const databaseUpdating = useLoading()
-  const archiveUpdating = useLoading()
 
   const updateDatabaseBackup = () => {
     Modal.confirm({
@@ -20,21 +19,13 @@ export const ActionsForm: React.FC = () => {
     })
   }
 
-  const updateArchiveCache = () => {
-    Modal.confirm({
-      centered: true,
-      title: '将会更新全站的所有全量数据缓存，确定要继续吗？',
-      onOk: () => archiveUpdating.promise(systemApis.updateArchiveCache())
-    })
-  }
-
   const articlesFetching = useLoading()
   const articlesData = useShallowRef<Article[]>([])
   const isOpenedExportArticlesModal = useShallowRef(false)
 
   const openExportArticlesModal = async () => {
     isOpenedExportArticlesModal.value = true
-    articlesData.value = await articlesFetching.promise(getAllArticles())
+    articlesData.value = await articlesFetching.promise(getAllArticles({ with_content: true }))
   }
 
   const closeExportArticlesModal = () => {
@@ -52,16 +43,6 @@ export const ActionsForm: React.FC = () => {
         icon={<Icons.CloudUploadOutlined />}
       >
         立即更新数据库备份
-      </Button>
-      <Divider />
-      <Button
-        type="primary"
-        block={true}
-        loading={archiveUpdating.state.value}
-        onClick={updateArchiveCache}
-        icon={<Icons.CloudSyncOutlined />}
-      >
-        更新 Archive 及缓存
       </Button>
       <Divider />
       <Button

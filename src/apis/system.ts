@@ -3,18 +3,12 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import _isNumber from 'lodash/isNumber'
 import nodepress from '@/services/nodepress'
 import { Options } from '@/constants/options'
 
 export const OPTIONS_API_PATH = '/options'
-export const ARCHIVE_API_PATHS = {
-  refresh: '/archive/refresh'
-}
-export const SYSTEM_API_PATHS = {
-  STATISTICS: '/system/statistics',
-  DATA_BASE_BACKUP: '/system/database-backup'
-}
+export const STATISTICS_API_PATH = '/system/statistics'
+export const DATA_BASE_BACKUP_API_PATH = '/system/database-backup'
 
 export interface Statistics {
   [key: string]: number
@@ -22,9 +16,7 @@ export interface Statistics {
 
 /** 获取全站统计信息 */
 export function getStatistics() {
-  return nodepress
-    .get<Statistics>(SYSTEM_API_PATHS.STATISTICS)
-    .then((response) => response.result)
+  return nodepress.get<Statistics>(STATISTICS_API_PATH).then((response) => response.result)
 }
 
 export interface StatisticsCalendarItem {
@@ -48,14 +40,9 @@ export function getCommentsCalendar() {
     .then((response) => response.result)
 }
 
-/** 更新 Archive 缓存 */
-export function updateArchiveCache() {
-  return nodepress.post<void>(ARCHIVE_API_PATHS.refresh).then((response) => response.result)
-}
-
 /** 更新数据库备份 */
 export function updateDatabaseBackup() {
-  return nodepress.post(SYSTEM_API_PATHS.DATA_BASE_BACKUP).then((response) => response.result)
+  return nodepress.post(DATA_BASE_BACKUP_API_PATH).then((response) => response.result)
 }
 
 /** 获取系统配置 */

@@ -30,9 +30,9 @@ export function getArticles(params: GetArticleParams = {}) {
 }
 
 /** 获取全量文章 */
-export function getAllArticles() {
+export function getAllArticles(params?: Record<string, any>) {
   return nodepress
-    .get<Array<Article>>(`${ARTICLE_API_PATH}/all`)
+    .get<Array<Article>>(`${ARTICLE_API_PATH}/all`, { params })
     .then((response) => response.result)
 }
 
@@ -55,16 +55,14 @@ export function updateArticle(article: Article) {
     .then((response) => response.result)
 }
 
+/** 删除文章 */
+export function deleteArticle(articleId: number) {
+  return nodepress.delete(`${ARTICLE_API_PATH}/${articleId}`).then((response) => response.result)
+}
+
 /** 批量修改文章状态 */
 export function updateArticlesStatus(articleIds: number[], status: ArticleStatus) {
   return nodepress
     .patch(ARTICLE_API_PATH, { article_ids: articleIds, status })
-    .then((response) => response.result)
-}
-
-/** 批量删除文章 */
-export function deleteArticles(articleIds: number[]) {
-  return nodepress
-    .delete(ARTICLE_API_PATH, { data: { article_ids: articleIds } })
     .then((response) => response.result)
 }
