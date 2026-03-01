@@ -1,5 +1,6 @@
 import React from 'react'
-import { Avatar, AvatarProps, Badge, Modal, Descriptions, Divider, Tooltip } from 'antd'
+import { Avatar, AvatarProps, Badge, Modal, Descriptions } from 'antd'
+import { Typography, Divider, Tooltip, Row, Col } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { GeneralAuthorType, CommentAuthorType, getAuthorTypeName } from '@/constants/author'
 import { User, UserType, getUserType } from '@/constants/user'
@@ -13,6 +14,7 @@ export interface AuthorAvatarProps {
   author_name?: string | null
   author_email?: string | null
   author_email_hash?: string | null
+  author_website?: string | null
   author_type?: GeneralAuthorType | CommentAuthorType
   badge?: boolean
   tooltip?: boolean
@@ -66,36 +68,63 @@ export const AuthorAvatar: React.FC<AuthorAvatarProps> = (props) => {
       title: state.tooltip,
       content: (
         <div>
-          <Divider size="small" />
-          <Descriptions
-            layout="horizontal"
-            column={1}
-            items={[
-              {
-                key: 'author_type',
-                label: 'author_type',
-                children: props.author_type
-              },
-              {
-                key: 'author_name',
-                label: 'author_name',
-                children: <UniversalText text={props.author_name} placeholder="无" />
-              },
-              {
-                key: 'author_email',
-                label: 'author_email',
-                children: (
-                  <UniversalText text={props.author_email} copyable={true} placeholder="无" />
-                )
-              }
-            ]}
-          />
+          <Divider size="middle" />
+          <Row gutter={24}>
+            <Col span={20}>
+              <Descriptions
+                layout="horizontal"
+                size="middle"
+                column={1}
+                items={[
+                  {
+                    key: 'author_type',
+                    label: 'author_type',
+                    children: props.author_type
+                  },
+                  {
+                    key: 'author_name',
+                    label: 'author_name',
+                    children: <UniversalText text={props.author_name} placeholder="无" />
+                  },
+                  {
+                    key: 'author_email',
+                    label: 'author_email',
+                    children: (
+                      <UniversalText text={props.author_email} copyable={true} placeholder="无" />
+                    )
+                  },
+                  {
+                    key: 'author_website',
+                    label: 'author_website',
+                    children: props.author_website ? (
+                      <Typography.Link target="_blank" href={props.author_website}>
+                        {props.author_website}
+                      </Typography.Link>
+                    ) : (
+                      <Typography.Text type="secondary">无</Typography.Text>
+                    )
+                  }
+                ]}
+              />
+            </Col>
+            <Col span={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Avatar
+                size={68}
+                shape={props.shape ?? 'square'}
+                draggable={false}
+                icon={state.icon}
+                src={state.src}
+                alt={state.alt}
+              />
+            </Col>
+          </Row>
           {props.user && (
             <>
               <Divider size="middle" />
               <Descriptions
                 layout="horizontal"
                 column={2}
+                size="middle"
                 items={[
                   {
                     key: 'user_id',
@@ -108,14 +137,17 @@ export const AuthorAvatar: React.FC<AuthorAvatarProps> = (props) => {
                     children: <UniversalText text={stringToYMD(props.user.created_at)} />
                   },
                   {
+                    span: 2,
                     key: 'user_name',
                     label: 'user_name',
-                    children: <UniversalText text={props.user.name} placeholder="无" />
-                  },
-                  {
-                    key: 'user_type',
-                    label: 'user_type',
-                    children: getUserType(props.user.type).name
+                    children: (
+                      <span>
+                        <UniversalText text={props.user.name} placeholder="无" />
+                        <Typography.Text type="secondary">
+                          （{getUserType(props.user.type).name}）
+                        </Typography.Text>
+                      </span>
+                    )
                   },
                   {
                     span: 2,
@@ -129,8 +161,12 @@ export const AuthorAvatar: React.FC<AuthorAvatarProps> = (props) => {
                     span: 2,
                     key: 'user_website',
                     label: 'user_website',
-                    children: (
-                      <UniversalText text={props.user.website} copyable={true} placeholder="无" />
+                    children: props.user.website ? (
+                      <Typography.Link target="_blank" href={props.user.website}>
+                        {props.user.website}
+                      </Typography.Link>
+                    ) : (
+                      <Typography.Text type="secondary">无</Typography.Text>
                     )
                   }
                 ]}

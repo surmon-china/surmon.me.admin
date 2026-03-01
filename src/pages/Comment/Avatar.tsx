@@ -40,6 +40,7 @@ export const CommentAvatar: React.FC<CommentAvatarProps> = (props) => {
       author_name={comment.author_name}
       author_email={comment.author_email}
       author_email_hash={comment.author_email_hash}
+      author_website={comment.author_website}
       badge={true}
       shape={shape}
       size={size}
