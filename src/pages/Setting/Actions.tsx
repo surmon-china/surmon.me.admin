@@ -25,7 +25,7 @@ export const ActionsForm: React.FC = () => {
 
   const openExportArticlesModal = async () => {
     isOpenedExportArticlesModal.value = true
-    articlesData.value = await articlesFetching.promise(getAllArticles({ with_content: true }))
+    articlesData.value = await articlesFetching.promise(getAllArticles({ with_detail: true }))
   }
 
   const closeExportArticlesModal = () => {
