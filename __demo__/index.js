@@ -40,10 +40,14 @@ function generateCalendar({ start = '2018-01-01', prob = 0.08, maxCount = 4 } = 
 
 // Set a mock token immediately on page load so the dashboard page can be accessed directly.
 console.info('mock token')
-window.localStorage.setItem('token_expires_in', '3153600000')
-window.localStorage.setItem('token_birth_time', String(Math.floor(Date.now() / 1000)))
+
+window.localStorage.setItem('token_expires_at', '4102444800')
 window.localStorage.setItem(
-  'id_token',
+  'refresh_token',
+  'a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90'
+)
+window.localStorage.setItem(
+  'access_token',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQxMDI0NDQ4MDAsImlhdCI6MTcwNDA2NzIwMCwicm9sZSI6ImFkbWluIn0.mock_signature'
 )
 
@@ -52,8 +56,8 @@ const mockHandlers = {
   '/admin/login': {
     post: () => ensureJSON('admin/login')
   },
-  '/admin/check-token': {
-    post: () => ensureJSON('admin/check-token')
+  '/admin/verify-token': {
+    post: () => ensureJSON('admin/verify-token')
   },
   '/admin/profile': {
     get: () => ensureJSON('admin/profile')
