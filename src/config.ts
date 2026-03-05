@@ -33,12 +33,14 @@ export const APP_AUTH_HEADER_KEY = 'Authorization'
 
 // App config
 export const APP_DB_NAME = 'AdminApp'
-export enum AppDbStoreName {
+
+export enum AppDatabaseStoreName {
   AiHistory = 'ai_history',
   EditorCache = 'editor_cache'
 }
+
 export enum AppLocalStorageKey {
-  IdToken = 'id_token',
-  TokenBirthTime = 'token_birth_time',
-  TokenExpiresIn = 'token_expires_in'
+  AccessToken = 'access_token',
+  RefreshToken = 'refresh_token',
+  TokenExpiresAt = 'token_expires_at'
 }

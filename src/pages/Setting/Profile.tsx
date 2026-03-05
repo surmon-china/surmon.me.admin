@@ -10,7 +10,7 @@ import { useAdminProfile } from '@/contexts/AdminProfile'
 import { ImageUploader } from '@/components/common/ImageUploader'
 import { AdminProfile } from '@/constants/admin'
 import { scrollTo } from '@/utils/scroller'
-import { removeToken } from '@/services/token'
+import tokenService from '@/services/token'
 
 export const ProfileForm: React.FC = () => {
   const navigate = useNavigate()
@@ -26,10 +26,12 @@ export const ProfileForm: React.FC = () => {
   const updateProfile = async (adminProfile: AdminProfile) => {
     const result = await updating.promise(api.updateAdminProfile(adminProfile))
     if (adminProfile.new_password) {
-      notification.info({ title: '修改了新密码，即将跳转到登录页...' })
+      notification.info({ title: '修改了新密码，即将退出登录...' })
       setTimeout(() => {
-        removeToken()
-        navigate(RoutesPath[RoutesKey.Hello])
+        api.authLogout(tokenService.getRefreshToken()!).finally(() => {
+          tokenService.removeToken()
+          navigate(RoutesPath[RoutesKey.Hello])
+        })
       }, 1688)
     } else {
       form.setFieldsValue(result)

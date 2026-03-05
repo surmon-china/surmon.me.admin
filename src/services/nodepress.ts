@@ -10,7 +10,7 @@ import { API_URL, APP_AUTH_HEADER_KEY } from '@/config'
 import { ADMIN_AUTH_API_PATHS } from '@/apis/admin'
 import { RoutesKey, RoutesPath } from '@/routes'
 import { i18n } from '@/i18n'
-import token from './token'
+import tokenService from './token'
 
 enum HttpCode {
   SUCCESS = 200,
@@ -51,9 +51,9 @@ export const nodepress = axios.create({
 
 // request interceptor
 nodepress.interceptors.request.use((config) => {
-  if (token.isTokenValid()) {
+  if (tokenService.isAccessTokenValid()) {
     config.headers = config.headers || {}
-    config.headers[APP_AUTH_HEADER_KEY] = `Bearer ${token.getToken()}`
+    config.headers[APP_AUTH_HEADER_KEY] = `Bearer ${tokenService.getAccessToken()}`
   } else if (config.url !== ADMIN_AUTH_API_PATHS.LOGIN) {
     notification.error({
       title: i18n.t('nodepress.request.invalid_token.title'),
@@ -99,7 +99,7 @@ nodepress.interceptors.response.use(
     // If a 401 response is received, it means that the authentication has failed,
     // the token is deleted and you are redirected to the login page.
     if (error.response?.status === HttpCode.UNAUTHORIZED) {
-      token.removeToken()
+      tokenService.removeToken()
       window.router.navigate(RoutesPath[RoutesKey.Hello])
     }
 

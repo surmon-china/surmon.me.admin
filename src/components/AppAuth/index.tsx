@@ -10,8 +10,8 @@ import { notification, Typography, Spin, Space, Flex } from 'antd'
 import { Loading3QuartersOutlined } from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
 import { RoutesKey, RoutesPath } from '@/routes'
-import { checkTokenValidity } from '@/apis/admin'
-import { removeToken, isTokenValid } from '@/services/token'
+import * as adminApi from '@/apis/admin'
+import tokenService from '@/services/token'
 import { startTokenAutoRefresh, stopTokenAutoRefresh } from './token'
 
 import styles from './style.module.less'
@@ -39,10 +39,20 @@ export const AppAuth: React.FC<React.PropsWithChildren> = (props) => {
       // When the application is initialised, it first checks the local Token.
       setVerifying(true)
       console.debug('Token verifying...')
-      // 1. Verify local Token
-      await (isTokenValid() ? Promise.resolve() : Promise.reject('The local token is invalid'))
-      // 2. Verify Token form NodePress
-      await checkTokenValidity()
+
+      if (tokenService.isAccessTokenValid()) {
+        // 1. Verify local Token
+        await adminApi.verifyToken()
+      } else {
+        // 2. Try refresh token
+        console.debug('Access token invalid, attempting refresh...')
+        const refreshToken = tokenService.getRefreshToken()
+        if (!refreshToken) throw new Error('No refresh token available')
+
+        tokenService.setToken(await adminApi.refreshToken(refreshToken))
+        console.debug('Access token restored via refresh token.')
+      }
+
       // Verification successful
       console.debug('Token verification successful.')
       setVerifying(false)
@@ -57,7 +67,7 @@ export const AppAuth: React.FC<React.PropsWithChildren> = (props) => {
         title: i18n.t('login.invalid_token_message_title'),
         description: i18n.t('login.invalid_token_message_description')
       })
-      removeToken()
+      tokenService.removeToken()
       navigate(RoutesPath[RoutesKey.Hello])
     }
   }

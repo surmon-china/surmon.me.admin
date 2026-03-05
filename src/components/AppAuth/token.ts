@@ -1,28 +1,32 @@
-import { refreshToken } from '@/apis/admin'
-import { getTokenCountdown, setToken } from '@/services/token'
+import * as adminApi from '@/apis/admin'
+import tokenService from '@/services/token'
 
 let refreshTimer: null | number = null
 
-// Stop refresh token
 export const stopTokenAutoRefresh = (): void => {
-  if (typeof refreshTimer === 'number') {
+  if (refreshTimer) {
     window.clearTimeout(refreshTimer)
+    refreshTimer = null
   }
 }
 
-// Auto refresh token
 export const startTokenAutoRefresh = (): void => {
   stopTokenAutoRefresh()
-  const countdown = getTokenCountdown()
-  const seconds = countdown - 10
-  console.debug(
-    `Token auto-refresh is working.`,
-    `Token will be updated automatically after ${seconds}s!`
-  )
-  refreshTimer = window.setTimeout(() => {
-    refreshToken().then((auth) => {
-      setToken(auth.access_token, auth.expires_in)
-      startTokenAutoRefresh()
-    })
-  }, seconds * 1000)
+
+  const countdown = tokenService.getAccessTokenCountdown()
+  const waitSeconds = Math.max(1, countdown - 300)
+
+  console.debug(`Token will be auto-refreshed in ${waitSeconds}s`)
+
+  refreshTimer = window.setTimeout(async () => {
+    try {
+      const refreshToken = tokenService.getRefreshToken()
+      if (refreshToken) {
+        tokenService.setToken(await adminApi.refreshToken(refreshToken))
+        startTokenAutoRefresh()
+      }
+    } catch (error) {
+      console.error('Auto refresh token failed:', error)
+    }
+  }, waitSeconds * 1000)
 }

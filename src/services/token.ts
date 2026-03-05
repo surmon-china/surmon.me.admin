@@ -4,45 +4,49 @@
  */
 
 import localstorage from './localstorage'
+import { TokenResult } from '@/apis/admin'
 import { AppLocalStorageKey } from '@/config'
 
-export const getToken = () => {
-  return localstorage.get(AppLocalStorageKey.IdToken)
-}
-
-export const setToken = (token: string, expires_in: number): void => {
-  localstorage.set(AppLocalStorageKey.IdToken, token)
-  localstorage.set(AppLocalStorageKey.TokenExpiresIn, String(expires_in))
-  localstorage.set(AppLocalStorageKey.TokenBirthTime, String(Math.floor(Date.now() / 1000)))
+export const setToken = (token: TokenResult): void => {
+  const expiresAt = Math.floor(Date.now() / 1000) + token.expires_in
+  localstorage.set(AppLocalStorageKey.AccessToken, token.access_token)
+  localstorage.set(AppLocalStorageKey.RefreshToken, token.refresh_token)
+  localstorage.set(AppLocalStorageKey.TokenExpiresAt, String(expiresAt))
 }
 
 export const removeToken = () => {
-  localstorage.remove(AppLocalStorageKey.IdToken)
-  localstorage.remove(AppLocalStorageKey.TokenExpiresIn)
-  localstorage.remove(AppLocalStorageKey.TokenBirthTime)
+  localstorage.remove(AppLocalStorageKey.AccessToken)
+  localstorage.remove(AppLocalStorageKey.RefreshToken)
+  localstorage.remove(AppLocalStorageKey.TokenExpiresAt)
 }
 
-export const getTokenCountdown = (): number => {
-  const expiresIn = Number(localstorage.get(AppLocalStorageKey.TokenExpiresIn) || 0)
-  const birthTime = Number(localstorage.get(AppLocalStorageKey.TokenBirthTime) || 0)
-  if (!expiresIn || !birthTime) return 0
+export const getAccessToken = () => {
+  return localstorage.get(AppLocalStorageKey.AccessToken)
+}
 
-  const deadLine = birthTime + expiresIn
+export const getRefreshToken = () => {
+  return localstorage.get(AppLocalStorageKey.RefreshToken)
+}
+
+export const getAccessTokenCountdown = (): number => {
+  const expiresAt = Number(localstorage.get(AppLocalStorageKey.TokenExpiresAt) || 0)
+  if (!expiresAt) return 0
+
   const now = Math.floor(Date.now() / 1000)
-  return deadLine > now ? deadLine - now : 0
+  return expiresAt > now ? expiresAt - now : 0
 }
 
-export const isTokenValid = (): boolean => {
-  const token = getToken()
+export const isAccessTokenValid = (): boolean => {
+  const token = getAccessToken()
   const isFormatValid = !!token && token.split('.').length === 3
-  const isTimeValid = getTokenCountdown() > 0
-  return isFormatValid && isTimeValid
+  return isFormatValid && getAccessTokenCountdown() > 0
 }
 
 export default {
-  getToken,
   setToken,
   removeToken,
-  isTokenValid,
-  getTokenCountdown
+  getAccessToken,
+  getRefreshToken,
+  isAccessTokenValid,
+  getAccessTokenCountdown
 }

@@ -11,13 +11,16 @@ export const ADMIN_PROFILE_API_PATH = '/admin/profile'
 export const ADMIN_AUTH_API_PATHS = {
   LOGIN: '/admin/login',
   LOGOUT: '/admin/logout',
-  CHECK_TOKEN: '/admin/check-token',
+  VERIFY_TOKEN: '/admin/verify-token',
   REFRESH_TOKEN: '/admin/refresh-token'
 }
 
+// https://github.com/surmon-china/nodepress/blob/main/src/core/auth/auth.interface.ts
 export interface TokenResult {
+  token_type: 'Bearer'
   access_token: string
   expires_in: number
+  refresh_token: string
 }
 
 /** 登录 */
@@ -28,20 +31,20 @@ export function authLogin(password: string) {
 }
 
 /** 登出（让 Token 在服务端失效） */
-export function authLogout() {
-  return nodepress.post<void>(ADMIN_AUTH_API_PATHS.LOGOUT)
+export function authLogout(refresh_token?: string) {
+  return nodepress.post<void>(ADMIN_AUTH_API_PATHS.LOGOUT, { refresh_token })
 }
 
 /** 续约 Token */
-export function refreshToken() {
+export function refreshToken(refresh_token: string) {
   return nodepress
-    .post<TokenResult>(ADMIN_AUTH_API_PATHS.REFRESH_TOKEN)
+    .post<TokenResult>(ADMIN_AUTH_API_PATHS.REFRESH_TOKEN, { refresh_token })
     .then((response) => response.result)
 }
 
 /** 检查 Token 有效性 */
-export function checkTokenValidity() {
-  return nodepress.post<void>(ADMIN_AUTH_API_PATHS.CHECK_TOKEN)
+export function verifyToken() {
+  return nodepress.post<void>(ADMIN_AUTH_API_PATHS.VERIFY_TOKEN)
 }
 
 /** 获取管理员资料 */

@@ -27,8 +27,8 @@ export const HelloPage: React.FC = () => {
   const login = async (password: string) => {
     try {
       setLoggingIn(true)
-      const { access_token, expires_in } = await authLogin(password)
-      tokenService.setToken(access_token, expires_in)
+      const authToken = await authLogin(password)
+      tokenService.setToken(authToken)
       console.info('Login successful')
       navigate(RoutesPath[RoutesKey.Dashboard])
     } catch (error) {

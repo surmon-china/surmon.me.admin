@@ -1,11 +1,11 @@
 import localforage from 'localforage'
 import { useShallowRef, onMounted, useWatch } from 'veact'
-import { APP_DB_NAME, AppDbStoreName } from '@/config'
+import { APP_DB_NAME, AppDatabaseStoreName } from '@/config'
 import { AiGenerateResult } from '@/apis/ai'
 
 const aiHistoryStore = localforage.createInstance({
   name: APP_DB_NAME,
-  storeName: AppDbStoreName.AiHistory
+  storeName: AppDatabaseStoreName.AiHistory
 })
 
 export interface AiHistoryRecord extends AiGenerateResult {

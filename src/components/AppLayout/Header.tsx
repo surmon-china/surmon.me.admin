@@ -8,7 +8,7 @@ import { useTranslation } from '@/i18n'
 import { useTheme } from '@/contexts/Theme'
 import { useLocale, languages } from '@/contexts/Locale'
 import { useAdminProfile } from '@/contexts/AdminProfile'
-import { removeToken } from '@/services/token'
+import tokenService from '@/services/token'
 
 import styles from './style.module.less'
 
@@ -29,10 +29,10 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
       title: i18n.t('logout.confirmation'),
       centered: true,
       onOk() {
-        authLogout()
+        authLogout(tokenService.getRefreshToken()!)
           .then(() => {
             console.info('Logout successful')
-            removeToken()
+            tokenService.removeToken()
             navigate(RoutesPath[RoutesKey.Hello])
           })
           .catch((error) => {

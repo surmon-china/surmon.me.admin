@@ -1,10 +1,10 @@
 import _debounce from 'lodash/debounce'
 import localforage from 'localforage'
-import { APP_DB_NAME, AppDbStoreName } from '@/config'
+import { APP_DB_NAME, AppDatabaseStoreName } from '@/config'
 
 const editorStore = localforage.createInstance({
   name: APP_DB_NAME,
-  storeName: AppDbStoreName.EditorCache
+  storeName: AppDatabaseStoreName.EditorCache
 })
 
 const getEditorCacheStorageKey = (id: string) => `uneditor-${id}`
