@@ -20,6 +20,7 @@
 
 - **[NodePress](https://github.com/surmon-china/nodepress)** - RESTful API service (CMS core).
 - **[surmon.me](https://github.com/surmon-china/surmon.me)** - SSR blog website
+- **[surmon.me.ai](https://github.com/surmon-china/surmon.me.ai)** - Blog AI agent
 - **[surmon.me.native](https://github.com/surmon-china/surmon.me.native)** - Blog native app
 
 ## Screenshot
