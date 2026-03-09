@@ -78,5 +78,8 @@
   "page.setting.userinfo.title": "站长资料",
 
   "page.setting.statics": "文件管理",
-  "page.statics.list.title": "文件列表"
+  "page.statics.list.title": "文件列表",
+
+  "page.ai-agent.title": "AI Agent",
+  "page.ai-agent.list.title": "对话列表 ({{total}})"
 }

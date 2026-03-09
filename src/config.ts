@@ -16,6 +16,7 @@ export const isDev = import.meta.env.DEV
 export const APP_BASE_URL = import.meta.env.BASE_URL as string
 // defined in vite.config.ts
 export const API_URL = __API_URL__ ?? import.meta.env.VITE_API_URL
+export const AI_AGENT_API_URL = import.meta.env.VITE_AI_AGENT_API_URL
 export const APP_VERSION = __APP_VERSION__
 export const BLOG_BASE_URL = __BLOG_URL__
 export const GITHUB_REPO_URL = __GITHUB_URL__

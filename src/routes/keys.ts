@@ -13,5 +13,6 @@ export enum RoutesKey {
   Article = 'article',
   ArticleList = 'article-list',
   ArticlePost = 'article-post',
-  ArticleEdit = 'article-edit'
+  ArticleEdit = 'article-edit',
+  AiAgent = 'ai-agent'
 }

@@ -12,7 +12,7 @@ import { RoutesKey, RoutesPath } from '@/routes'
 import { i18n } from '@/i18n'
 import tokenService from './token'
 
-enum HttpCode {
+export enum HttpCode {
   SUCCESS = 200,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,

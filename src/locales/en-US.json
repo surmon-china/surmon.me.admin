@@ -78,5 +78,8 @@
   "page.setting.userinfo.title": "Admin Profile",
 
   "page.setting.statics": "Statics",
-  "page.statics.list.title": "File list"
+  "page.statics.list.title": "File list",
+
+  "page.ai-agent.title": "AI Agent",
+  "page.ai-agent.list.title": "Sessions ({{total}})"
 }

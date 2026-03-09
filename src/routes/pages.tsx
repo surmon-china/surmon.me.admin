@@ -15,6 +15,7 @@ import { FeedbackPage } from '@/pages/Feedback'
 import { SettingPage } from '@/pages/Setting'
 import { StaticPage } from '@/pages/Static'
 import { UserPage } from '@/pages/User'
+import { AiAgentPage } from '@/pages/AiAgent'
 
 import { RouteObject } from '.'
 import { RoutesKey } from './keys'
@@ -160,6 +161,15 @@ export const pageRoutes: RouteObject[] = [
     handle: {
       i18nKey: 'page.setting.title',
       icon: <Icons.SettingOutlined />
+    }
+  },
+  {
+    id: RoutesKey.AiAgent,
+    path: '/ai-agent',
+    element: <AiAgentPage />,
+    handle: {
+      i18nKey: 'page.ai-agent.title',
+      icon: <Icons.RobotOutlined />
     }
   }
 ]

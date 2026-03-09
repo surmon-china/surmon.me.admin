@@ -78,5 +78,8 @@
   "page.setting.userinfo.title": "站長資料",
 
   "page.setting.statics": "媒體管理",
-  "page.statics.list.title": "媒體列表"
+  "page.statics.list.title": "媒體列表",
+
+  "page.ai-agent.title": "AI Agent",
+  "page.ai-agent.list.title": "對話列表 ({{total}})"
 }
