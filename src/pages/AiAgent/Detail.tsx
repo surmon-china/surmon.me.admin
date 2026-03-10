@@ -7,7 +7,7 @@ import { AuthorName, AuthorEmail } from '@/components/common/AuthorProfile'
 import { UniversalText } from '@/components/common/UniversalText'
 import * as api from '@/apis/ai-agent'
 import type { ChatSession, ChatMessage } from '@/constants/ai-agent'
-import { stringToYMD } from '@/transforms/date'
+import { timestampToYMD } from '@/transforms/date'
 import { APP_PRIMARY_COLOR } from '@/config'
 
 export interface SessionDetailProps {
@@ -38,7 +38,7 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
           key: 'content',
           span: 2,
           label: '最后对话时间',
-          children: <UniversalText text={stringToYMD(props.session.last_active)} />
+          children: <UniversalText text={timestampToYMD(props.session.last_active * 1000)} />
         },
         {
           key: 'last_active',
@@ -106,7 +106,7 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
           >
             <List.Item.Meta
               title={<UniversalText text={message.role.toUpperCase()} strong={true} />}
-              description={stringToYMD(message.created_at)}
+              description={timestampToYMD(message.created_at * 1000)}
               avatar={
                 <Avatar
                   size={56}

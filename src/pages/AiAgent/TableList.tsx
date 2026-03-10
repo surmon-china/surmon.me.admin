@@ -5,7 +5,7 @@ import { ChatSession } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
 import { AuthorName, AuthorEmail } from '@/components/common/AuthorProfile'
 import { UniversalText } from '@/components/common/UniversalText'
-import { stringToYMD } from '@/transforms/date'
+import { timestampToYMD } from '@/transforms/date'
 
 export interface TableListProps {
   loading: boolean
@@ -37,7 +37,9 @@ export const TableList: React.FC<TableListProps> = (props) => {
         {
           title: '最后对话',
           dataIndex: 'content',
-          render: (_, session) => <UniversalText text={stringToYMD(session.last_active)} />
+          render: (_, session) => (
+            <UniversalText text={timestampToYMD(session.last_active * 1000)} />
+          )
         },
         {
           title: '对话次数',

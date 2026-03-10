@@ -13,12 +13,12 @@ export interface ChatMessage {
   tool_call_id: string | null
   input_tokens: number
   output_tokens: number
-  created_at: string
+  created_at: number
 }
 
 export interface ChatSession {
   session_id: string
-  last_active: string
+  last_active: number
   message_count: number
   input_tokens: number
   output_tokens: number
