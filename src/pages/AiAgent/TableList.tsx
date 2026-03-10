@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Space, Popover, Typography } from 'antd'
+import { Table, Space, Popover, Typography, Divider, Statistic } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { ChatSession } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
@@ -25,45 +25,57 @@ export const TableList: React.FC<TableListProps> = (props) => {
       pagination={false}
       columns={[
         {
-          title: 'Session ID',
-          minWidth: 260,
-          dataIndex: 'content',
-          render: (_, session, index) => (
-            <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
-              {session.session_id}
-            </Typography.Link>
-          )
-        },
-        {
           title: '最后对话',
           dataIndex: 'content',
-          render: (_, session) => (
-            <UniversalText text={timestampToYMD(session.last_active * 1000)} />
+          render: (_, session, index) => (
+            <Space size="small" orientation="vertical">
+              <Space size="small" separator={<Divider orientation="vertical" />}>
+                <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
+                  对话记录
+                </Typography.Link>
+                <UniversalText
+                  text={timestampToYMD(session.last_active * 1000)}
+                  type="secondary"
+                />
+              </Space>
+              <Typography.Text style={{ textWrap: 'auto' }}>
+                {session.last_user_message}
+              </Typography.Text>
+            </Space>
           )
         },
         {
           title: '对话次数',
-          minWidth: 60,
+          minWidth: 100,
+          ellipsis: true,
           dataIndex: 'last_active',
-          render: (_, session) => <UniversalText text={session.message_count} strong />
+          render: (_, session) => <Statistic value={session.message_count} />
         },
         {
-          title: 'Token 总用',
+          title: 'Token 用量',
+          minWidth: 130,
+          ellipsis: true,
           dataIndex: 'total_tokens',
-          render: (_, session) => <UniversalText text={session.total_tokens} strong />
-        },
-        {
-          title: 'Token 输入',
-          dataIndex: 'input_tokens',
-          render: (_, session) => <UniversalText text={session.input_tokens} strong />
-        },
-        {
-          title: 'Token 输出',
-          dataIndex: 'output_tokens',
-          render: (_, session) => <UniversalText text={session.output_tokens} strong />
+          render: (_, session) => (
+            <Popover
+              title="Token 用量"
+              placement="bottomLeft"
+              content={
+                <Space orientation="vertical" size="small">
+                  <UniversalText prefix="总计" text={session.total_tokens} strong />
+                  <UniversalText prefix="输入" text={session.input_tokens} type="secondary" />
+                  <UniversalText prefix="输出" text={session.output_tokens} type="secondary" />
+                </Space>
+              }
+            >
+              <Statistic value={session.total_tokens} />
+            </Popover>
+          )
         },
         {
           title: '用户',
+          minWidth: 120,
+          ellipsis: true,
           dataIndex: 'author_name',
           render: (_, session) => (
             <Popover

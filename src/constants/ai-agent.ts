@@ -19,6 +19,7 @@ export interface ChatMessage {
 export interface ChatSession {
   session_id: string
   last_active: number
+  last_user_message: string | null
   message_count: number
   input_tokens: number
   output_tokens: number

@@ -32,7 +32,7 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
           key: 'id',
           span: 3,
           label: 'Session ID',
-          children: <UniversalText text={props.session.session_id} />
+          children: <UniversalText text={props.session.session_id} copyable />
         },
         {
           key: 'content',
