@@ -1,7 +1,7 @@
 import React from 'react'
 import { useShallowRef, onMounted } from 'veact'
 import { useLoading } from 'veact-use'
-import { Descriptions, Typography, List, Skeleton, Avatar, Divider } from 'antd'
+import { Descriptions, Typography, List, Skeleton, Statistic, Avatar, Divider } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { AuthorName, AuthorEmail } from '@/components/common/AuthorProfile'
 import { UniversalText } from '@/components/common/UniversalText'
@@ -26,39 +26,19 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
 
   const renderSessionInfos = () => (
     <Descriptions
-      column={3}
+      column={4}
       items={[
         {
           key: 'id',
-          span: 3,
+          span: 4,
           label: 'Session ID',
           children: <UniversalText text={props.session.session_id} copyable />
         },
         {
           key: 'content',
-          span: 2,
+          span: 4,
           label: '最后对话时间',
           children: <UniversalText text={timestampToYMD(props.session.last_active * 1000)} />
-        },
-        {
-          key: 'last_active',
-          label: '对话次数',
-          children: <UniversalText text={props.session.message_count} strong />
-        },
-        {
-          key: 'total_tokens',
-          label: 'Token 总用',
-          children: <UniversalText text={props.session.total_tokens} strong />
-        },
-        {
-          key: 'input_tokens',
-          label: 'Token 输入',
-          children: <UniversalText text={props.session.input_tokens} strong />
-        },
-        {
-          key: 'output_tokens',
-          label: 'Token 输出',
-          children: <UniversalText text={props.session.output_tokens} strong />
         },
         {
           key: 'user_id',
@@ -72,8 +52,31 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
         },
         {
           key: 'author_email',
+          span: 4,
           label: '用户邮箱',
           children: <AuthorEmail author_email={props.session.author_email} />
+        },
+        {
+          key: 'message_count',
+          children: (
+            <Statistic
+              title="消息数量"
+              prefix={<Icons.MessageOutlined />}
+              value={props.session.message_count}
+            />
+          )
+        },
+        {
+          key: 'total_tokens',
+          children: <Statistic title="总用 Token" value={props.session.total_tokens} />
+        },
+        {
+          key: 'input_tokens',
+          children: <Statistic title="输入 Token" value={props.session.input_tokens} />
+        },
+        {
+          key: 'output_tokens',
+          children: <Statistic title="输出 Token" value={props.session.output_tokens} />
         }
       ]}
     />

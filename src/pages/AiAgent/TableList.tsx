@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Space, Popover, Typography, Divider, Statistic } from 'antd'
+import { Table, Space, Popover, Typography, Statistic } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { ChatSession } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
@@ -25,30 +25,41 @@ export const TableList: React.FC<TableListProps> = (props) => {
       pagination={false}
       columns={[
         {
-          title: '最后对话',
-          dataIndex: 'content',
+          title: 'session ID',
+          dataIndex: 'session_id',
           render: (_, session, index) => (
-            <Space size="small" orientation="vertical">
-              <Space size="small" separator={<Divider orientation="vertical" />}>
-                <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
-                  对话记录
-                </Typography.Link>
-                <UniversalText
-                  text={timestampToYMD(session.last_active * 1000)}
-                  type="secondary"
-                />
-              </Space>
-              <Typography.Text style={{ textWrap: 'auto' }}>
-                {session.last_user_message}
-              </Typography.Text>
-            </Space>
+            <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
+              对话记录
+            </Typography.Link>
           )
         },
         {
-          title: '对话次数',
-          minWidth: 100,
+          title: '最后对话',
           ellipsis: true,
           dataIndex: 'last_active',
+          render: (_, session) => (
+            <UniversalText text={timestampToYMD(session.last_active * 1000)} type="secondary" />
+          )
+        },
+        {
+          title: '最后消息',
+          dataIndex: 'last_user_message',
+          render: (_, session) => (
+            <Popover
+              placement="bottom"
+              content={<Typography.Text>{session.last_user_message}</Typography.Text>}
+            >
+              <Typography.Text ellipsis={{ suffix: '...' }}>
+                {session.last_user_message}
+              </Typography.Text>
+            </Popover>
+          )
+        },
+        {
+          title: '消息数量',
+          minWidth: 100,
+          ellipsis: true,
+          dataIndex: 'message_count',
           render: (_, session) => <Statistic value={session.message_count} />
         },
         {
@@ -80,7 +91,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
           render: (_, session) => (
             <Popover
               title="用户身份"
-              placement="bottomLeft"
+              placement="bottomRight"
               content={
                 <Space orientation="vertical" size="small">
                   <UniversalText
