@@ -24,9 +24,16 @@ export function getChatSessions(params: GetSessionsParams = {}) {
     .then((response) => response.data)
 }
 
-/** 获取对话详情 */
+/** 获取对话消息记录 */
 export function getChatMessages(sessionId: string) {
   return aiAgent
     .get<ChatMessage[]>(`/chat-sessions/${sessionId}`)
+    .then((response) => response.data)
+}
+
+/** 删除对话记录 */
+export function deleteChatMessages(sessionId: string) {
+  return aiAgent
+    .delete<ChatMessage[]>(`/chat-sessions/${sessionId}`)
     .then((response) => response.data)
 }

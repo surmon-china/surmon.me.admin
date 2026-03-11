@@ -5,7 +5,7 @@ import { UniversalText } from '@/components/common/UniversalText'
 import { IPLocation } from '@/components/common/IPLocation'
 import { UserAgent } from '@/components/common/UserAgent'
 import { Pagination } from '@/constants/nodepress'
-import { stringToYMD } from '@/transforms/date'
+import { stringToYMD, timeFromNow } from '@/transforms/date'
 import { Vote, VoteType, getVoteType, getVoteTargetText } from '@/constants/vote'
 import { APP_PAGE_SIZE_OPTIONS } from '@/config'
 
@@ -98,7 +98,15 @@ export const TableList: React.FC<TableListProps> = (props) => {
           ellipsis: true,
           dataIndex: 'created_at',
           render(_, vote) {
-            return <UniversalText text={stringToYMD(vote.created_at)} />
+            return (
+              <Popover
+                title="时间"
+                placement="bottomLeft"
+                content={<UniversalText text={stringToYMD(vote.created_at)} />}
+              >
+                {timeFromNow(vote.created_at)}
+              </Popover>
+            )
           }
         },
         {

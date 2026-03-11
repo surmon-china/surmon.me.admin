@@ -1,23 +1,23 @@
 import React from 'react'
-import { Table, Space, Popover, Typography } from 'antd'
+import { Table, Space, Popover, Tooltip, Typography, Button } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { ChatSession } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
 import { UniversalText } from '@/components/common/UniversalText'
-import { timestampToYMD } from '@/transforms/date'
+import { timestampToYMD, timeFromNow } from '@/transforms/date'
 
 export interface TableListProps {
   loading: boolean
   data: ChatSession[]
   footer?: React.ReactNode
   onDetail(sessionId: string, index: number): void
+  onDelete(sessionId: string, index: number): void
 }
 
 export const TableList: React.FC<TableListProps> = (props) => {
   return (
     <Table<ChatSession>
       rowKey="id"
-      tableLayout="auto"
       loading={props.loading}
       dataSource={props.data}
       footer={() => props.footer}
@@ -25,37 +25,41 @@ export const TableList: React.FC<TableListProps> = (props) => {
       columns={[
         {
           title: '最后对话',
-          ellipsis: true,
+          width: 130,
           dataIndex: 'last_active',
           render: (_, session) => (
-            <UniversalText text={timestampToYMD(session.last_active * 1000)} type="secondary" />
+            <Popover
+              placement="bottomLeft"
+              content={<UniversalText text={timestampToYMD(session.last_active * 1000)} />}
+            >
+              {timeFromNow(session.last_active * 1000)}
+            </Popover>
           )
         },
         {
           title: '最后消息',
           dataIndex: 'last_user_message',
+          ellipsis: {
+            showTitle: false
+          },
           render: (_, session) => (
             <Popover
-              placement="bottom"
+              placement="bottomLeft"
               content={<Typography.Text>{session.last_user_message}</Typography.Text>}
             >
-              <Typography.Text ellipsis={{ suffix: '...' }}>
-                {session.last_user_message}
-              </Typography.Text>
+              {session.last_user_message}
             </Popover>
           )
         },
         {
           title: '消息数量',
-          minWidth: 100,
-          ellipsis: true,
+          width: 100,
           dataIndex: 'message_count',
           render: (_, session) => <UniversalText text={session.message_count} strong={true} />
         },
         {
-          title: 'Token 总用量',
-          minWidth: 130,
-          ellipsis: true,
+          title: 'Token 用量',
+          width: 120,
           dataIndex: 'total_tokens',
           render: (_, session) => (
             <Popover
@@ -77,8 +81,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
         },
         {
           title: '用户',
-          minWidth: 120,
-          ellipsis: true,
+          width: 100,
           dataIndex: 'author_name',
           render: (_, session) => (
             <Popover
@@ -117,12 +120,28 @@ export const TableList: React.FC<TableListProps> = (props) => {
           )
         },
         {
-          title: 'session',
+          width: 190,
           dataIndex: 'session_id',
           render: (_, session, index) => (
-            <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
-              对话记录
-            </Typography.Link>
+            <Space.Compact size="small">
+              <Button
+                color="primary"
+                variant="link"
+                icon={<Icons.CommentOutlined />}
+                onClick={() => props.onDetail(session.session_id, index)}
+              >
+                对话记录
+              </Button>
+              <Button
+                color="danger"
+                variant="link"
+                danger={true}
+                icon={<Icons.DeleteOutlined />}
+                onClick={() => props.onDelete(session.session_id, index)}
+              >
+                删除
+              </Button>
+            </Space.Compact>
           )
         }
       ]}

@@ -7,7 +7,7 @@ import React from 'react'
 import { useShallowRef, useRef, useComputed, useWatch, onMounted, useReactive } from 'veact'
 import { useLoading } from 'veact-use'
 import { useTranslation } from '@/i18n'
-import { Card, Divider, Drawer, Button, Flex } from 'antd'
+import { Card, Divider, Drawer, Button, Flex, Modal } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/ai-agent'
 import type { ChatSession } from '@/constants/ai-agent'
@@ -81,6 +81,20 @@ export const AiAgentPage: React.FC = () => {
     pagination.hasMore = result.length >= pagination.pageSize
   }
 
+  const deleteMessages = (index: number) => {
+    const targetSession = sessions.value[index]!
+    Modal.confirm({
+      title: `确定要删除该 Session 下的 ${targetSession.message_count} 条对话记录吗？`,
+      content: '删除后不可恢复',
+      centered: true,
+      onOk: () => {
+        return api.deleteChatMessages(targetSession.session_id).then(() => {
+          fetchFirstPage()
+        })
+      }
+    })
+  }
+
   useWatch(
     () => filterParams.value,
     () => fetchFirstPage(),
@@ -119,6 +133,7 @@ export const AiAgentPage: React.FC = () => {
           </Flex>
         }
         onDetail={(_, index) => openDetailDrawer(index)}
+        onDelete={(_, index) => deleteMessages(index)}
       />
       <Drawer
         size="large"

@@ -20,3 +20,7 @@ export const timestampToYMD = (timestamp: number) => {
 export const stringToYMD = (string: string) => {
   return dayjs(string)?.format('YYYY-MM-DD HH:mm:ss')
 }
+
+export const timeFromNow = (time: string | number) => {
+  return dayjs(time)?.fromNow()
+}
