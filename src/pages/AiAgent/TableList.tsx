@@ -1,9 +1,8 @@
 import React from 'react'
-import { Table, Space, Popover, Typography, Statistic } from 'antd'
+import { Table, Space, Popover, Typography } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { ChatSession } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
-import { AuthorName, AuthorEmail } from '@/components/common/AuthorProfile'
 import { UniversalText } from '@/components/common/UniversalText'
 import { timestampToYMD } from '@/transforms/date'
 
@@ -24,15 +23,6 @@ export const TableList: React.FC<TableListProps> = (props) => {
       footer={() => props.footer}
       pagination={false}
       columns={[
-        {
-          title: 'session ID',
-          dataIndex: 'session_id',
-          render: (_, session, index) => (
-            <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
-              对话记录
-            </Typography.Link>
-          )
-        },
         {
           title: '最后对话',
           ellipsis: true,
@@ -60,10 +50,10 @@ export const TableList: React.FC<TableListProps> = (props) => {
           minWidth: 100,
           ellipsis: true,
           dataIndex: 'message_count',
-          render: (_, session) => <Statistic value={session.message_count} />
+          render: (_, session) => <UniversalText text={session.message_count} strong={true} />
         },
         {
-          title: 'Token 用量',
+          title: 'Token 总用量',
           minWidth: 130,
           ellipsis: true,
           dataIndex: 'total_tokens',
@@ -79,7 +69,9 @@ export const TableList: React.FC<TableListProps> = (props) => {
                 </Space>
               }
             >
-              <Statistic value={session.total_tokens} />
+              <span>
+                <UniversalText text={session.total_tokens} strong={true} />
+              </span>
             </Popover>
           )
         },
@@ -95,22 +87,42 @@ export const TableList: React.FC<TableListProps> = (props) => {
               content={
                 <Space orientation="vertical" size="small">
                   <UniversalText
-                    prefix={<Icons.UserOutlined />}
+                    prefix={<Icons.FieldNumberOutlined />}
                     text={session.user_id}
                     placeholder="非登录用户"
+                    strong={true}
                   />
-                  <AuthorName author_name={session.author_name} icon={true} />
-                  <AuthorEmail author_email={session.author_email} icon={true} />
+                  <UniversalText
+                    prefix={<Icons.UserOutlined />}
+                    text={session.author_name}
+                    placeholder={getAuthorTypeName(GeneralAuthorType.Anonymous)}
+                  />
+                  <UniversalText
+                    prefix={<Icons.MailOutlined />}
+                    text={session.author_email}
+                    placeholder="无邮箱"
+                    copyable={true}
+                  />
                 </Space>
               }
             >
               <span>
                 <UniversalText
-                  text={session.user_id || session.author_name}
+                  text={session.author_name}
                   placeholder={getAuthorTypeName(GeneralAuthorType.Anonymous)}
+                  strong={true}
                 />
               </span>
             </Popover>
+          )
+        },
+        {
+          title: 'session',
+          dataIndex: 'session_id',
+          render: (_, session, index) => (
+            <Typography.Link onClick={() => props.onDetail(session.session_id, index)}>
+              对话记录
+            </Typography.Link>
           )
         }
       ]}

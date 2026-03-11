@@ -3,10 +3,10 @@ import { useShallowRef, onMounted } from 'veact'
 import { useLoading } from 'veact-use'
 import { Descriptions, Typography, List, Skeleton, Statistic, Avatar, Divider } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { AuthorName, AuthorEmail } from '@/components/common/AuthorProfile'
+import type { ChatSession, ChatMessage } from '@/constants/ai-agent'
+import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
 import { UniversalText } from '@/components/common/UniversalText'
 import * as api from '@/apis/ai-agent'
-import type { ChatSession, ChatMessage } from '@/constants/ai-agent'
 import { timestampToYMD } from '@/transforms/date'
 import { APP_PRIMARY_COLOR } from '@/config'
 
@@ -26,45 +26,57 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
 
   const renderSessionInfos = () => (
     <Descriptions
-      column={4}
+      column={1}
       items={[
         {
           key: 'id',
-          span: 4,
           label: 'Session ID',
           children: <UniversalText text={props.session.session_id} copyable />
         },
         {
           key: 'content',
-          span: 4,
           label: '最后对话时间',
           children: <UniversalText text={timestampToYMD(props.session.last_active * 1000)} />
-        },
+        }
+      ]}
+    />
+  )
+
+  const renderUsageStats = () => (
+    <Descriptions
+      column={4}
+      items={[
         {
           key: 'user_id',
           label: '用户 ID',
-          children: <UniversalText text={props.session.user_id} placeholder="非登录用户" />
+          children: (
+            <UniversalText text={props.session.user_id} placeholder="非登录用户" strong={true} />
+          )
         },
         {
           key: 'author_name',
           label: '用户名称',
-          children: <AuthorName author_name={props.session.author_name} />
+          children: (
+            <UniversalText
+              text={props.session.author_name}
+              placeholder={getAuthorTypeName(GeneralAuthorType.Anonymous)}
+            />
+          )
         },
         {
           key: 'author_email',
           span: 4,
-          label: '用户邮箱',
-          children: <AuthorEmail author_email={props.session.author_email} />
+          children: (
+            <UniversalText
+              text={props.session.author_email}
+              copyable={true}
+              placeholder="无邮箱"
+            />
+          )
         },
         {
           key: 'message_count',
-          children: (
-            <Statistic
-              title="消息数量"
-              prefix={<Icons.MessageOutlined />}
-              value={props.session.message_count}
-            />
-          )
+          children: <Statistic title="消息数量" value={props.session.message_count} />
         },
         {
           key: 'total_tokens',
@@ -91,24 +103,38 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
           <List.Item
             key={index}
             style={{ overflow: 'hidden' }}
-            actions={[
-              <UniversalText key="model" text={message.model} type="secondary" />,
-              <UniversalText
-                key="input_tokens"
-                prefix="Input"
-                text={message.input_tokens}
-                type="secondary"
-              />,
-              <UniversalText
-                key="output_tokens"
-                prefix="Output"
-                text={message.output_tokens}
-                type="secondary"
-              />
-            ]}
+            actions={
+              message.role === 'user'
+                ? []
+                : [
+                    <UniversalText key="model" text={message.model} type="secondary" />,
+                    <UniversalText
+                      key="input_tokens"
+                      prefix="Input"
+                      text={message.input_tokens}
+                      type="secondary"
+                    />,
+                    <UniversalText
+                      key="output_tokens"
+                      prefix="Output"
+                      text={message.output_tokens}
+                      type="secondary"
+                    />
+                  ]
+            }
           >
             <List.Item.Meta
-              title={<UniversalText text={message.role.toUpperCase()} strong={true} />}
+              title={
+                message.role === 'user' ? (
+                  <UniversalText
+                    text={props.session.author_name}
+                    placeholder={getAuthorTypeName(GeneralAuthorType.Anonymous)}
+                    strong={true}
+                  />
+                ) : (
+                  <UniversalText text={message.role} strong={true} />
+                )
+              }
               description={timestampToYMD(message.created_at * 1000)}
               avatar={
                 <Avatar
@@ -146,6 +172,8 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
   return (
     <div>
       {renderSessionInfos()}
+      <Divider />
+      {renderUsageStats()}
       <Divider />
       {fetching.state.value ? <Skeleton /> : renderMessages()}
     </div>
