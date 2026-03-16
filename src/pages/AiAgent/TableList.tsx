@@ -82,6 +82,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
         {
           title: '用户',
           width: 100,
+          ellipsis: true,
           dataIndex: 'author_name',
           render: (_, session) => (
             <Popover
