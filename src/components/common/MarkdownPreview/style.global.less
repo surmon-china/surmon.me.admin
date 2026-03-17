@@ -1,13 +1,15 @@
 @import '@/styles/mixins.less';
 @import '@/styles/variables.less';
 
-#app {
+:root {
   &[data-theme='light'] {
+    @import (less) 'github-markdown-css/github-markdown-light.css';
     .markdown-preview {
       @import (less) 'highlight.js/styles/github.css';
     }
   }
   &[data-theme='dark'] {
+    @import (less) 'github-markdown-css/github-markdown-dark.css';
     .markdown-preview {
       @import (less) 'highlight.js/styles/github-dark.css';
     }
@@ -15,85 +17,18 @@
 }
 
 .markdown-preview {
-  a {
-    font-weight: bold;
-  }
+  .markdown-body {
+    background-color: transparent !important;
+    line-height: 1.8 !important;
 
-  hr {
-    border: none;
-    border-top: 1px solid @color-border;
-  }
-
-  img {
-    max-width: 80%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    border-radius: @border-radius-xs;
-    border: @gap-x solid @color-border-secondary;
-  }
-
-  code {
-    padding-inline: @gap-xx;
-    margin-inline: @gap-xx;
-    border-radius: @border-radius-xs;
-    background-color: @color-border-secondary;
-    font-size: 90%;
-  }
-
-  p {
-    line-height: 2.2em;
-    text-indent: 2em;
-  }
-
-  blockquote {
-    margin: 1.2em 0;
-    text-indent: 0em;
-    background-color: @color-border-secondary;
-    border-left: 0.5em solid @color-border;
-    padding: 0.5em 1em;
-    padding-left: 1em;
-
-    p {
-      text-indent: 0em;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
-  ul {
-    list-style-type: square;
-  }
-
-  ul,
-  ol {
-    > li {
-      line-height: 1.8em;
-      padding: 0.5em 1em;
-      &:hover {
-        background-color: @body-background;
-      }
-
-      > ul {
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
-  pre {
-    margin-bottom: 1em;
-
-    > code {
-      position: relative;
-      display: block;
-      margin: 0;
-      padding: 1em;
-      line-height: 1.6em;
-      overflow-x: auto;
-      background-color: @body-background;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      padding-bottom: 0 !important;
+      border: none !important;
     }
   }
 }

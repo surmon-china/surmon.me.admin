@@ -11,6 +11,17 @@ hljs.registerLanguage('xml', xml)
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('typescript', typescript)
 
+marked.use(
+  markedHighlight({
+    langPrefix: 'hljs language-',
+    highlight(code, language) {
+      return hljs.getLanguage(language)
+        ? hljs.highlight(code, { language }).value
+        : hljs.highlightAuto(code).value
+    }
+  })
+)
+
 const renderer = new marked.Renderer()
 
 renderer.link = ({ href, title, tokens }) => {
@@ -28,17 +39,6 @@ renderer.link = ({ href, title, tokens }) => {
   `
   return linkHtml.replace(/\s+/g, ' ').replace(/\n/g, ' ')
 }
-
-marked.use(
-  markedHighlight({
-    langPrefix: 'hljs language-',
-    highlight(code, language) {
-      return hljs.getLanguage(language)
-        ? hljs.highlight(code, { language }).value
-        : hljs.highlightAuto(code).value
-    }
-  })
-)
 
 marked.setOptions({
   renderer,
