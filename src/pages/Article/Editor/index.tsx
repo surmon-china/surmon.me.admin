@@ -42,6 +42,7 @@ const DEFAULT_ARTICLE: ArticleWithoutId = Object.freeze({
   origin: ArticleOrigin.Original,
   lang: ArticleLanguage.Chinese,
   featured: false,
+  unlisted: false,
   disabled_comments: false,
   tags: [],
   categories: [],

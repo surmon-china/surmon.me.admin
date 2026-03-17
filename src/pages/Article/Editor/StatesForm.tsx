@@ -92,6 +92,15 @@ export const StatesForm: React.FC<StatesFormProps> = (props) => {
       >
         <Switch checkedChildren="是" unCheckedChildren="否" style={{ width: 50 }} />
       </Form.Item>
+      <Form.Item
+        required={true}
+        name="unlisted"
+        label="列表隐藏"
+        rules={[REQUIRED_RULE]}
+        valuePropName="checked"
+      >
+        <Switch checkedChildren="是" unCheckedChildren="否" style={{ width: 50 }} />
+      </Form.Item>
       <Divider />
       <Button
         type="primary"

@@ -24,6 +24,7 @@ export interface Article {
   origin: ArticleOrigin
   lang: ArticleLanguage
   featured: boolean
+  unlisted: boolean
   disabled_comments: boolean
   stats?: {
     likes: number

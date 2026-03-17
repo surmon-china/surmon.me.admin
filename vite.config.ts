@@ -46,6 +46,27 @@ export function getDefaultConfig(env: ConfigEnv): UserConfig {
           }
         }
       }
+      // for vite@8
+      // rolldownOptions: {
+      //   output: {
+      //     codeSplitting: {
+      //       groups: [
+      //         {
+      //           name: 'antd',
+      //           test: (id) => id.includes('node_modules/antd') || id.includes('@ant-design/icons')
+      //         },
+      //         {
+      //           name: 'codemirror',
+      //           test: (id) => id.includes('node_modules/@codemirror')
+      //         },
+      //         {
+      //           name: 'echarts',
+      //           test: (id) => id.includes('node_modules/echarts')
+      //         }
+      //       ]
+      //     }
+      //   }
+      // }
     }
   }
 }

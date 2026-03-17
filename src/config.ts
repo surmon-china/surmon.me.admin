@@ -3,8 +3,8 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import type { PaginationProps } from 'antd/lib/pagination'
-import type { SizeType } from 'antd/lib/config-provider/SizeContext'
+import type { PaginationProps } from 'antd/es/pagination'
+import type { SizeType } from 'antd/es/config-provider/SizeContext'
 import { Language } from '@/contexts/Locale'
 
 // vite envs

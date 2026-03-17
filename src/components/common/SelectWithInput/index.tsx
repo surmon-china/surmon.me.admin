@@ -6,9 +6,9 @@
 import classnames from 'classnames'
 import React, { useMemo } from 'react'
 import { Input, Select, Space } from 'antd'
-import type { SpaceCompactProps } from 'antd/lib/space/Compact'
-import type { SelectProps } from 'antd/lib/select'
-import type { SearchProps } from 'antd/lib/input'
+import type { SpaceCompactProps } from 'antd/es/space/Compact'
+import type { SelectProps } from 'antd/es/select'
+import type { SearchProps } from 'antd/es/input'
 
 import styles from './style.module.less'
 

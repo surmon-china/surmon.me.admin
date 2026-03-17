@@ -52,6 +52,7 @@
 
   "page.article.list.title": "Articles ({{total}})",
   "page.article.list.filter.featured": "Featured",
+  "page.article.list.filter.unlisted": "Unlisted",
   "page.article.list.filter.search": "Input title, content... to search",
 
   "page.article.editor.content": "Basic Content",

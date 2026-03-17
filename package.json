@@ -36,6 +36,7 @@
     "classnames": "^2.5.x",
     "dayjs": "^1.11.x",
     "echarts": "^6.x",
+    "github-markdown-css": "^5.x",
     "highlight.js": "^11.11.x",
     "i18next": "^25.x",
     "i18next-browser-languagedetector": "^8.2.x",
