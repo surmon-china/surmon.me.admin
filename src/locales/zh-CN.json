@@ -52,6 +52,7 @@
 
   "page.article.list.title": "文章列表（{{total}}）",
   "page.article.list.filter.featured": "精选文章",
+  "page.article.list.filter.unlisted": "列表隐藏",
   "page.article.list.filter.search": "输入文章标题、内容搜索",
 
   "page.article.editor.content": "文章内容",

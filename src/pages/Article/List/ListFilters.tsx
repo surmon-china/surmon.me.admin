@@ -19,6 +19,7 @@ export const SELECT_ALL_VALUE = 'ALL'
 export const DEFAULT_FILTER_PARAMS = {
   sort: SortMode.Latest,
   featured: false as boolean,
+  unlisted: false as boolean,
   tag_slug: SELECT_ALL_VALUE as SelectAllValue | string,
   category_slug: SELECT_ALL_VALUE as SelectAllValue | string,
   status: SELECT_ALL_VALUE as SelectAllValue | ArticleStatus,
@@ -31,6 +32,7 @@ export type FilterParams = typeof DEFAULT_FILTER_PARAMS
 export const getQueryParams = (params: FilterParams): GetArticleParams => ({
   sort: params.sort,
   featured: params.featured ? true : void 0,
+  unlisted: params.unlisted ? true : void 0,
   tag_slug: params.tag_slug !== SELECT_ALL_VALUE ? params.tag_slug : void 0,
   category_slug: params.category_slug !== SELECT_ALL_VALUE ? params.category_slug : void 0,
   status: params.status !== SELECT_ALL_VALUE ? params.status : void 0,
@@ -87,24 +89,20 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
           >
             {i18n.t('page.article.list.filter.featured')}
           </Button>
-          <Select
-            style={{ width: 110 }}
+          <Button
             disabled={props.loading}
-            value={props.params.status}
-            onChange={(status) => props.onParamsChange({ status })}
-            options={[
-              { label: '全部状态', value: SELECT_ALL_VALUE },
-              ...articleStatuses.map((status) => ({
-                value: status.id,
-                label: (
-                  <Space size="small">
-                    {status.icon}
-                    {status.name}
-                  </Space>
-                )
-              }))
-            ]}
-          />
+            type={props.params.unlisted ? 'primary' : 'default'}
+            icon={
+              props.params.unlisted ? (
+                <Icons.EyeInvisibleFilled />
+              ) : (
+                <Icons.EyeInvisibleOutlined />
+              )
+            }
+            onClick={() => props.onParamsChange({ unlisted: !props.params.unlisted })}
+          >
+            {i18n.t('page.article.list.filter.unlisted')}
+          </Button>
           <Select
             style={{ width: 106 }}
             disabled={props.loading}
@@ -185,6 +183,24 @@ export const ListFilters: React.FC<ListFiltersProps> = (props) => {
             withHot={true}
             value={props.params.sort}
             onChange={(sort) => props.onParamsChange({ sort })}
+          />
+          <Select
+            style={{ width: 110 }}
+            disabled={props.loading}
+            value={props.params.status}
+            onChange={(status) => props.onParamsChange({ status })}
+            options={[
+              { label: '全部状态', value: SELECT_ALL_VALUE },
+              ...articleStatuses.map((status) => ({
+                value: status.id,
+                label: (
+                  <Space size="small">
+                    {status.icon}
+                    {status.name}
+                  </Space>
+                )
+              }))
+            ]}
           />
           <Input.Search
             style={{ width: 260 }}
