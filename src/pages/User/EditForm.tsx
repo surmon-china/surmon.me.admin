@@ -129,7 +129,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
           />
         </Form.Item>
       )}
-      <Form.Item label="自定义扩展" extra="可以为当前评论增加自定义扩展属性" shouldUpdate={true}>
+      <Form.Item label="自定义扩展" extra="可以为当前用户增加自定义扩展属性" shouldUpdate={true}>
         <FormKeyValueInput formFieldName="extras" />
       </Form.Item>
       <Form.Item label=" ">
