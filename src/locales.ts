@@ -4,7 +4,7 @@
  */
 
 import { Language } from '@/contexts/Locale'
-import type { Locale as AntdLocale } from 'antd/lib/locale'
+import type { Locale as AntdLocale } from 'antd/es/locale'
 
 // dayjs locales
 import dayjsEnUS from 'dayjs/locale/en'
@@ -12,9 +12,9 @@ import dayjsZhCN from 'dayjs/locale/zh-cn'
 import dayjsZhTW from 'dayjs/locale/zh-tw'
 
 // antd locales
-import antdEnUS from 'antd/lib/locale/en_US'
-import antdZhCN from 'antd/lib/locale/zh_CN'
-import antdZhTW from 'antd/lib/locale/zh_TW'
+import antdEnUS from 'antd/es/locale/en_US'
+import antdZhCN from 'antd/es/locale/zh_CN'
+import antdZhTW from 'antd/es/locale/zh_TW'
 
 // i18n locales
 import i18nEnUS from './locales/en-US.json'

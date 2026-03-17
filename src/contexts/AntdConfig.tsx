@@ -6,7 +6,7 @@
 import React, { useLayoutEffect, useMemo } from 'react'
 import { ConfigProvider, theme as antdTheme } from 'antd'
 import type { ConfigProviderProps } from 'antd'
-import type { Locale as Locale } from 'antd/lib/locale'
+import type { Locale as Locale } from 'antd/es/locale'
 
 import * as CONFIG from '@/config'
 import { locales } from '@/locales'

@@ -5,7 +5,6 @@
 
 import React from 'react'
 import { Button, Dropdown } from 'antd'
-import type { ItemType as MenuItemType } from 'antd/es/menu/interface'
 import * as Icons from '@ant-design/icons'
 
 export interface ButtonMenuProps {

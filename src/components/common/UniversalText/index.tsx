@@ -6,7 +6,7 @@
 import _isNil from 'lodash/isNil'
 import React from 'react'
 import { Typography, Space } from 'antd'
-import { BaseType } from 'antd/lib/typography/Base'
+import type { BaseType } from 'antd/es/typography/Base'
 
 export interface UniversalTextProps {
   text: React.ReactNode

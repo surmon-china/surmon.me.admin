@@ -72,6 +72,6 @@
     "prettier": "^3.x",
     "typescript": "^5.9.x",
     "typescript-eslint": "^8.x",
-    "vite": "^8.x"
+    "vite": "^7.x"
   }
 }
