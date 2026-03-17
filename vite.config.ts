@@ -33,16 +33,27 @@ export function getDefaultConfig(env: ConfigEnv): UserConfig {
       open: true
     },
     build: {
-      rollupOptions: {
+      rolldownOptions: {
         output: {
-          manualChunks(id) {
-            if (id.includes('node_modules/antd') || id.includes('@ant-design/icons')) {
-              return 'antd'
-            } else if (id.includes('node_modules/@codemirror')) {
-              return 'codemirror'
-            } else if (id.includes('node_modules/echarts')) {
-              return 'echarts'
-            }
+          codeSplitting: {
+            groups: [
+              {
+                name: 'antd',
+                test: (id) => id.includes('node_modules/antd')
+              },
+              {
+                name: 'antd-icons',
+                test: (id) => id.includes('@ant-design/icons')
+              },
+              {
+                name: 'codemirror',
+                test: (id) => id.includes('node_modules/@codemirror')
+              },
+              {
+                name: 'echarts',
+                test: (id) => id.includes('node_modules/echarts')
+              }
+            ]
           }
         }
       }
