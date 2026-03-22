@@ -14,7 +14,7 @@ import { useTranslation } from '@/i18n'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { Announcement } from '@/constants/announcement'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { ListFilters, DEFAULT_FILTER_PARAMS, FilterParams, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
 import { FormModal } from './FormModal'
@@ -72,7 +72,7 @@ export const AnnouncementPage: React.FC = () => {
     fetching.promise(api.getAnnouncements(getParams)).then((response) => {
       announcements.data = response.data
       announcements.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

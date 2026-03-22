@@ -14,7 +14,7 @@ import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { Vote } from '@/constants/vote'
 import { useTranslation } from '@/i18n'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { FilterTargetId, DEFAULT_TARGET_ID } from './ListFilters'
 import { ListFilters, getQueryParams, DEFAULT_FILTER_PARAMS } from './ListFilters'
 import { TableList } from './TableList'
@@ -63,7 +63,7 @@ export const VotePage: React.FC = () => {
     fetching.promise(api.getVotes(getParams)).then((response) => {
       votes.data = response.data
       votes.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

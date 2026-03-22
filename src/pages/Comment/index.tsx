@@ -18,7 +18,7 @@ import { Comment as CommentType, CommentStatus, CommentTargetType } from '@/cons
 import { getCommentStatus } from '@/constants/comment'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { getBlogGuestbookUrl } from '@/transforms/url'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { useTranslation } from '@/i18n'
 import { ListFilters, DEFAULT_FILTER_PARAMS, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
@@ -97,7 +97,7 @@ export const CommentPage: React.FC = () => {
     fetching.promise(api.getComments(getParams)).then((response) => {
       comments.data = response.data
       comments.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

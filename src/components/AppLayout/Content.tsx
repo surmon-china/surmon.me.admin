@@ -6,7 +6,6 @@ import { CaretUpOutlined } from '@ant-design/icons'
 import { ENABLED_HEADER_AD } from '@/config'
 import { useTranslation } from '@/i18n'
 import { flatRoutes } from '@/routes'
-import { scrollTo } from '@/utils/scroller'
 
 import styles from './style.module.less'
 
@@ -59,7 +58,6 @@ export const AppContent: React.FC<React.PropsWithChildren> = (props) => {
         shape="square"
         type="primary"
         icon={<CaretUpOutlined />}
-        onClick={() => scrollTo(document.body)}
       />
     </div>
   )

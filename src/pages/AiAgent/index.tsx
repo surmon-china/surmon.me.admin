@@ -15,7 +15,7 @@ import type { FilterParams } from './ListFilters'
 import { ListFilters, DEFAULT_FILTER_PARAMS, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
 import { SessionDetail } from './Detail'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 
 export const AiAgentPage: React.FC = () => {
   const { i18n } = useTranslation()
@@ -63,7 +63,7 @@ export const AiAgentPage: React.FC = () => {
     sessions.value = result
     pagination.currentPage = 1
     pagination.hasMore = result.length >= pagination.pageSize
-    scrollTo(document.body)
+    scrollToTop()
   }
 
   const fetchNextPage = async () => {

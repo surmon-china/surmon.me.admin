@@ -7,7 +7,7 @@ import * as api from '@/apis/system'
 import { UniversalEditor, UnEditorLanguage } from '@/components/common/UniversalEditor'
 import { FormKeyValueInput } from '@/components/common/FormKeyValueInput'
 import { Options } from '@/constants/options'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { formatJSONString } from '@/transforms/json'
 
 export interface GeneralFormProps {
@@ -48,7 +48,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (props) => {
         ...formValues
       }
       updateOptions(payload).then(() => {
-        scrollTo(document.body)
+        scrollToTop()
       })
     })
   }

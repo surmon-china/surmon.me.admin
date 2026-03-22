@@ -14,7 +14,7 @@ import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { Tag } from '@/constants/tag'
 import { useTranslation } from '@/i18n'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { ListFilters } from './ListFilters'
 import { TableList } from './TableList'
 import { FormModal } from './FormModal'
@@ -65,7 +65,7 @@ export const TagPage: React.FC = () => {
     fetching.promise(api.getTags(getParams)).then((response) => {
       tags.data = response.data
       tags.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

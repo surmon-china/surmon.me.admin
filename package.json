@@ -32,7 +32,6 @@
     "@uiw/react-codemirror": "^4.25.x",
     "antd": "^6.x",
     "axios": "^1.13.x",
-    "bezier-easing": "^2.1.0",
     "classnames": "^2.5.x",
     "dayjs": "^1.11.x",
     "echarts": "^6.x",

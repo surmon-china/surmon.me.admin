@@ -16,7 +16,7 @@ import { Article, ArticleLanguage } from '@/constants/article'
 import { useLocale } from '@/contexts/Locale'
 import { useTheme } from '@/contexts/Theme'
 import { useTranslation } from '@/i18n'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { MainForm, MainFormExtraItem } from './MainForm'
 import { CategoriesForm } from './CategoriesForm'
 import { StatesForm } from './StatesForm'
@@ -116,7 +116,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = (props) => {
   // init default form when mounted
   onMounted(() => {
     setFormsValue(DEFAULT_ARTICLE)
-    scrollTo(document.body)
+    scrollToTop()
   })
 
   return (

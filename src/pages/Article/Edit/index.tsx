@@ -14,7 +14,7 @@ import { getUnEditorCache } from '@/components/common/UniversalEditor'
 import * as aiApis from '@/apis/ai'
 import * as articleApis from '@/apis/article'
 import { Article } from '@/constants/article'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { numberToKilo, numberSplit } from '@/transforms/number'
 import { getBlogArticleUrl } from '@/transforms/url'
 import { stringToYMD } from '@/transforms/date'
@@ -73,7 +73,7 @@ export const ArticleEditPage: React.FC = () => {
   const updateArticle = (_article: Article) => {
     return updating.promise(articleApis.updateArticle(_article)).then((result) => {
       article.value = result
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 
@@ -89,7 +89,7 @@ export const ArticleEditPage: React.FC = () => {
       onOk: () => {
         return updating.promise(articleApis.deleteArticle(article.value!.id)).then(() => {
           navigate(RoutesPath[RoutesKey.ArticleList])
-          scrollTo(document.body)
+          scrollToTop()
         })
       }
     })

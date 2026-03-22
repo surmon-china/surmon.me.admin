@@ -10,7 +10,7 @@ import { useLoading } from 'veact-use'
 import { Button, Card, Divider, Modal } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import { RoutesKey, RoutesPath } from '@/routes'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
@@ -52,7 +52,7 @@ export const ArticleListPage: React.FC = () => {
     fetching.promise(getArticles(getParams)).then((result) => {
       articles.data = result.data
       articles.pagination = result.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

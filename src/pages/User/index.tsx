@@ -13,7 +13,7 @@ import * as api from '@/apis/user'
 import type { GetUsersParams } from '@/apis/user'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { User, UserIdentityProvider } from '@/constants/user'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import type { FilterParams } from './ListFilters'
 import { ListFilters, DEFAULT_FILTER_PARAMS, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
@@ -73,7 +73,7 @@ export const UserPage: React.FC = () => {
     fetching.promise(api.getUsers(getParams)).then((response) => {
       users.data = response.data
       users.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 

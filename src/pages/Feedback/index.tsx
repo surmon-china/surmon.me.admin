@@ -14,7 +14,7 @@ import type { GetFeedbacksParams } from '@/apis/feedback'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { Feedback } from '@/constants/feedback'
-import { scrollTo } from '@/utils/scroller'
+import { scrollToTop } from '@/utils/scroll'
 import type { FilterParams } from './ListFilters'
 import { ListFilters, DEFAULT_FILTER_PARAMS, getQueryParams } from './ListFilters'
 import { TableList } from './TableList'
@@ -71,7 +71,7 @@ export const FeedbackPage: React.FC = () => {
     fetching.promise(api.getFeedbacks(getParams)).then((response) => {
       feedbacks.data = response.data
       feedbacks.pagination = response.pagination
-      scrollTo(document.body)
+      scrollToTop()
     })
   }
 
