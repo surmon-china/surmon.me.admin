@@ -27,10 +27,10 @@ importers:
         specifier: ^6.5.x
         version: 6.5.2
       '@codemirror/state':
-        specifier: ^6.5.x
+        specifier: ^6.6.x
         version: 6.6.0
       '@codemirror/view':
-        specifier: ^6.39.x
+        specifier: ^6.40.x
         version: 6.40.0
       '@uiw/react-codemirror':
         specifier: ^4.25.x
@@ -90,8 +90,8 @@ importers:
         specifier: ^19.x
         version: 19.2.4(react@19.2.4)
       react-i18next:
-        specifier: ^16.5.x
-        version: 16.5.8(i18next@25.8.18(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+        specifier: ^16.6.x
+        version: 16.6.1(i18next@25.8.18(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       react-router:
         specifier: ^7.x
         version: 7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -142,7 +142,7 @@ importers:
         specifier: ^17.x
         version: 17.4.0
       less:
-        specifier: ^4.5.x
+        specifier: ^4.6.x
         version: 4.6.4
       prettier:
         specifier: ^3.x
@@ -2121,8 +2121,8 @@ packages:
     peerDependencies:
       react: ^19.2.4
 
-  react-i18next@16.5.8:
-    resolution: {integrity: sha512-2ABeHHlakxVY+LSirD+OiERxFL6+zip0PaHo979bgwzeHg27Sqc82xxXWIrSFmfWX0ZkrvXMHwhsi/NGUf5VQg==}
+  react-i18next@16.6.1:
+    resolution: {integrity: sha512-izjXh+AkBLy3h3xe3sh6Gg1flhFHc3UyzsMftMKYJr2Z7WvAZQIdjjpHypctN41zFoeLdJUNGDgP1+Qich2fYg==}
     peerDependencies:
       i18next: '>= 25.6.2'
       react: '>= 16.8.0'
@@ -4861,7 +4861,7 @@ snapshots:
       react: 19.2.4
       scheduler: 0.27.0
 
-  react-i18next@16.5.8(i18next@25.8.18(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3):
+  react-i18next@16.6.1(i18next@25.8.18(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.29.2
       html-parse-stringify: 3.0.1
