@@ -39,7 +39,6 @@
     "highlight.js": "^11.11.x",
     "i18next": "^25.x",
     "i18next-browser-languagedetector": "^8.2.x",
-    "js-base64": "^3.7.x",
     "localforage": "^1.x",
     "lodash": "^4.17.x",
     "marked": "^17.x",

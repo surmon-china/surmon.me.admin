@@ -3,8 +3,8 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { Base64 } from 'js-base64'
 import { AdminProfile } from '@/constants/admin'
+import { base64Encode } from '@/transforms/base64'
 import nodepress from '@/services/nodepress'
 
 export const ADMIN_PROFILE_API_PATH = '/admin/profile'
@@ -26,7 +26,7 @@ export interface TokenResult {
 /** 登录 */
 export function authLogin(password: string) {
   return nodepress
-    .post<TokenResult>(ADMIN_AUTH_API_PATHS.LOGIN, { password: Base64.encode(password) })
+    .post<TokenResult>(ADMIN_AUTH_API_PATHS.LOGIN, { password: base64Encode(password) })
     .then((response) => response.result)
 }
 
@@ -56,8 +56,8 @@ export function getAdminProfile() {
 export function updateAdminProfile(profile: AdminProfile) {
   const payload = {
     ...profile,
-    password: profile.password ? Base64.encode(profile.password) : '',
-    new_password: profile.new_password ? Base64.encode(profile.new_password) : ''
+    password: profile.password ? base64Encode(profile.password) : '',
+    new_password: profile.new_password ? base64Encode(profile.new_password) : ''
   }
   return nodepress
     .patch<AdminProfile>(ADMIN_PROFILE_API_PATH, payload)
