@@ -6,11 +6,11 @@ import { AppLayout } from '@/components/AppLayout'
 import { HelloPage } from '@/pages/Hello'
 import { NotFoundPage } from '@/pages/NotFound'
 
-import { pageRoutes } from './pages'
+import type { RouteObject } from './interface'
+import { bizRoutes } from './routes-biz'
 import { RoutesKey } from './keys'
-import { RouteObject } from '.'
 
-export const routes: RouteObject[] = [
+export const allRoutes: RouteObject[] = [
   {
     id: RoutesKey.Hello,
     path: '/hello',
@@ -18,7 +18,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: '/',
-    children: pageRoutes,
+    children: bizRoutes,
     element: (
       <AppAuth>
         <AppLayout>

@@ -13,9 +13,10 @@ import { LocaleProvider, Language } from '@/contexts/Locale'
 import { ThemeProvider, Theme } from '@/contexts/Theme'
 import { initI18next } from './i18n'
 import { locales } from './locales'
+import { router } from './router'
 
 import '@/styles/app.less'
-import { App, router } from './App'
+import { App } from './App'
 
 // init export router to global
 window.router = router

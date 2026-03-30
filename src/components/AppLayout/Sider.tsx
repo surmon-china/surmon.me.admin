@@ -5,8 +5,8 @@ import { Menu, Spin, Typography, MenuProps, Space, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { GITHUB_REPO_URL } from '@/config'
 import { Trans } from '@/i18n'
-import { RouteObject, RoutesKey, RoutesPath } from '@/routes'
-import { pageRoutes } from '@/routes/pages'
+import type { RouteObject } from '@/routes'
+import { RoutesKey, getRoutePath, bizRoutes } from '@/routes'
 import { useLocale } from '@/contexts/Locale'
 import { useAdminProfile } from '@/contexts/AdminProfile'
 import { getResourceUrl } from '@/transforms/url'
@@ -33,7 +33,7 @@ export const AppSider: React.FC<AppSiderProps> = ({ isSiderCollapsed }) => {
   const location = useLocation()
   const { language } = useLocale()
   const adminProfile = useAdminProfile()
-  const mainMenuItems = useMemo(() => transRoutesToMenuItems(pageRoutes), [language])
+  const mainMenuItems = useMemo(() => transRoutesToMenuItems(bizRoutes), [language])
 
   return (
     <div className={styles.siderContent}>
@@ -75,7 +75,7 @@ export const AppSider: React.FC<AppSiderProps> = ({ isSiderCollapsed }) => {
         className={styles.menus}
         onClick={(event) => navigate(event.key)}
         selectedKeys={[location.pathname]}
-        defaultOpenKeys={[RoutesPath[RoutesKey.Article]]}
+        defaultOpenKeys={[getRoutePath(RoutesKey.Article)]}
         items={mainMenuItems}
       />
       <a

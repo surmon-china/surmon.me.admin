@@ -9,7 +9,7 @@ import { useRef, onMounted, toRaw } from 'veact'
 import { useLoading } from 'veact-use'
 import { Modal, Button, Space, Divider, Typography, Tooltip, message } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { getUnEditorCache } from '@/components/common/UniversalEditor'
 import * as aiApis from '@/apis/ai'
 import * as articleApis from '@/apis/article'
@@ -88,7 +88,7 @@ export const ArticleEditPage: React.FC = () => {
       },
       onOk: () => {
         return updating.promise(articleApis.deleteArticle(article.value!.id)).then(() => {
-          navigate(RoutesPath[RoutesKey.ArticleList])
+          navigate(getRoutePath(RoutesKey.ArticleList))
           scrollToTop()
         })
       }
@@ -97,7 +97,7 @@ export const ArticleEditPage: React.FC = () => {
 
   const navigateToCommentList = () => {
     navigate({
-      pathname: RoutesPath[RoutesKey.Comment],
+      pathname: getRoutePath(RoutesKey.Comment),
       search: `target_type=article&target_id=${article.value?.id!}`
     })
   }

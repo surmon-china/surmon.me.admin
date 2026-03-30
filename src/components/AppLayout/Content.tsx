@@ -5,7 +5,7 @@ import { Card, Breadcrumb, FloatButton, Typography, Flex } from 'antd'
 import { CaretUpOutlined } from '@ant-design/icons'
 import { ENABLED_HEADER_AD } from '@/config'
 import { useTranslation } from '@/i18n'
-import { flatRoutes } from '@/routes'
+import { routeMap } from '@/routes'
 
 import styles from './style.module.less'
 
@@ -33,8 +33,8 @@ export const AppContent: React.FC<React.PropsWithChildren> = (props) => {
   const { i18n } = useTranslation()
   const location = useLocation()
   const [, ...paths] = location.pathname.split('/')
-  const currentRoute = flatRoutes.find((route) => {
-    return matchPath(route.path!, location.pathname)
+  const currentRoute = routeMap.values().find((route) => {
+    return route.path && matchPath(route.path, location.pathname)
   })
 
   return (

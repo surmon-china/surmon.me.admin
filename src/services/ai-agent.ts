@@ -8,7 +8,7 @@ import type { AxiosError } from 'axios'
 import { notification } from 'antd'
 import { AI_AGENT_API_URL, APP_AUTH_HEADER_KEY } from '@/config'
 import { ADMIN_AUTH_API_PATHS } from '@/apis/admin'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { i18n } from '@/i18n'
 import { HttpCode } from './nodepress'
 import tokenService from './token'
@@ -52,7 +52,7 @@ aiAgent.interceptors.response.use(
     // the token is deleted and you are redirected to the login page.
     if (error.response?.status === HttpCode.UNAUTHORIZED) {
       tokenService.removeToken()
-      window.router.navigate(RoutesPath[RoutesKey.Hello])
+      window.router.navigate(getRoutePath(RoutesKey.Hello))
     }
 
     return Promise.reject(error)

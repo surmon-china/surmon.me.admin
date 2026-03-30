@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router'
 import { notification, Typography, Spin, Space, Flex } from 'antd'
 import { Loading3QuartersOutlined } from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import * as adminApi from '@/apis/admin'
 import tokenService from '@/services/token'
 import { startTokenAutoRefresh, stopTokenAutoRefresh } from './token'
@@ -68,7 +68,7 @@ export const AppAuth: React.FC<React.PropsWithChildren> = (props) => {
         description: i18n.t('login.invalid_token_message_description')
       })
       tokenService.removeToken()
-      navigate(RoutesPath[RoutesKey.Hello])
+      navigate(getRoutePath(RoutesKey.Hello))
     }
   }
 

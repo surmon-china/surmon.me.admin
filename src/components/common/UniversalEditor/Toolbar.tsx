@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Select, Space, Typography, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { UnEditorLanguage, UnEditorLanguages } from './shared/language'
-import { UniversalEditorProps } from './'
 
 import styles from './style.module.less'
 
@@ -17,7 +16,7 @@ export interface EditorToolbarProps {
   onLanguageChange(language: UnEditorLanguage): void
   onPreviewingChange(state: boolean): void
   onFullscreenChange(state: boolean): void
-  renderToolbarExtra?: UniversalEditorProps['renderToolbarExtra']
+  renderToolbarExtra?(language: UnEditorLanguage): React.ReactNode
 }
 
 export const EditorToolbar: React.FC<EditorToolbarProps> = (props) => {

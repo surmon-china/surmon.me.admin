@@ -6,7 +6,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { useLoading } from 'veact-use'
-import { RoutesPather } from '@/routes'
+import { getArticleDetailRoutePath } from '@/routes'
 import { Article } from '@/constants/article'
 import { scrollToTop } from '@/utils/scroll'
 import { ArticleEditor } from '../Editor'
@@ -17,7 +17,7 @@ export const ArticleCreatePage: React.FC = () => {
   const creating = useLoading()
   const createArticle = (article: Article) => {
     return creating.promise(api.createArticle(article)).then((result) => {
-      navigate(RoutesPather.articleDetail(result.id))
+      navigate(getArticleDetailRoutePath(result.id))
       scrollToTop()
     })
   }

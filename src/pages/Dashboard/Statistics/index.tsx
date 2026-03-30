@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { Flex, Divider, Rate, Typography } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { Statistics } from '@/apis/system'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { numberToKilo } from '@/transforms/number'
 import { StatisticCard } from './Card'
 
@@ -23,7 +23,7 @@ export const getStatisticsCards = (statistics: Statistics | null, loading: boole
           <Typography.Text type="secondary">
             累计阅读 <strong>{numberToKilo(statistics?.totalViews ?? 0)}</strong>
           </Typography.Text>
-          <Link className={styles.link} to={RoutesPath[RoutesKey.ArticlePost]}>
+          <Link className={styles.link} to={getRoutePath(RoutesKey.ArticlePost)}>
             <Icons.EditOutlined /> 写文章
           </Link>
         </Flex>
@@ -38,13 +38,13 @@ export const getStatisticsCards = (statistics: Statistics | null, loading: boole
       icon={<Icons.CommentOutlined />}
       extra={
         <Flex justify="space-between" align="center">
-          <Link className={styles.link} to={RoutesPath[RoutesKey.Comment]}>
+          <Link className={styles.link} to={getRoutePath(RoutesKey.Comment)}>
             管理评论
           </Link>
           <Divider orientation="vertical" />
           <Link
             className={styles.link}
-            to={RoutesPath[RoutesKey.Comment] + '?target_type=page&target_id=0'}
+            to={getRoutePath(RoutesKey.Comment) + '?target_type=page&target_id=0'}
           >
             查看留言
           </Link>
@@ -61,7 +61,7 @@ export const getStatisticsCards = (statistics: Statistics | null, loading: boole
       extra={
         <Flex justify="space-between">
           <Rate count={5} disabled allowHalf value={statistics?.averageEmotion} />
-          <Link className={styles.link} to={RoutesPath[RoutesKey.Feedback]}>
+          <Link className={styles.link} to={getRoutePath(RoutesKey.Feedback)}>
             站点反馈
           </Link>
         </Flex>
@@ -79,7 +79,7 @@ export const getStatisticsCards = (statistics: Statistics | null, loading: boole
           <Typography.Text type="secondary">
             <strong>{statistics?.tags ?? '-'}</strong> 个文章标签
           </Typography.Text>
-          <Link className={styles.link} to={RoutesPath[RoutesKey.Tag]}>
+          <Link className={styles.link} to={getRoutePath(RoutesKey.Tag)}>
             管理标签
           </Link>
         </Flex>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, Select, Divider, Space, Switch, FormInstance, message } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { articleStatuses, articleOrigins, articleLanguages } from '@/constants/article'
-import { StatesFormModel } from '.'
+import type { StatesFormModel } from '.'
 
 const REQUIRED_RULE = {
   message: '必选',

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { Form, Input, Button, Spin, Divider, notification } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as api from '@/apis/admin'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { useAdminProfile } from '@/contexts/AdminProfile'
 import { ImageUploader } from '@/components/common/ImageUploader'
 import { AdminProfile } from '@/constants/admin'
@@ -30,7 +30,7 @@ export const ProfileForm: React.FC = () => {
       setTimeout(() => {
         api.authLogout(tokenService.getRefreshToken()!).finally(() => {
           tokenService.removeToken()
-          navigate(RoutesPath[RoutesKey.Hello])
+          navigate(getRoutePath(RoutesKey.Hello))
         })
       }, 1688)
     } else {

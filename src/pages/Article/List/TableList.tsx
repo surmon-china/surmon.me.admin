@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { Table, Button, Typography, Badge, Card, Tag, Space, Divider } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { APP_PRIMARY_COLOR } from '@/config'
-import { RoutesPather } from '@/routes'
+import { getArticleDetailRoutePath } from '@/routes'
 import { Pagination } from '@/constants/nodepress'
 import { Tag as TagType } from '@/constants/tag'
 import { Category } from '@/constants/category'
@@ -178,7 +178,7 @@ export const TableList: React.FC<TableListProps> = (props) => {
           dataIndex: 'actions',
           render: (_, article) => (
             <Space orientation="vertical">
-              <Link to={RoutesPather.articleDetail(article.id)}>
+              <Link to={getArticleDetailRoutePath(article.id)}>
                 <Button
                   size="small"
                   color="default"

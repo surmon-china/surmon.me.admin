@@ -11,7 +11,7 @@ import { Button, Card, Divider, Modal } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { useTranslation } from '@/i18n'
 import { scrollToTop } from '@/utils/scroll'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { DropdownMenu } from '@/components/common/DropdownMenu'
 import { ResponsePaginationData } from '@/constants/nodepress'
 import { Article, ArticleStatus, getArticleStatus } from '@/constants/article'
@@ -104,7 +104,7 @@ export const ArticleListPage: React.FC = () => {
       variant="borderless"
       title={i18n.t('page.article.list.title', { total: articles.pagination?.total ?? '-' })}
       extra={
-        <Link to={RoutesPath[RoutesKey.ArticlePost]}>
+        <Link to={getRoutePath(RoutesKey.ArticlePost)}>
           <Button type="primary" size="small" icon={<Icons.EditOutlined />}>
             {i18n.t('page.article.create')}
           </Button>

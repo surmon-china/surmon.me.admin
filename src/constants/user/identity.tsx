@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import * as Icons from '@ant-design/icons'
 
 export enum UserIdentityProvider {

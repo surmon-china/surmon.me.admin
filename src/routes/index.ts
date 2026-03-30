@@ -3,27 +3,16 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import React from 'react'
-import { RouteObject as ReactRouteObject } from 'react-router'
+import { allRoutes } from './routes-all'
+import { RoutesKey } from './keys'
+import { buildRouteMap } from './map'
 
-export { routes } from './routes'
-export { pageRoutes } from './pages'
-
+export type * from './interface'
 export { RoutesKey } from './keys'
-export { RoutesPath, RoutesMap, flatRoutes } from './flats'
+export { allRoutes } from './routes-all'
+export { bizRoutes } from './routes-biz'
 
-export const RoutesPather = {
-  articleDetail: (articleId: number) => `/article/edit/${articleId}`
-}
+export const routeMap = buildRouteMap(allRoutes)
 
-export interface RouteHandle {
-  name?: string
-  i18nKey?: string
-  icon?: React.ReactElement
-  hiddenInMenu?: boolean
-}
-
-export interface RouteObject extends Omit<ReactRouteObject, 'children'> {
-  handle?: RouteHandle
-  children?: RouteObject[]
-}
+export const getRoutePath = (key: RoutesKey): string => routeMap.get(key)?.path ?? ''
+export const getArticleDetailRoutePath = (articleId: number) => `/article/edit/${articleId}`

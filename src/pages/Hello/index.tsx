@@ -8,7 +8,7 @@ import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { Spin, Input, InputRef } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { authLogin } from '@/apis/admin'
 import tokenService from '@/services/token'
 
@@ -30,7 +30,7 @@ export const HelloPage: React.FC = () => {
       const authToken = await authLogin(password)
       tokenService.setToken(authToken)
       console.info('Login successful')
-      navigate(RoutesPath[RoutesKey.Dashboard])
+      navigate(getRoutePath(RoutesKey.Dashboard))
     } catch (error) {
       console.warn('Login failed！', error)
       inputRef.current?.focus({ cursor: 'all' })

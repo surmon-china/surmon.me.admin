@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router'
 import { Dropdown, Avatar, Button, Modal, Select, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { RoutesKey, RoutesPath } from '@/routes'
+import { RoutesKey, getRoutePath } from '@/routes'
 import { authLogout } from '@/apis/admin'
 import { useTranslation } from '@/i18n'
 import { useTheme } from '@/contexts/Theme'
@@ -33,7 +33,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
           .then(() => {
             console.info('Logout successful')
             tokenService.removeToken()
-            navigate(RoutesPath[RoutesKey.Hello])
+            navigate(getRoutePath(RoutesKey.Hello))
           })
           .catch((error) => {
             console.warn('Logout failed！', error)
@@ -80,7 +80,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
                 key: 'profile',
                 icon: <Icons.SettingOutlined />,
                 label: i18n.t('page.setting.title'),
-                onClick: () => navigate(RoutesPath[RoutesKey.Setting])
+                onClick: () => navigate(getRoutePath(RoutesKey.Setting))
               },
               {
                 key: 'divider',

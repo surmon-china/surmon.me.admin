@@ -17,10 +17,10 @@ import { StaticPage } from '@/pages/Static'
 import { UserPage } from '@/pages/User'
 import { AiAgentPage } from '@/pages/AiAgent'
 
-import { RouteObject } from '.'
+import type { RouteObject } from './interface'
 import { RoutesKey } from './keys'
 
-export const pageRoutes: RouteObject[] = [
+export const bizRoutes: RouteObject[] = [
   {
     index: true,
     element: <Navigate to="/dashboard" />,
