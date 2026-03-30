@@ -6,7 +6,7 @@
     "title": "Surmon's Blog",
     "sub_title": "Nothing is true, everything is permitted.",
     "description": "Surmon's personal blog, share code and life.",
-    "keywords": ["Veact", "JavaScript", "Surmon's Blog", "Vue", "React"],
+    "keywords": ["Surmon's Blog", "JavaScript", "Vue", "React", "Veact"],
     "site_url": "https://surmon.me",
     "site_email": "admin@surmon.me",
     "friend_links": [
