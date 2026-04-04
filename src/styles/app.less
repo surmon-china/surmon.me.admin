@@ -8,10 +8,27 @@
 // font
 @font-face {
   font-display: swap;
-  font-family: DINRegular;
-  src: url('/fonts/DIN-Regular.ttf');
+  font-family: 'AlibabaSans';
+  font-weight: 400;
+  src: url('/fonts/AlibabaSans-Regular.woff2') format('woff2');
   // CSS Unicode Range Generator https://codepen.io/elifitch/pen/Ljqway
   // abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/.=-;',?!#@$%^&*()_+\|:"[]{}
+  unicode-range: U+21-3B, U+3D, U+3F-5F, U+61-7D;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'AlibabaSans';
+  font-weight: 500;
+  src: url('/fonts/AlibabaSans-Medium.woff2') format('woff2');
+  unicode-range: U+21-3B, U+3D, U+3F-5F, U+61-7D;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'AlibabaSans';
+  font-weight: 700;
+  src: url('/fonts/AlibabaSans-Bold.woff2') format('woff2');
   unicode-range: U+21-3B, U+3D, U+3F-5F, U+61-7D;
 }
 
@@ -32,7 +49,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family:
-    'DINRegular',
+    'AlibabaSans',
     'PingFang SC',
     -apple-system,
     BlinkMacSystemFont,
