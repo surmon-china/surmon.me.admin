@@ -25,7 +25,7 @@
 
 ## Screenshot
 
-![](/screenshots/dashboard.png)
+[![](/screenshots/dashboard.png)](https://raw.githubusercontent.com/surmon-china/surmon.me.admin/refs/heads/main/screenshots/dashboard.png)
 
 ## Development setup
 
