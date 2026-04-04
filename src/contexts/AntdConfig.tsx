@@ -21,6 +21,7 @@ interface ConfigProviderOptions {
 const getConfigProviderProps = (options: ConfigProviderOptions): ConfigProviderProps => ({
   locale: options.locale,
   space: { size: CONFIG.APP_CONTENT_SPACE_SIZE },
+  modal: { mask: { blur: true } },
   theme: {
     hashed: false,
     cssVar: { prefix: 'app' },
