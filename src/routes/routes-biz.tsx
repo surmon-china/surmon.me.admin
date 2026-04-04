@@ -17,16 +17,13 @@ import { StaticPage } from '@/pages/Static'
 import { UserPage } from '@/pages/User'
 import { AiAgentPage } from '@/pages/AiAgent'
 
-import type { RouteObject } from './interface'
+import type { AppRouteObject } from './interface'
 import { RoutesKey } from './keys'
 
-export const bizRoutes: RouteObject[] = [
+export const bizRoutes: AppRouteObject[] = [
   {
     index: true,
-    element: <Navigate to="/dashboard" />,
-    handle: {
-      hiddenInMenu: true
-    }
+    element: <Navigate to="/dashboard" />
   },
   {
     id: RoutesKey.Dashboard,
@@ -74,10 +71,7 @@ export const bizRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Navigate to="/article/list" />,
-        handle: {
-          hiddenInMenu: true
-        }
+        element: <Navigate to="/article/list" />
       },
       {
         id: RoutesKey.ArticleList,
@@ -103,8 +97,7 @@ export const bizRoutes: RouteObject[] = [
         element: <ArticleEditPage />,
         handle: {
           i18nKey: 'page.article.edit',
-          icon: <Icons.EditOutlined />,
-          hiddenInMenu: true
+          icon: <Icons.EditOutlined />
         }
       }
     ]

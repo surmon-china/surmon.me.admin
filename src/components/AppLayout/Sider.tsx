@@ -5,23 +5,43 @@ import { Menu, Spin, Typography, MenuProps, Space, Flex } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { GITHUB_REPO_URL } from '@/config'
 import { Trans } from '@/i18n'
-import type { RouteObject } from '@/routes'
-import { RoutesKey, getRoutePath, bizRoutes } from '@/routes'
-import { useLocale } from '@/contexts/Locale'
+import { routeMap, RoutesKey, getRoutePath } from '@/routes'
+import { type MenuItem, menuItems, isMenuGroupItem, isMenuRouteGroupItem } from '@/menus'
 import { useAdminProfile } from '@/contexts/AdminProfile'
+import { useLocale } from '@/contexts/Locale'
 import { getResourceUrl } from '@/transforms/url'
 
 import styles from './style.module.less'
 
-const transRoutesToMenuItems = (routes: RouteObject[]): NonNullable<MenuProps['items']> => {
-  return routes
-    .filter((route) => !route.handle?.hiddenInMenu)
-    .map((route) => ({
-      key: route.path!,
-      icon: route.handle?.icon,
-      children: route?.children ? transRoutesToMenuItems(route.children) : null,
-      label: route.handle?.i18nKey ? <Trans i18nKey={route.handle.i18nKey} /> : route.handle?.name
-    }))
+const transMenuItems = (items: MenuItem[]): NonNullable<MenuProps['items']> => {
+  return items.map((item) => {
+    if (isMenuGroupItem(item)) {
+      return {
+        type: 'group',
+        key: item.groupKey,
+        label: <Trans i18nKey={item.i18nKey} />,
+        children: transMenuItems(item.children)
+      }
+    }
+
+    const handle = routeMap.get(item.routeId)?.handle
+    const path = routeMap.get(item.routeId)?.path ?? item.routeId
+
+    if (isMenuRouteGroupItem(item)) {
+      return {
+        key: path,
+        icon: handle?.icon,
+        label: handle?.i18nKey ? <Trans i18nKey={handle.i18nKey} /> : handle?.name,
+        children: transMenuItems(item.children)
+      }
+    }
+
+    return {
+      key: path,
+      icon: handle?.icon,
+      label: handle?.i18nKey ? <Trans i18nKey={handle.i18nKey} /> : handle?.name
+    }
+  })
 }
 
 export interface AppSiderProps {
@@ -33,7 +53,7 @@ export const AppSider: React.FC<AppSiderProps> = ({ isSiderCollapsed }) => {
   const location = useLocation()
   const { language } = useLocale()
   const adminProfile = useAdminProfile()
-  const mainMenuItems = useMemo(() => transRoutesToMenuItems(bizRoutes), [language])
+  const mainMenuItems = useMemo(() => transMenuItems(menuItems), [language])
 
   return (
     <div className={styles.siderContent}>

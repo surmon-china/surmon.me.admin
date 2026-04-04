@@ -1,13 +1,12 @@
-import { RouteObject as ReactRouteObject } from 'react-router'
+import type { RouteObject } from 'react-router'
 
 export interface RouteHandle {
   name?: string
   i18nKey?: string
   icon?: React.ReactElement
-  hiddenInMenu?: boolean
 }
 
-export interface RouteObject extends Omit<ReactRouteObject, 'children'> {
+export type AppRouteObject = Omit<RouteObject, 'handle' | 'children'> & {
   handle?: RouteHandle
-  children?: RouteObject[]
+  children?: AppRouteObject[]
 }

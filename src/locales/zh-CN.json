@@ -11,6 +11,10 @@
   "nodepress.request.invalid_token.description": "Token 无效或不存在",
   "nodepress.response.success": "数据请求成功",
 
+  "menu.group.content": "内容管理",
+  "menu.group.interaction": "互动反馈",
+  "menu.group.system": "系统设置",
+
   "component.form_key_value.add": "增加数据项",
   "component.modal_json_editor.save": "提交更新",
   "component.modal_json_editor.error": "JSON 格式错误",
@@ -81,6 +85,6 @@
   "page.setting.statics": "文件管理",
   "page.statics.list.title": "文件列表",
 
-  "page.ai-agent.title": "AI Agent",
+  "page.ai-agent.title": "AI 对话",
   "page.ai-agent.list.title": "对话列表 ({{total}})"
 }

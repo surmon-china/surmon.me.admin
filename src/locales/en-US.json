@@ -11,6 +11,10 @@
   "nodepress.request.invalid_token.description": "Token is invalid or doesn't exist",
   "nodepress.response.success": "NodePress Response",
 
+  "menu.group.content": "Content",
+  "menu.group.interaction": "Interaction",
+  "menu.group.system": "System",
+
   "component.form_key_value.add": "Add item",
   "component.modal_json_editor.save": "Save",
   "component.modal_json_editor.error": "Invalid JSON format",
@@ -81,6 +85,6 @@
   "page.setting.statics": "Statics",
   "page.statics.list.title": "File list",
 
-  "page.ai-agent.title": "AI Agent",
-  "page.ai-agent.list.title": "Sessions ({{total}})"
+  "page.ai-agent.title": "AI Chats",
+  "page.ai-agent.list.title": "Chat Sessions ({{total}})"
 }

@@ -11,6 +11,10 @@
   "nodepress.request.invalid_token.description": "Token 無效或不存在",
   "nodepress.response.success": "資料請求成功",
 
+  "menu.group.content": "內容管理",
+  "menu.group.interaction": "互動回饋",
+  "menu.group.system": "系統設定",
+
   "component.form_key_value.add": "增加數據項",
   "component.modal_json_editor.save": "提交更新",
   "component.modal_json_editor.error": "JSON 格式錯誤",
@@ -81,6 +85,6 @@
   "page.setting.statics": "媒體管理",
   "page.statics.list.title": "媒體列表",
 
-  "page.ai-agent.title": "AI Agent",
+  "page.ai-agent.title": "AI 對話",
   "page.ai-agent.list.title": "對話列表 ({{total}})"
 }

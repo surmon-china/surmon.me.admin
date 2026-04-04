@@ -31,10 +31,10 @@ const HeaderAdvert: React.FC = () => {
 
 export const AppContent: React.FC<React.PropsWithChildren> = (props) => {
   const { i18n } = useTranslation()
-  const location = useLocation()
-  const [, ...paths] = location.pathname.split('/')
+  const { pathname } = useLocation()
+  const [, ...paths] = pathname.split('/')
   const currentRoute = routeMap.values().find((route) => {
-    return route.path && matchPath(route.path, location.pathname)
+    return route.path && matchPath(route.path, pathname)
   })
 
   return (
