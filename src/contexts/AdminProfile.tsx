@@ -11,7 +11,7 @@ import { getResourceUrl } from '@/transforms/url'
 const DEFAULT_ADMIN_PROFILE: AdminProfile = Object.freeze({
   name: 'Admin',
   slogan: 'NodePress',
-  avatar: getResourceUrl('/images/nodepress.png')
+  avatar_url: getResourceUrl('/images/nodepress.png')
 })
 
 export interface IAdminProfileContext {

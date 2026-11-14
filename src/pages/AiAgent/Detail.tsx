@@ -1,7 +1,18 @@
 import React from 'react'
 import { useShallowRef, onMounted } from 'veact'
 import { useLoading } from 'veact-use'
-import { Descriptions, Typography, List, Skeleton, Statistic, Avatar, Divider } from 'antd'
+import {
+  Descriptions,
+  Typography,
+  Flex,
+  Space,
+  Skeleton,
+  Statistic,
+  Avatar,
+  Divider,
+  Listy,
+  Empty
+} from 'antd'
 import * as Icons from '@ant-design/icons'
 import type { ChatSession, ChatMessage } from '@/constants/ai-agent'
 import { GeneralAuthorType, getAuthorTypeName } from '@/constants/author'
@@ -95,37 +106,35 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
   )
 
   const renderMessages = () => {
-    return (
-      <List
-        itemLayout="vertical"
-        dataSource={messages.value}
-        renderItem={(message, index) => (
-          <List.Item
-            key={index}
-            style={{ overflow: 'hidden' }}
-            actions={
-              message.role === 'user'
-                ? []
-                : [
-                    <UniversalText key="model" text={message.model} type="secondary" />,
-                    <UniversalText
-                      key="input_tokens"
-                      prefix="Input"
-                      text={message.input_tokens}
-                      type="secondary"
-                    />,
-                    <UniversalText
-                      key="output_tokens"
-                      prefix="Output"
-                      text={message.output_tokens}
-                      type="secondary"
-                    />
-                  ]
-            }
-          >
-            <List.Item.Meta
-              title={
-                message.role === 'user' ? (
+    return messages.value.length ? (
+      <Listy
+        rowHoverable={false}
+        items={messages.value}
+        rowKey={(_, index) => index}
+        styles={{ item: { padding: '12px 0' } }}
+        itemRender={(message) => (
+          <div style={{ overflow: 'hidden' }}>
+            <Flex gap="middle" align="start" style={{ marginBottom: 16 }}>
+              <Avatar
+                size={56}
+                style={{
+                  background:
+                    message.role === 'user'
+                      ? 'orange'
+                      : `linear-gradient(45deg, #fa4340, ${APP_PRIMARY_COLOR}, #19ba64)`
+                }}
+                icon={
+                  message.role === 'user' ? (
+                    <Icons.UserOutlined />
+                  ) : message.role === 'assistant' ? (
+                    <Icons.RobotOutlined />
+                  ) : (
+                    <Icons.ToolOutlined />
+                  )
+                }
+              />
+              <Flex orientation="vertical" gap="small">
+                {message.role === 'user' ? (
                   <UniversalText
                     text={props.session.author_name}
                     placeholder={getAuthorTypeName(GeneralAuthorType.Anonymous)}
@@ -133,39 +142,32 @@ export const SessionDetail: React.FC<SessionDetailProps> = (props) => {
                   />
                 ) : (
                   <UniversalText text={message.role} strong={true} />
-                )
-              }
-              description={timestampToYMD(message.created_at * 1000)}
-              avatar={
-                <Avatar
-                  size={56}
-                  style={{
-                    background:
-                      message.role === 'user'
-                        ? 'orange'
-                        : `linear-gradient(45deg, #fa4340, ${APP_PRIMARY_COLOR}, #19ba64)`
-                  }}
-                  icon={
-                    message.role === 'user' ? (
-                      <Icons.UserOutlined />
-                    ) : message.role === 'assistant' ? (
-                      <Icons.RobotOutlined />
-                    ) : (
-                      <Icons.ToolOutlined />
-                    )
-                  }
-                />
-              }
-            />
+                )}
+                <Typography.Text type="secondary">
+                  {timestampToYMD(message.created_at * 1000)}
+                </Typography.Text>
+              </Flex>
+            </Flex>
             <Typography.Paragraph
               ellipsis={{ rows: 3, expandable: true, symbol: '展开' }}
               style={{ maxHeight: '14em', overflowY: 'auto' }}
             >
               {message.tool_calls || message.content || '-'}
             </Typography.Paragraph>
-          </List.Item>
+            {message.role !== 'user' && (
+              <Flex justify="end">
+                <Space separator={<Divider orientation="vertical" />}>
+                  <UniversalText text={message.model} type="secondary" />
+                  <UniversalText prefix="Input" text={message.input_tokens} type="secondary" />
+                  <UniversalText prefix="Output" text={message.output_tokens} type="secondary" />
+                </Space>
+              </Flex>
+            )}
+          </div>
         )}
       />
+    ) : (
+      <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
     )
   }
 

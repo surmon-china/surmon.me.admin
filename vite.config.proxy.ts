@@ -1,5 +1,5 @@
 import { loadEnv, defineConfig } from 'vite'
-import { getDefaultConfig } from './vite.config'
+import { getDefaultConfig } from './vite.config.ts'
 
 const PROXY_API_URL = '/api'
 

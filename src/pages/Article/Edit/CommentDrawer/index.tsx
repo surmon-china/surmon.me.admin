@@ -1,7 +1,7 @@
 import React from 'react'
 import { useShallowRef, useRef, onMounted, useComputed } from 'veact'
 import { useLoading } from 'veact-use'
-import { Button, Divider, Drawer, Flex, Space, List } from 'antd'
+import { Button, Divider, Drawer, Flex, Space, Listy, Empty, Spin } from 'antd'
 import type { DrawerProps } from 'antd/es/drawer'
 import * as Icons from '@ant-design/icons'
 import * as commentApi from '@/apis/comment'
@@ -104,29 +104,37 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = (props) => {
         </Space.Compact>
       }
     >
-      <List
-        itemLayout="vertical"
-        loading={loadmoreFetching.state.value}
-        dataSource={commentTreeList.value}
-        renderItem={(rootComment) => (
-          <List.Item>
-            <CommentItem comment={rootComment}>
-              {rootComment.children && rootComment.children.length > 0 && (
-                <List
-                  itemLayout="vertical"
-                  dataSource={rootComment.children}
-                  split={true}
-                  renderItem={(replyComment) => (
-                    <List.Item>
-                      <CommentItem comment={replyComment} isReply={true} />
-                    </List.Item>
+      <Spin spinning={loadmoreFetching.state.value}>
+        {commentTreeList.value.length ? (
+          <Listy
+            rowHoverable={false}
+            rowKey="id"
+            styles={{ item: { padding: '12px 0' } }}
+            items={commentTreeList.value}
+            itemRender={(rootComment) => (
+              <div>
+                <CommentItem comment={rootComment}>
+                  {rootComment.children && rootComment.children.length > 0 && (
+                    <Listy
+                      rowHoverable={false}
+                      rowKey="id"
+                      styles={{ item: { padding: '12px 0' } }}
+                      items={rootComment.children}
+                      itemRender={(replyComment) => (
+                        <div>
+                          <CommentItem comment={replyComment} isReply={true} />
+                        </div>
+                      )}
+                    />
                   )}
-                />
-              )}
-            </CommentItem>
-          </List.Item>
+                </CommentItem>
+              </div>
+            )}
+          />
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
-      />
+      </Spin>
       <Divider />
       <Flex justify="center">
         <Button

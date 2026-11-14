@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import { getDefaultConfig, HTML_HEAD_SLOT } from './vite.config'
+import { getDefaultConfig, HTML_HEAD_SLOT } from './vite.config.ts'
 
 const GOOGLE_ANALYTICS_ID = 'G-WNSSKPKKMG'
 const GOOGLE_ADSENSE_ID = 'ca-pub-4710915636313788'

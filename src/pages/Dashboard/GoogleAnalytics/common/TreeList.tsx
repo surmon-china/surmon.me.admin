@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Button, List, Flex } from 'antd'
+import { Button, Flex, Listy, Empty } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { ReportRowItem } from './helper'
 import { UniversalText } from '@/components/common/UniversalText'
@@ -77,7 +77,7 @@ const TreeListItemNode: React.FC<TreeListItemNodeProps> = (props) => {
   )
 
   return (
-    <List.Item className={styles.listItem}>
+    <div className={styles.listItem}>
       <div className={styles.listItemPercent}>
         <div className={styles.percentCore} style={{ width: `${percent}%` }}></div>
       </div>
@@ -86,7 +86,7 @@ const TreeListItemNode: React.FC<TreeListItemNodeProps> = (props) => {
         <span>{props.data.value}</span>
       </Flex>
       {children?.length && isExpanded ? renderChildrenList() : null}
-    </List.Item>
+    </div>
   )
 }
 
@@ -127,12 +127,13 @@ export const GoogleAnalyticsTreeList: React.FC<GoogleAnalyticsTreeListProps> = (
     [treeList]
   )
 
-  return (
-    <List
-      size="small"
-      itemLayout="vertical"
-      dataSource={treeList.slice(0, props.limit)}
-      renderItem={(item) => (
+  return treeList.slice(0, props.limit).length ? (
+    <Listy
+      rowHoverable={false}
+      rowKey="name"
+      styles={{ item: { padding: 0 } }}
+      items={treeList.slice(0, props.limit)}
+      itemRender={(item) => (
         <TreeListItemNode
           data={item}
           totalValue={totalValue}
@@ -145,5 +146,7 @@ export const GoogleAnalyticsTreeList: React.FC<GoogleAnalyticsTreeListProps> = (
         />
       )}
     />
+  ) : (
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
   )
 }

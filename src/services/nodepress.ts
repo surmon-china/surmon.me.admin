@@ -67,7 +67,7 @@ nodepress.interceptors.request.use((config) => {
 // response interceptor
 nodepress.interceptors.response.use(
   (response) => {
-    if (!response.headers['content-type']?.includes('json')) {
+    if (!response.headers['content-type']?.toString().includes('json')) {
       notification.success({
         title: i18n.t('nodepress.response.success'),
         description: response.statusText,

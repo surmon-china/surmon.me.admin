@@ -50,7 +50,7 @@ export interface ChartRef {
 
 export const ECharts = React.forwardRef<ChartRef, ChartProps>((props, ref) => {
   const domRef = useRef<HTMLDivElement>(null)
-  const chartRef = useRef<EChartsType>()
+  const chartRef = useRef<EChartsType | undefined>(undefined)
 
   const resizeChart = () => {
     chartRef.current?.resize({
@@ -76,8 +76,10 @@ export const ECharts = React.forwardRef<ChartRef, ChartProps>((props, ref) => {
     window.addEventListener('resize', resizeChart)
     return () => {
       window.removeEventListener('resize', resizeChart)
+      chartRef.current?.dispose()
+      chartRef.current = undefined
     }
-  }, [props.options])
+  }, [])
 
   useImperativeHandle(ref, () => ({
     instance: () => chartRef.current

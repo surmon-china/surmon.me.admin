@@ -1,7 +1,7 @@
 import React from 'react'
 import { useShallowRef, useRef, onMounted, useComputed } from 'veact'
 import { useLoading } from 'veact-use'
-import { Button, Drawer, Flex, Space, List, Tag, Descriptions } from 'antd'
+import { Button, Drawer, Flex, Space, Tag, Descriptions, Listy, Empty, Spin } from 'antd'
 import type { DrawerProps } from 'antd/es/drawer'
 import * as Icons from '@ant-design/icons'
 import * as voteApi from '@/apis/vote'
@@ -96,59 +96,66 @@ export const VoteDrawer: React.FC<VoteDrawerProps> = (props) => {
         </Space.Compact>
       }
     >
-      <List
-        itemLayout="vertical"
-        loading={loadmoreFetching.state.value}
-        dataSource={votes.value}
-        renderItem={(vote) => (
-          <List.Item>
-            <Descriptions
-              column={3}
-              items={[
-                {
-                  key: 'author',
-                  label: '作者',
-                  children: (
-                    <AuthorName
-                      user={vote.user}
-                      author_type={vote.author_type}
-                      author_name={vote.author_name}
-                      tooltip={true}
-                    />
-                  )
-                },
-                {
-                  key: 'tag',
-                  label: '操作',
-                  children: (
-                    <Tag
-                      icon={getVoteType(vote.vote_type).icon}
-                      color={vote.vote_type === VoteType.Upvote ? 'green' : 'red'}
-                    >
-                      <strong>{getVoteType(vote.vote_type).name}</strong>
-                    </Tag>
-                  )
-                },
-                {
-                  key: 'time',
-                  label: '时间',
-                  children: <UniversalText text={stringToYMD(vote.created_at!)} />
-                },
-                {
-                  key: 'location',
-                  label: '位置',
-                  children: <IPLocation ipLocation={vote.ip_location} emoji={true} />
-                },
-                {
-                  key: 'browser',
-                  label: '设备',
-                  children: <UserAgent.OverView userAgent={vote.user_agent} />
-                }
-              ]}
-            />
-          </List.Item>
+      <Spin spinning={loadmoreFetching.state.value}>
+        {votes.value.length ? (
+          <Listy
+            rowHoverable={false}
+            rowKey="id"
+            styles={{ item: { padding: '12px 0' } }}
+            items={votes.value}
+            itemRender={(vote) => (
+              <div>
+                <Descriptions
+                  column={3}
+                  items={[
+                    {
+                      key: 'author',
+                      label: '作者',
+                      children: (
+                        <AuthorName
+                          user={vote.user}
+                          author_type={vote.author_type}
+                          author_name={vote.author_name}
+                          tooltip={true}
+                        />
+                      )
+                    },
+                    {
+                      key: 'tag',
+                      label: '操作',
+                      children: (
+                        <Tag
+                          icon={getVoteType(vote.vote_type).icon}
+                          color={vote.vote_type === VoteType.Upvote ? 'green' : 'red'}
+                        >
+                          <strong>{getVoteType(vote.vote_type).name}</strong>
+                        </Tag>
+                      )
+                    },
+                    {
+                      key: 'time',
+                      label: '时间',
+                      children: <UniversalText text={stringToYMD(vote.created_at!)} />
+                    },
+                    {
+                      key: 'location',
+                      label: '位置',
+                      children: <IPLocation ipLocation={vote.ip_location} emoji={true} />
+                    },
+                    {
+                      key: 'browser',
+                      label: '设备',
+                      children: <UserAgent.OverView userAgent={vote.user_agent} />
+                    }
+                  ]}
+                />
+              </div>
+            )}
+          />
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
-      />
+      </Spin>
       <br />
       <Flex justify="center">
         <Button

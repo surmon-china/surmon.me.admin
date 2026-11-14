@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react'
 import { onBeforeUnmount, onMounted } from 'veact'
 import * as Icons from '@ant-design/icons'
-import { Col, Row, List, Flex, Statistic, Divider, Empty } from 'antd'
+import { Col, Row, Flex, Statistic, Divider, Empty, Listy } from 'antd'
 import { APP_PRIMARY_COLOR } from '@/config'
 import { APP_LAYOUT_GUTTER_SIZE } from '@/config'
 import { countryCodeToEmoji } from '@/transforms/country'
@@ -94,18 +94,19 @@ export const GoogleAnalyticsRealtime: React.FC<GoogleAnalyticsRealtimeProps> = (
   })
 
   const renderRegionList = (dataSource: ReportRowItem[]) => (
-    <List
+    <Listy
+      rowHoverable={false}
+      rowKey={(_, index) => index}
+      styles={{ item: { padding: '8px 0' } }}
       style={{
         maxHeight: 120,
         overflowY: 'auto',
         scrollbarWidth: 'thin',
         overscrollBehavior: 'contain'
       }}
-      size="small"
-      itemLayout="vertical"
-      dataSource={dataSource}
-      renderItem={(item, index) => (
-        <List.Item key={index} style={{ paddingInline: 0 }}>
+      items={dataSource}
+      itemRender={(item, index) => (
+        <div key={index} style={{ paddingInline: 0 }}>
           <Flex justify="space-between">
             {item.dimensionValues[0].value.includes('other') ? (
               <UniversalText
@@ -126,7 +127,7 @@ export const GoogleAnalyticsRealtime: React.FC<GoogleAnalyticsRealtimeProps> = (
             )}
             <UniversalText text={item.metricValues[0].value} type="secondary" />
           </Flex>
-        </List.Item>
+        </div>
       )}
     />
   )

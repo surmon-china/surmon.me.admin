@@ -5,19 +5,18 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "strict": true,
     "allowJs": false,
-    "skipLibCheck": false,
-    "esModuleInterop": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@app/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@app/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"]

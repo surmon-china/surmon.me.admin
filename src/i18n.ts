@@ -36,7 +36,6 @@ export const initI18next = (options: { fallbackLanguage: FallbackLng }): I18n =>
       // https://github.com/i18next/i18next/issues/1068#issuecomment-952821733
       // https://github.com/i18next/i18next-browser-languageDetector#getting-started
       debug: isDev,
-      cleanCode: true,
       resources: i18nResources,
       fallbackLng: options.fallbackLanguage,
       // https://www.i18next.com/translation-function/interpolation#all-interpolation-options

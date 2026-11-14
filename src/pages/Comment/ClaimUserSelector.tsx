@@ -1,7 +1,7 @@
 import React from 'react'
 import { useShallowRef } from 'veact'
 import { useLoading } from 'veact-use'
-import { Input, Typography, List, Card, Space, message, Avatar } from 'antd'
+import { Input, Typography, Card, Space, message, Avatar, Listy, Empty } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { APP_PRIMARY_COLOR } from '@/config'
 import { Comment } from '@/constants/comment'
@@ -50,19 +50,25 @@ export const ClaimUserSelector: React.FC<ClaimUserSelectorProps> = ({ comments, 
         <Typography.Text type="secondary">
           只有无用户归属的评论可以被认领，将尝试把以下 {comments.length} 条评论认领给指定用户：
         </Typography.Text>
-        <List
-          size="small"
-          dataSource={comments}
-          style={{ maxHeight: 280, overflow: 'auto', marginTop: 8 }}
-          renderItem={(item) => (
-            <List.Item style={{ padding: '4px 0', border: 'none' }}>
-              <Typography.Text ellipsis style={{ width: '100%' }} title={item.content}>
-                <Typography.Text strong>[{item.author_name || '匿名'}]</Typography.Text>{' '}
-                {item.content}
-              </Typography.Text>
-            </List.Item>
-          )}
-        />
+        {comments.length ? (
+          <Listy
+            rowHoverable={false}
+            rowKey="id"
+            styles={{ item: { padding: '4px 0', borderBottom: 0 } }}
+            items={comments}
+            style={{ maxHeight: 280, overflow: 'auto', marginTop: 8 }}
+            itemRender={(item) => (
+              <div>
+                <Typography.Text ellipsis style={{ width: '100%' }} title={item.content}>
+                  <Typography.Text strong>[{item.author_name || '匿名'}]</Typography.Text>{' '}
+                  {item.content}
+                </Typography.Text>
+              </div>
+            )}
+          />
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        )}
       </div>
       <Input.Search
         placeholder="请输入目标用户 ID，按回车或点击搜索"

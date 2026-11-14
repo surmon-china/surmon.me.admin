@@ -1,7 +1,7 @@
 import path from 'path'
 import viteReact from '@vitejs/plugin-react'
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from 'vite'
-import packageJSON from './package.json'
+import packageJSON from './package.json' with { type: 'json' }
 
 // HTML slots for injecting content into the head and body of the `index.html` file.
 export const HTML_HEAD_SLOT = '<!-- HEAD_SLOT -->'
@@ -18,7 +18,7 @@ export function getDefaultConfig(env: ConfigEnv): UserConfig {
     plugins: [viteReact()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        '@': path.resolve(import.meta.dirname, 'src')
       }
     },
     define: {
